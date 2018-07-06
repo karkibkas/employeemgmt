@@ -1,0 +1,69 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+}
+
+main {
+    flex: 1 0 auto;
+    padding-top: 2px;
+}
+
+.container-fluid{
+    margin: 0 auto;
+    width: 85%;
+}
+
+.bg{
+    background: linear-gradient(110deg,#ef5350 ,#ef5350,#BA68C8);
+}
+
+.cart-icon{
+    margin-top: 3px;
+}
+
+#featured-products div > div > .card-panel > .prod-details{
+    padding: 10px !important;
+}
+
+#featured-products div > div > .card-panel > .prod-details > p{
+    margin: 0 !important;
+}
+
+#featured-products div > div > .card-panel > .prod-details > p{
+    font-size: .89em;
+}
+
+#featured-products div > div > .card-panel > .prod-details > a{
+    font-size: 1.04em;
+    padding-top:5px !important;
+    padding-bottom: 5px !important;
+}
+
+#featured-products div > div > .card-panel > .prod-details > a , p{
+    font-size: 1em;
+    padding-top:5px !important;
+    padding-bottom: 5px !important;
+}
+
+.prod-card-img > img{
+    width:100%;
+    height: 150px;
+}
+
+.d-flex{
+    display: flex;
+}
+
+.prod-options{
+    border-top: solid #EC407A 1px;
+    padding-top: 10px !important;
+    margin-top: 10px !important;
+}
+
+.media-link{
+    margin:5px !important;
+}
