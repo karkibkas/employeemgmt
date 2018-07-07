@@ -20,7 +20,7 @@
                 <a href="{{route('contact')}}">Contact</a>
             </li>
             <li class="waves-effect">
-                <a href="{{route('cart')}}"><i class="material-icons left cart-icon">shopping_cart</i>(10)</a>
+                <a href="{{route('cart')}}" class="cart-val"><i class="material-icons left cart-icon">shopping_cart</i>(10)</a>
             </li>
         </ul>
     </div>
