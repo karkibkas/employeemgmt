@@ -16,4 +16,10 @@ Route::get('/products', 'HomeController@products')->name('products');
 Route::get('/products/{slug}','HomeController@showProduct')->name('product-details');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/cart', 'HomeController@cart')->name('cart');
+Route::get('/checkout', 'HomeController@checkout')->name('checkout');
+
+Route::prefix('/cart')->group(function(){
+    Route::get('/', 'HomeController@cart')->name('cart');
+    Route::post('/add','CartController@addCart');
+    Route::post('/update','CartController@updateCart');    
+});

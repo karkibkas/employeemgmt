@@ -38,6 +38,10 @@
             @endcomponent
         @endforeach
     </div>
+    <br><br>
+    <div class="center-align">
+        {{$products->links('vendor.pagination.default',['items' => $products])}}
+    </div>
 </div>
 <br><br><br>
 @endsection

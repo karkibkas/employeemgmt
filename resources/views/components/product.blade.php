@@ -10,10 +10,10 @@
                 </div>
                 <div class="prod-desc">
                     <p class="grey-text text-darken-1">
-                        {{substr($product->description,0,50)}}
+                        {{substr($product->description,0,50)}}..
                     </p>
                 </div>
-                <span class="prod-price">${{$product->price}}</span>
+                <span class="val">${{$product->price}}</span>
                 <div class="d-flex">
                     <span>Ratings : </span>
                     <i class="material-icons yellow-text">star</i>
@@ -23,7 +23,7 @@
                     <i class="material-icons yellow-text">star</i>
                 </div>
                 <div class="center prod-options">
-                    <a href="#" class="tooltipped btn bg2 waves-effect waves-light" data-position="bottom" data-tooltip="Add to Cart">
+                    <a href="{{route('product-details',$product->slug)}}" class="tooltipped btn bg2 waves-effect waves-light" data-position="bottom" data-tooltip="Add to Cart">
                         <i class="material-icons">add_shopping_cart</i>
                     </a>
                     <a href="#" class="tooltipped btn bg2 waves-effect waves-light" data-position="bottom" data-tooltip="Add to wishlist">

@@ -34,10 +34,15 @@ class HomeController extends Controller
     /**
      * Display a Single Product
      *
+     * @param string $slug
      * @return \Illuminate\Http\Response
      */
     public function showProduct($slug)
     {
+        $product = Product::where('slug',$slug)->first();
+        return view('home.product-details',[
+            'product' => $product
+        ]);
     }
 
     /**
@@ -67,6 +72,15 @@ class HomeController extends Controller
      */
     public function cart()
     {
+        //dd(\Cart::content());
         return view('home.cart');
+    }
+
+    /**
+     *  Display Checkout/Order Page
+     *  @return \Illuminate\Http\Response
+     */
+    public function checkout(){
+        
     }
 }
