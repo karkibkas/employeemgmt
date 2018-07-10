@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 <div class="container-fluid">
-    <br><br>
     <div class="row">
         <div class="col s12 m12 xl8">
             <div class="card-panel cart-panel">
@@ -32,7 +31,7 @@
                                     </td>
                                     <td class="val">${{$product->price}}</td>
                                     <td>
-                                        <form action="{{route('cart')}}" method="post">
+                                        <form action="{{route('cart.index')}}" method="post">
                                             @csrf
                                             <div class="row"  style="margin-bottom:0 !important">
                                                 <input type="hidden" id="rowId-{{$product->id}}" value="{{$product->rowId}}">
@@ -83,5 +82,4 @@
         </div>
     </div>
 </div>
-<br><br><br>
 @endsection

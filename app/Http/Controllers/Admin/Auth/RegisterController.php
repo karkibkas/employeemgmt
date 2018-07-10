@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
@@ -37,7 +37,14 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:admin');
+    }
+
+    /**
+     * 
+     */
+    public function showRegisterationForm(){
+        return view('admin.auth.register');
     }
 
     /**

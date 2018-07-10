@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<br><br><br>
 <div class="container-fluid">
     <h4 class="center grey-text text-darken-1">Products Page</h4>
     <br><br>
@@ -43,5 +42,4 @@
         {{$products->links('vendor.pagination.default',['items' => $products])}}
     </div>
 </div>
-<br><br><br>
 @endsection

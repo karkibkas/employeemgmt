@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="{{asset('css/materialize.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/animate.css')}}">
+    @if(auth::guard('admin')->check())
+        <link rel="stylesheet" href="{{asset('css/admin.css')}}">
+    @endif
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <title>Laracart | The Best Online Store Like Ever...</title>
@@ -16,11 +19,15 @@
     {{-- Show loader before the page loads --}}
         {{--@include('inc.preloader')--}}
     {{-- Include the Navbar --}}
-    @include('inc.navbar')
+    <header>
+        @include('inc.navbar')
+    </header>
 
     <main>
+        <br><br><br>
         {{-- Page content here --}}
         @yield('content')
+        <br><br><br>
     </main>
 
     {{-- Footer here --}}

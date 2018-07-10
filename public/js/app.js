@@ -124,7 +124,7 @@ function updateCart(data,id){
         },300);
     }
     makeToast(data.msg);
-    $('#cart-count').text('('+data.cart_count+')');
+    $('.cart-count').text('('+data.cart_count+')');
 }
 
 
@@ -138,7 +138,7 @@ function addCart(data){
     console.log(data);
     if(data.success == true){
         makeToast(data.msg+' <a href="/cart" class="btn-flat blue-text"> Cart</a>');
-        $('#cart-count').text('('+data.cart_count+')');
+        $('.cart-count').text('('+data.cart_count+')');
     }
 }
 

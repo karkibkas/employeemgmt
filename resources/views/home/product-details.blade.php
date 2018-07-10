@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<br><br><br>
 <div class="container-fluid">
     <div class="row">
         <h4 class="grey-text text-darken-2 center">{{$product->title}}</h4>
@@ -73,5 +72,4 @@
     </div>
     </div>
 </div>
-<br><br><br>
 @endsection
