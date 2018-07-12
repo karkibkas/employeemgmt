@@ -8,7 +8,7 @@
             <form action="{{route('login')}}" method="post">
                 @csrf()
                 <div class="input-field">
-                    <input type="email" name="email" id="email">
+                    <input type="email" name="email" id="email" value="{{old('email')}}">
                     <label for="email">Email</label>
                     @if($errors->has('email'))
                         <span class="helper-text red-text">{{$errors->first('email')}}</span>

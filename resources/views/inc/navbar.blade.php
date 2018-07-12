@@ -40,18 +40,37 @@
                     </a>
                 </li>
             </ul>
-        @endif
-        @if(Auth::guard('admin')->check())
+        @else
             <ul class="hide-on-med-and-down right">
-                <li class="waves-effect">
-                    <a href="#" onclick="this.preventDefault;document.querySelector('#admin-logout').submit()">{{Auth::guard('admin')->user()->name}} Logout</a>
+                <li>
+                    <a href="#" class="dropdown-trigger" data-target="admin-dropdown">
+                        {{Auth::guard('admin')->user()->name}}
+                        <i class="material-icons right mt-3">arrow_drop_down</i>
+                    </a>
                 </li>
-                <form class="hide" action="{{route('admin.logout')}}" method="post" id="admin-logout">
-                    @csrf
-                </form>
+            </ul>
+            {{-- dropdown for admin --}}
+            <ul id='admin-dropdown' class='dropdown-content'>
+                <li>
+                    <a href="#">Profile</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    {{-- this link submits a hidden form to log users out --}}
+                    <a href="#" onclick="this.preventDefault;document.querySelector('#admin-logout').submit()">Logout</a>
+                    <form action="{{route('admin.logout')}}" method="post" class="hide" id="admin-form">
+                        @csrf
+                    </form>
+                </li>
             </ul>
         @endif
     </div>
 </nav>
 
-@include('inc.sidenav')
+@if(Auth::guard('admin')->check())
+    {{-- Include SideNav that's appropriate for admin --}}
+    @include('admin.inc.sidenav')
+@else
+    {{-- Include SideNav that's appropriate for normal users or guests --}}
+    @include('inc.sidenav')
+@endif

@@ -38,9 +38,16 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-
+    /**
+     *  Logout the Admin
+     * 
+     *  @return void
+     */
     public function logout(){
         Auth::logout();
-        return redirect()->route('index');
+        
+        return redirect()
+            ->route('index')
+            ->with('status', 'You are Successfully logged Out!');
     }
 }

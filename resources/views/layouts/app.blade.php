@@ -37,6 +37,9 @@
     <script src="{{asset('js/jquery.js')}}"></script>
     <script src="{{asset('js/materialize.min.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
+
+    {{-- Show toasts, if there are any --}}
+    @include('inc.message')
     {{-- javascript from a view that's extending this layout --}}
     @yield('script')
 </body>

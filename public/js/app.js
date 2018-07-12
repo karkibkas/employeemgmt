@@ -7,6 +7,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     //Initialize all the components of materialize css
     M.AutoInit();
+    var dropdowns = document.querySelectorAll('.dropdown-trigger');
+    M.Dropdown.init(dropdowns, {
+        constrainWidth:false
+    });
 });
 
 // Get CSRF-TOKEN
@@ -117,7 +121,7 @@ function updateCart(data,id){
                 .remove();
                 
                 $('.cart-panel')
-                .html(`<h5 class="animated zoomIn grey-text text-darken-2 center">Your cart is empty! <a href="/products"> Start Shopping</a></h5>`);
+                .html(`<h5 class="animated fadeIn grey-text text-darken-2 center">Your cart is empty! <a href="/products"> Start Shopping</a></h5>`);
             }else{
                 
             }

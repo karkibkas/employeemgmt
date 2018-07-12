@@ -37,7 +37,7 @@ class LoginController extends Controller
     public function __construct()
     {
         // for guests that are not logged in as admin.
-        // Except for logout
+        // Except for logout method.
         $this->middleware('guest:admin')->except('logout');
     }
 
@@ -81,7 +81,6 @@ class LoginController extends Controller
             ->with('status','You are logged in!');
     }
 
-
     /**
      *  Logout the Admin
      * 
@@ -91,8 +90,12 @@ class LoginController extends Controller
         /**
          *  Logging out the admin having admin guard
          */
-        Auth::guard('admin')->logout();
-        return redirect()->route('index');
+        Auth::guard('admin')
+            ->logout();
+
+        return redirect()
+            ->route('index')
+            ->with('status', 'You are Successfully logged Out!');
     }
 
     /**
@@ -102,9 +105,16 @@ class LoginController extends Controller
      *  @return void
      */
     public function validateLogin(Request $request){
+        
+        // Customize the validation error message
+        $messages = [
+            'exists' => 'These credentials do not match our records'
+        ];
+
+        // validate(Request,$rules[],$custom_messages[])
         $this->validate($request,[
-            'email' => 'required|email|min:7|max:150',
+            'email' => 'required|email|min:7|max:150|exists:admins',
             'password' => 'required|string'
-        ]);
+        ],$messages);
     }
 }

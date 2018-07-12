@@ -38,4 +38,18 @@ class Admin extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+    /**
+     * Get the User Avatar (profile image associated with user's email)
+     * 
+     * @return string
+     */
+    public function getGravatarAttribute()
+    {
+        //Creating a Hash
+        $hash = md5(strtolower(trim($this->email)));
+        
+        //Getting the admin avatar with gravatar
+        return "http://www.gravatar.com/avatar/$hash"."?d=mp";
+    }
 }

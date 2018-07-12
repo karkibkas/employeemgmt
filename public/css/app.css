@@ -101,3 +101,27 @@ main {
 .mt-1{
     margin-top:2em;
 }
+
+.pl-15{
+    padding-left:15px !important;
+}
+
+.pl-0{
+    padding-left:0 !important;
+}
+
+.mt-3{
+    padding-top:3px !important;
+}
+
+.login-panel{
+    margin: 0;
+}
+
+.login-panel > div{
+    margin: 0 !important;
+}
+
+.login-panel > h4{
+    margin:0;
+}
