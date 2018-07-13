@@ -23,7 +23,7 @@
                                     <td>{{$loop->index + 1}}</td>
                                     <td>
                                         <div>
-                                            <img src="{{asset('images/product.jpeg')}}" width="50px"  height="50px"  alt="">
+                                            <img src="{{('storage/products/'.App\Product::where('slug' , $product->id)->first()->image)}}" width="50px"  height="50px"  alt="">
                                         </div>
                                     </td>
                                     <td>

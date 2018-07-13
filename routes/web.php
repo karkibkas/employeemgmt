@@ -55,4 +55,8 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
      */
     Route::get('/dashboard' , 'DashboardController@index')->name('dashboard');
 
+    /**
+     *  Product Route(s)
+     */
+    Route::resource('/products', 'ProductsController');
 });

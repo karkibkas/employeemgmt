@@ -43,7 +43,7 @@
         @else
             <ul class="hide-on-med-and-down right">
                 <li>
-                    <a href="#" class="dropdown-trigger" data-target="admin-dropdown">
+                    <a href="#" class="dropdown-trigger user-dropdown" data-target="admin-dropdown">
                         {{Auth::guard('admin')->user()->name}}
                         <i class="material-icons right mt-3">arrow_drop_down</i>
                     </a>

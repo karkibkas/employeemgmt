@@ -2,7 +2,7 @@
     <a href="{{route('product-details',$product->slug)}}">
         <div class="card-panel no-padding hoverable">
             <div class="prod-card-img">
-                <img src="{{asset('images/product.jpeg')}}" alt="">
+                <img src="{{asset('storage/products/'.$product->image)}}" alt="">
             </div>
             <div class="prod-details">
                 <div class="prod-title">

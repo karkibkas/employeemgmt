@@ -28,7 +28,7 @@
             <div class="collapsible-body">
               <ul>
                 <li>
-                    <a href="#!" class="grey-text text-darken-1">
+                    <a href="{{route('admin.products.index')}}" class="grey-text text-darken-1">
                         <i class="material-icons">list</i>
                         Products List
                     </a>

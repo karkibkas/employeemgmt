@@ -51,6 +51,10 @@ main {
     min-height:40px;
 }
 
+.prod-desc > p{
+    word-break: break-all;
+} 
+
 .card-panel > .prod-details > p{
     font-size: .89em;
 }

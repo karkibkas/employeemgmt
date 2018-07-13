@@ -7,7 +7,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     //Initialize all the components of materialize css
     M.AutoInit();
-    var dropdowns = document.querySelectorAll('.dropdown-trigger');
+    var dropdowns = document.querySelectorAll('.user-dropdown');
     M.Dropdown.init(dropdowns, {
         constrainWidth:false
     });

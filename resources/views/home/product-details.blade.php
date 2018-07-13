@@ -7,23 +7,23 @@
     <div class="col xl6">
         <ul class="collection">
             <li class="collection-item">
-                <img src="{{asset('images/product.jpeg')}}" class="materialboxed" alt="{{$product->title}}" height="250px" width="100%">
+                <img src="{{asset('storage/products/'.$product->image)}}" class="materialboxed" alt="{{$product->title}}" height="250px" width="100%">
             </li>
             <li class="collection-item">
                 <div class="row">
                     <div class="col s6 m4 l4 xl4">
-                        <img src="{{asset('images/product.jpeg')}}" alt="{{$product->title}}" class="materialboxed img-details">
+                        <img src="{{asset('storage/products/'.$product->image)}}" alt="{{$product->title}}" class="materialboxed img-details">
                     </div>
                     <div class="col s6 m4 l4 xl4">
-                        <img src="{{asset('images/product.jpeg')}}" alt="{{$product->title}}" class="materialboxed img-details">
+                        <img src="{{asset('storage/products/'.$product->image)}}" alt="{{$product->title}}" class="materialboxed img-details">
                     </div>
                     <div class="hide-on-small-only col s12 m4 l4 xl4">
-                        <img src="{{asset('images/product.jpeg')}}" alt="{{$product->title}}" class="materialboxed img-details">
+                        <img src="{{asset('storage/products/'.$product->image)}}" alt="{{$product->title}}" class="materialboxed img-details">
                     </div>
                 </div>
             </li>
             <li class="show-on-small hide-on-med-and-up collection-item">
-                <img src="{{asset('images/product.jpeg')}}" alt="{{$product->title}}" class="materialboxed img-details">
+                <img src="{{asset('storage/products/'.$product->image)}}" alt="{{$product->title}}" class="materialboxed img-details">
             </li>
         </ul>
     </div>

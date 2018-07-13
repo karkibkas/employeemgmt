@@ -25,4 +25,8 @@ class Product extends Model
     public function hasStock($qty){
         return $this->quantity >= $qty;
     }
+
+    public function hasCategory(){
+        return $this->belongsTo('App\Category','category');
+    }
 }
