@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="row"></div>
-                                <button type="submit" class="btn  waves-effect waves-light bg col s12 m8 offset-m2 l4 offset-l4 xl4 offset-xl4">Create Product</button>
+                            <button type="submit" class="btn waves-effect waves-light bg col s12 m8 offset-m2 l4 offset-l4 xl4 offset-xl4">Create Product</button>
                         </div>
                     </form>
                 </div>

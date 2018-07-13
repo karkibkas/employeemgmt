@@ -43,6 +43,7 @@
                         </div>
                         @component('components.confirm',[
                             'id'    => 'delete-form',
+                            'modal' => 'deleteModal',
                             'title' => 'Product'
                         ])
                         @endcomponent

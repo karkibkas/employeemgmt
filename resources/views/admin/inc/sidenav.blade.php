@@ -33,6 +33,12 @@
                         Products List
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.categories.index')}}" class="grey-text text-darken-1">
+                        <i class="material-icons">list</i>
+                        Categories List
+                    </a>
+                </li>
               </ul>
             </div>
           </li>

@@ -30,7 +30,11 @@
                             <td>{{$product->title}}</td>
                             <td>{{$product->hasCategory->title}}</td>
                             <td>{{$product->created_at->diffForHumans()}}</td>
-                            <td>{{$product->updated_at->diffForHumans()}}</td>
+                            @if($product->updated_at)
+                                <td>{{$product->updated_at->diffForHumans()}}</td>
+                            @else
+                                <td>Not updated</td>
+                            @endif
                             <td>
                                 <div class="center">
                                     <a href="{{route('admin.products.show',$product->id)}}" class="btn-floating btn-small waves-effect waves-light tooltipped" data-position="left" data-tooltip="Show Product Details">

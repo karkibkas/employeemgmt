@@ -59,4 +59,9 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
      *  Product Route(s)
      */
     Route::resource('/products', 'ProductsController');
+
+    /**
+     *  Categories Route(s)
+     */
+    Route::resource('/categories', 'CategoriesController');
 });

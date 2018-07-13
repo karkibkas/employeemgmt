@@ -1,4 +1,4 @@
-<div id="deleteModal" class="modal">
+<div id="{{$modal}}" class="modal">
   <div class="modal-content">
     <h4 class="red-text">Delete {{$title}}!</h4>
     <p class="grey-text text-darken-1">Are you sure?</p>
