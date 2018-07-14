@@ -150,7 +150,10 @@ return [
         /*
          * Package Service Providers...
          */
+        //LaravelCart package 
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        //Ckeditor package
+        Unisharp\Ckeditor\ServiceProvider::class,
 
         /*
          * Application Service Providers...

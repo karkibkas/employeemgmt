@@ -10,7 +10,7 @@
                 </div>
                 <div class="prod-desc">
                     <p class="grey-text text-darken-1">
-                        {{substr($product->description,0,50)}}..
+                        {!!substr($product->description,0,50)!!}..
                     </p>
                 </div>
                 <span class="val">${{$product->price}}</span>

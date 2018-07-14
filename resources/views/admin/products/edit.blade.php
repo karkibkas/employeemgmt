@@ -34,7 +34,6 @@
                             </div>
                             <div class="input-field col s12 m10 offset-m1 l12 xl12">
                                 <textarea name="description" id="description" class="materialize-textarea">{{old('description') ? : $product->description }}</textarea>
-                                <label for="description">Description</label>
                                 @if($errors->has('description'))
                                     <span class="helper-text red-text">
                                         {{$errors->first('description')}}
@@ -81,4 +80,11 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'description' );
+    </script>
 @endsection

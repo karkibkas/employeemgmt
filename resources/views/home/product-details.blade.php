@@ -33,7 +33,7 @@
                 <h5>{{$product->title}}</h5>
             </div>
             <div class="collection-item">
-                <p>{{$product->description}}</p>
+                <p>{!!$product->description!!}</p>
                 <p><strong>Price:</strong> <span class="val grey-text text-darken-1">${{$product->price}}</span></p>
                 <p>Available Quantity: <span class="val grey-text text-darken-1">{{$product->quantity}}</span></p>
                 @if($product->hasLowStock())
