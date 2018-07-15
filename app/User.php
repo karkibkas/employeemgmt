@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPasswordNotification;
 class User extends Authenticatable
 {
+
     use Notifiable;
 
     /**
@@ -51,5 +52,13 @@ class User extends Authenticatable
 
         //Getting the user avatar with gravatar
         return "http://www.gravatar.com/avatar/$hash"."?d=mp";
+    }
+
+    /**
+     *  One to Many Relationship.
+     *  One User can have many orders.
+     */
+    public function orders(){
+        return $this->hasMany('App\Order');
     }
 }

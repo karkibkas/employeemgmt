@@ -20,7 +20,7 @@ Route::get('/products/{slug}','HomeController@showProduct')->name('product-detai
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/checkout', 'HomeController@checkout')->name('checkout');
-
+Route::post('/checkout','OrderController@store');
 /**
  *  prefixing routes and grouping them together.
  */

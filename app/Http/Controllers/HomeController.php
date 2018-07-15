@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -81,6 +82,16 @@ class HomeController extends Controller
      *  @return \Illuminate\Http\Response
      */
     public function checkout(){
-        
+        if(!Auth::check()){
+            return redirect()
+                ->route('login')
+                ->with('status','Please Login or Register to Place the Order!');
+        }
+
+        if(!\Cart::count()){
+            return redirect()->route('cart.index');
+        }
+
+        return view('home.checkout');
     }
 }

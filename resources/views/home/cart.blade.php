@@ -62,23 +62,12 @@
             <br><br>
         </div>
         <div class="col s12 m12 xl4">
-            <ul class=" collection with-header">
-                <li class="collection-header grey-text text-darken-2">
-                    <h5 class="center">Cart Summary</h5>
-                </li>
-                <li class="collection-item grey lighten-4">Subtotal:
-                    <span class="secondary-content blue-text val cart-subtotal">${{Cart::subtotal()}} /-</span>
-                </li>
-                <li class="collection-item grey lighten-4">Shipping:
-                    <span class="secondary-content blue-text val cart-tax">${{Cart::tax()}} /-</span>
-                </li>
-                <li class="collection-item light-green lighten-4">Total:
-                    <span class="secondary-content grey-text text-darken-3 val cart-total">${{Cart::total()}} /-</span>
-                </li>
-                <li class="collection-item center">
-                    <a class="btn waves-effect waves-light green lighten-1 checkout-btn {{!Cart::count() ? 'disabled': ''}}" href="{{route('checkout')}}">check out</a>
-                </li>
-            </ul>
+            <div class="card-panel">
+                @component('components.cart-summary')
+                @endcomponent
+                <br>
+                <a class="btn waves-effect waves-light green lighten-1 checkout-btn {{!Cart::count() ? 'disabled': ''}}" href="{{route('checkout')}}">check out</a>
+            </div>
         </div>
     </div>
 </div>
