@@ -27,7 +27,12 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="{{route('product-details',$product->id)}}">{{$product->name}}</a>
+                                        
+                                        @if(!App\Product::where('slug' , $product->id)->first()->hasStock($product->qty))
+                                            <a class="tooltipped red-text" data-position="bottom" data-tooltip="This item has insufficient stock!" href="{{route('product-details',$product->id)}}">{{$product->name}}</a>
+                                        @else
+                                            <a href="{{route('product-details',$product->id)}}">{{$product->name}}</a>
+                                        @endif
                                     </td>
                                     <td class="val">${{$product->price}}</td>
                                     <td>

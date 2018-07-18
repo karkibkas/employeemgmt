@@ -32,4 +32,11 @@ class Order extends Model
     public function products(){
         return $this->belongsToMany('App\Product','orders_products')->withPivot('qty');
     }
+
+    /**
+     * One to One Relationship 
+     */
+    public function payment(){
+        return $this->hasOne('App\Payment');
+    }
 }

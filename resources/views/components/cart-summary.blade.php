@@ -6,19 +6,19 @@
         <tr>
             <td>Subtotal:</td>
             <td>
-                <span class="val">${{Cart::subtotal()}}</span>
+                <span class="val cart-subtotal"> ${{Cart::subtotal()}} /- </span>
             </td>
         </tr>
         <tr>
             <td>Shipping:</td>
             <td>
-                <span class="val">${{Cart::tax()}}</span>
+                <span class="val cart-tax"> ${{Cart::tax()}} /- </span>
             </td>
         </tr>
         <tr>
             <td>Total:</td>
             <td>
-                <span class="val">${{Cart::total()}}</span>
+                <span class="val cart-total">${{Cart::total()}} /- </span>
             </td>
         </tr>
     </tbody>

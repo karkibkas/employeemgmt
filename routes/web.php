@@ -21,6 +21,10 @@ Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/checkout', 'HomeController@checkout')->name('checkout');
 Route::post('/checkout','OrderController@store');
+
+// get the braintree client token
+Route::get('/braintree/token','BraintreeController@token');
+
 /**
  *  prefixing routes and grouping them together.
  */

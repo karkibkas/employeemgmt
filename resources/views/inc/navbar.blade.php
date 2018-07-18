@@ -32,6 +32,9 @@
                     <li class="waves-effect">
                         <a href="{{route('login')}}">Login</a>
                     </li>
+                    <li class="waves-effect">
+                        <a href="{{route('register')}}">Register</a>
+                    </li>
                 @endauth
                 <li class="waves-effect">
                     <a href="{{route('cart.index')}}" class="val">

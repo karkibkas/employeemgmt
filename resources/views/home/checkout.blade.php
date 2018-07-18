@@ -47,6 +47,11 @@
                                     </span>
                                 @endif
                             </div>
+                            <div class="input-field">
+                                <div id="dropin-container"></div>
+                                <button id="check-out-btn" class="btn center">Request Payment Method</button>
+                            </div>
+                            <input type="hidden" name="nonce" id="nonce">
                         </div>
                     </form>
                 </div>
@@ -62,4 +67,35 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    <script src="https://js.braintreegateway.com/web/dropin/1.11.0/js/dropin.min.js"></script>
+
+    <script>
+        var button = document.querySelector('#check-out-btn');
+        // Get the braintree token from server
+        // and init the dropin-ui 
+        $(document).ready(function(){
+            $.ajax({
+                url: '/braintree/token',
+                type:'GET',
+                dataType:'json',
+                success: function(data){
+                    braintree.dropin.create({
+                    authorization: data.token,
+                    container: '#dropin-container'
+                    }, function (createErr, instance) {
+                    button.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+                        // Submit payload.nonce to your server
+                        $('#nonce').val(payload.nonce);
+                        });
+                    });
+                    });
+                }
+            });
+        });
+    </script>
 @endsection
