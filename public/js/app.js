@@ -66,7 +66,26 @@ $(document).ready(function(){
                 updateCart(res,id)
             }
         );
-    }); 
+    });
+
+    // Handle add product to wishlist request
+    $('#wishlist-btn').click(function(e){
+        e.preventDefault();
+        const id = $('#add-cart').attr('data-id');
+        const data = {
+                _token: _token,
+                _id: id
+            };
+        
+            makeAJAXRequest(
+            '/wishlist/add',
+            'POST',
+            data,
+            function(res){
+                makeToast(res.msg);
+            }
+        );
+    })
 });
 
 /**

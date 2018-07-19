@@ -25,6 +25,9 @@ Route::post('/checkout','OrderController@store');
 // get the braintree client token
 Route::get('/braintree/token','BraintreeController@token');
 
+//Wishlist
+Route::post('/wishlist/add', 'WishlistsController@store')->name('wishlist.add');
+
 /**
  *  prefixing routes and grouping them together.
  */
