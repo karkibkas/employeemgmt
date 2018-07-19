@@ -17,6 +17,13 @@ class WishlistsController extends Controller
      *  @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+
+        if(!Auth::check()){
+            return response()
+            ->json([
+                'msg' => 'Please Login/Register to use Wishlist!'
+            ]);
+        }
     
         $product = Product::findOrFail($request->_id);
 
