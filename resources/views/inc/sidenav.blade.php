@@ -84,16 +84,42 @@
             Contact
         </a>
     </li>
-    <li>
-        <a href="#" onclick="this.preventDefault;document.querySelector('#user-logout').submit()" class="waves-effect grey-text text-darken-1">
-            <i class="material-icons left grey-text text-darken-1">person_outline</i>
-            <span>Logout</span>
-        </a>
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header waves-effect grey-text text-darken-1">
+                <i class="material-icons pl-15 grey-text text-darken-1">supervisor_account</i>
+                <span class="pl-15">{{Auth::user()->name}}</span>
+            </a>
+            <div class="collapsible-body">
+              <ul>
+                <li>
+                    <a href="{{route('profile')}}" class="grey-text text-darken-1 waves-effect">
+                        <i class="material-icons">info</i>
+                        My Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="grey-text text-darken-1 waves-effect">
+                        <i class="material-icons">list</i>
+                        My Transaction History
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="grey-text text-darken-1 waves-effect" onclick="this.preventDefault;document.querySelector('#user-logout').submit()">
+                        <i class="material-icons">input</i>
+                        Logout
+                    </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
     </li>
     <li>
         <a href="{{route('cart.index')}}" class="waves-effect grey-text text-darken-1 val">
             <i class="material-icons left cart-icon grey-text text-darken-1">shopping_cart</i>
-            <span>My Cart </span><span class="cart-count">({{Cart::count()}})</span>
+            <span class="grey-text text-darken-1">My Cart </span><span class="cart-count">({{Cart::count()}})</span>
         </a>
     </li>
 </ul>

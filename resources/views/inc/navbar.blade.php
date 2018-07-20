@@ -22,12 +22,28 @@
                     <a href="{{route('contact')}}">Contact</a>
                 </li>
                 @auth
-                    <li class="waves-effect">
-                        <a href="#" onclick="this.preventDefault;document.querySelector('#user-logout').submit()">{{Auth::user()->name}} Logout</a>
+                    <li>
+                        <a href="#" class="dropdown-trigger" data-target="user-dropdown">
+                            {{Auth::user()->name}}
+                            <i class="material-icons right mt-3">arrow_drop_down</i>
+                        </a>
                     </li>
-                    <form action="{{route('logout')}}" class="hide" id="user-logout" method="post">
-                        @csrf
-                    </form>
+                    <ul id='user-dropdown' class='dropdown-content'>
+                        <li>
+                            <a href="{{route('profile')}}">Profile</a>
+                        </li>
+                        <li>
+                            <a href="#">Order History</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            {{-- this link submits a hidden form to log users out --}}
+                            <a href="#" onclick="this.preventDefault;document.querySelector('#user-logout').submit()">Logout</a>
+                            <form action="{{route('logout')}}" method="post" class="hide" id="user-logout">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
                 @else
                     <li class="waves-effect">
                         <a href="{{route('login')}}">Login</a>
@@ -46,7 +62,7 @@
         @else
             <ul class="hide-on-med-and-down right">
                 <li>
-                    <a href="#" class="dropdown-trigger user-dropdown" data-target="admin-dropdown">
+                    <a href="#" class="dropdown-trigger" data-target="admin-dropdown">
                         {{Auth::guard('admin')->user()->name}}
                         <i class="material-icons right mt-3">arrow_drop_down</i>
                     </a>
@@ -55,7 +71,7 @@
             {{-- dropdown for admin --}}
             <ul id='admin-dropdown' class='dropdown-content'>
                 <li>
-                    <a href="#">Profile</a>
+                    <a href="{{route('admin.profile')}}">Profile</a>
                 </li>
                 <li class="divider"></li>
                 <li>

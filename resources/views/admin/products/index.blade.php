@@ -14,6 +14,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Category</th>
+                        <th>Quantity</th>
                         <th>Created at</th>
                         <th>Updated at</th>
                         <th>Actions</th>
@@ -29,6 +30,7 @@
                             <td>{{$product->id}}</td>
                             <td>{{$product->title}}</td>
                             <td>{{$product->hasCategory->title}}</td>
+                            <td class="center">{{$product->quantity}}</td>
                             <td>{{$product->created_at->diffForHumans()}}</td>
                             @if($product->updated_at)
                                 <td>{{$product->updated_at->diffForHumans()}}</td>

@@ -19,8 +19,22 @@ Route::get('/products', 'HomeController@products')->name('products');
 Route::get('/products/{slug}','HomeController@showProduct')->name('product-details');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/checkout', 'HomeController@checkout')->name('checkout');
-Route::post('/checkout','OrderController@store');
+
+/**
+ *  Checkout Route(s)
+ */
+Route::prefix('checkout')->group(function(){
+    Route::get('/', 'HomeController@checkout')->name('checkout');
+    Route::post('/','OrderController@store');
+});
+
+/**
+ *  Customer (User) Profile Route(s)
+ */
+Route::prefix('/profile')->group(function(){
+    Route::get('/','ProfileController@show')->name('profile');
+    Route::post('/','ProfileController@update');
+});
 
 // get the braintree client token
 Route::get('/braintree/token','BraintreeController@token');
@@ -61,6 +75,12 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
      *  Dashboard Route(s)
      */
     Route::get('/dashboard' , 'DashboardController@index')->name('dashboard');
+
+    /**
+     *  Admin Profile
+     */
+    Route::get('/dashboard/profile','ProfileController@show')->name('profile');
+    Route::post('/dashboard/profile','ProfileController@update');
 
     /**
      *  Product Route(s)
