@@ -36,11 +36,24 @@ Route::prefix('/profile')->group(function(){
     Route::post('/','ProfileController@update');
 });
 
+/**
+ *  Customer order history Route(s)
+ */
+Route::get('/order/history','OrderController@index')->name('order.index');
+Route::get('/order/history/{id}','OrderController@show')->name('order.show');
+
 // get the braintree client token
 Route::get('/braintree/token','BraintreeController@token');
 
-//Wishlist
-Route::post('/wishlist/add', 'WishlistsController@store')->name('wishlist.add');
+/**
+ *  Customer Wishlist Route(s)
+ */
+Route::prefix('wishlist')->name('wishlist.')->group(function(){
+    Route::post('/add', 'WishlistsController@store')->name('add');
+    Route::get('/','WishlistsController@index')->name('index');
+    Route::delete('/{id}','WishlistsController@destroy')->name('destroy');
+});
+
 
 /**
  *  prefixing routes and grouping them together.

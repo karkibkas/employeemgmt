@@ -9,6 +9,19 @@ use Hash;
 
 class ProfileController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        // for guests that are not logged in as admin.
+        // Except for logout method.
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Show Admin Profile
      *  

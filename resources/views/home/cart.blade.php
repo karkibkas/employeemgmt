@@ -51,7 +51,7 @@
                                                 </div>
                                                 <div class="col">
                                                 <br>
-                                                <button type="submit" id="update-cart" data-id="{{$product->id}}" class="btn-floating waves-effect bg2 tooltipped" data-position="bottom" data-tooltip="Update quantity">
+                                                <button type="submit" data-id="{{$product->id}}" class="btn-floating waves-effect bg2 tooltipped update-cart" data-position="bottom" data-tooltip="Update quantity">
                                                     <i class="material-icons">sync</i>
                                                 </button>
                                                 </div>

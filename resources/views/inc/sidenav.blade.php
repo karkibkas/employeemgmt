@@ -100,9 +100,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="grey-text text-darken-1 waves-effect">
+                    <a href="{{route('order.index')}}" class="grey-text text-darken-1 waves-effect">
                         <i class="material-icons">list</i>
-                        My Transaction History
+                        My Order History
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('wishlist.index')}}" class="grey-text text-darken-1 waves-effect">
+                        <i class="material-icons">favorite</i>
+                        My Wishlist
                     </a>
                 </li>
                 <li>

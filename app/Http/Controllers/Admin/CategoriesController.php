@@ -9,6 +9,18 @@ use App\Category;
 class CategoriesController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        // for guests that are not logged in as admin.
+        // Except for logout method.
+        $this->middleware('auth:admin');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

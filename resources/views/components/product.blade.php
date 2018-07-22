@@ -23,10 +23,10 @@
                     <i class="material-icons yellow-text">star</i>
                 </div>
                 <div class="center prod-options">
-                    <a href="{{route('product-details',$product->slug)}}" class="tooltipped btn bg2 waves-effect waves-light" data-position="bottom" data-tooltip="Add to Cart">
+                    <a href="{{route('product-details',$product->slug)}}" data-id="{{$product->id}}" class="add-cart tooltipped btn bg2 waves-effect waves-light" data-position="bottom" data-tooltip="Add to Cart">
                         <i class="material-icons">add_shopping_cart</i>
                     </a>
-                    <a href="#" class="tooltipped btn bg2 waves-effect waves-light" data-position="bottom" data-tooltip="Add to wishlist">
+                    <a href="#" data-id="{{$product->id}}" class="add-wishlist tooltipped btn bg2 waves-effect waves-light" data-position="bottom" data-tooltip="Add to wishlist">
                         <i class="material-icons">favorite_border</i>
                     </a>
                 </div>

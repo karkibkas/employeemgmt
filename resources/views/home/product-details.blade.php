@@ -58,7 +58,7 @@
                             </div>
                         </form>
                         <div class="center">
-                            <a href="#" id="add-cart" data-id="{{$product->id}}" class="btn bg2 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Add to Cart"><i class="material-icons">add_shopping_cart</i></a>
+                            <a href="#" data-id="{{$product->id}}" class="add-cart btn bg2 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Add to Cart"><i class="material-icons">add_shopping_cart</i></a>
                             <a href="#" id="wishlist-btn" class="btn bg2 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Add to Wishlist"><i class="material-icons">favorite_border</i></a>
                             <form id="wishlist-form" action="{{route('wishlist.add')}}" method="post" class="hide">
                                 @csrf

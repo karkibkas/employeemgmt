@@ -18,9 +18,17 @@
 <body>
     {{-- Show loader before the page loads --}}
         {{--@include('inc.preloader')--}}
+
     {{-- Include the Navbar --}}
     <header>
-        @include('inc.navbar')
+
+        @if(Auth::guard('admin')->check())
+            {{-- Admin Navbar --}}
+            @include('admin.inc.navbar')
+        @else
+            {{-- Normal user Navbar --}}
+            @include('inc.navbar')
+        @endif
     </header>
 
     <main>
@@ -40,7 +48,9 @@
 
     {{-- Show toasts, if there are any --}}
     @include('inc.message')
+
     {{-- javascript from a view that's extending this layout --}}
     @yield('script')
+
 </body>
 </html>

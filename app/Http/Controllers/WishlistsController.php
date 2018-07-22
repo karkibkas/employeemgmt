@@ -11,6 +11,24 @@ class WishlistsController extends Controller
 {
 
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        // for guests that are not logged in as admin.
+        // Except for logout method.
+        $this->middleware('auth');
+    }
+
+    public function index(){
+        $wishlists = Auth::user()->wishlist()->paginate(10);
+        return view('wishlist.index',[
+            'wishlists' => $wishlists
+        ]);
+    }
+    /**
      *  Store a wishlist product to storage.
      * 
      *  @param \Illuminate\Http\Request $request
@@ -43,6 +61,14 @@ class WishlistsController extends Controller
             ->json([
                 'msg' => 'Product added to wishlist'
             ]);
+    }
+
+    public function destroy($id){
+        $wishlist = Wishlist::destroy($id);
+        
+        return redirect()
+            ->back()
+            ->with('status','Wishlist item has been deleted!');
     }
 
     /**

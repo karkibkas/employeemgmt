@@ -18,13 +18,15 @@ const _token = $('meta[name=csrf-token]').attr('content');
 
 $(document).ready(function(){
 
-    $('body').delegate('#add-cart','click',function(e){
+    $('body').delegate('.add-cart','click',function(e){
         // get the attribute value of element with #add-cart id.
-        let id = $('#add-cart').attr('data-id');
+        let id = $(this).attr('data-id');
 
         // get the text (value) of selected quantity
         let qty = $('#qty :selected').text();
-        
+        if(!qty){
+            qty = 1 ;
+        }
         const data = {
             _token: _token,
             _id: id,
@@ -45,7 +47,7 @@ $(document).ready(function(){
         )
     })
 
-    $('body').delegate('#update-cart', 'click',function(e){
+    $('body').delegate('.update-cart', 'click',function(e){
         e.preventDefault();
         // "this" means the current object, in our case
         // it's #update-cart.
@@ -69,9 +71,9 @@ $(document).ready(function(){
     });
 
     // Handle add product to wishlist request
-    $('#wishlist-btn').click(function(e){
+    $('body').delegate('.add-wishlist','click',function(e){
         e.preventDefault();
-        const id = $('#add-cart').attr('data-id');
+        const id = $(this).attr('data-id');
         const data = {
                 _token: _token,
                 _id: id
@@ -158,7 +160,6 @@ function updateCart(data,id){
  * @param {*} data 
  */
 function addCart(data){
-    console.log(data);
     if(data.success == true){
         makeToast(data.msg+' <a href="/cart" class="btn-flat blue-text"> Cart</a>');
         $('.cart-count').text('('+data.cart_count+')');

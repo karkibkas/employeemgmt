@@ -37,6 +37,6 @@ class Order extends Model
      * One to One Relationship 
      */
     public function payment(){
-        return $this->hasOne('App\Payment');
+        return $this->hasOne('App\Payment','order_id');
     }
 }

@@ -7,6 +7,7 @@ use Braintree_Transaction;
 use App\User;
 use App\Address;
 use App\Product;
+use App\Order;
 use Auth;
 use Cart;
 use App\Events\OrderWasCreated;
@@ -18,6 +19,45 @@ class OrderController extends Controller
      *  NOTICE!
      *  We are Using User model for Customer.
      */
+
+    /**
+     * Show customer order history
+     *  
+     * @return \Illuminate\Http\Response
+     */
+    public function index(){
+        /**
+         * get all the orders related to
+         * authenticated customer.
+         */
+        $orders = Auth::user()->orders()->paginate(10);
+        
+        /**
+         *  we will use this array to calculate
+         *  the quantity of products in each order.
+         */
+        $qty = [];
+        
+        return view('order.index',[
+            'orders' => $orders,
+            'qty' => $qty
+        ]);
+    }
+
+    /**
+     *  Show a single order with details
+     *  
+     *  @param int $id
+     *  @return \Illuminate\Http\Response
+     */
+    public function show($id){
+        $order = Order::findOrFail($id);
+        $products = $order->products()->paginate(10);
+        return view('order.show',[
+            'order' => $order,
+            'products' => $products
+        ]);
+    }
 
     /**
      * Create Customer Orders

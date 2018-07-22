@@ -1,7 +1,7 @@
 <h5 class="center grey-text text-darken-1">Cart Summary</h5>
 <br>
 <div class="divider"></div>
-<table class="responsive-table">
+<table class="centered">
     <tbody>
         <tr>
             <td>Subtotal:</td>
