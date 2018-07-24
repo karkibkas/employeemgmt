@@ -104,4 +104,24 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
      *  Categories Route(s)
      */
     Route::resource('/categories', 'CategoriesController');
+
+    /**
+     *  Orders Route(s)
+     */
+    Route::resource('/orders','OrdersController');
+
+    /**
+     *  Payments Route(s)
+     */
+    Route::resource('/payments','PaymentsController');
+
+    /**
+     *  Customers (Users) Route(s)
+     */
+    Route::resource('/customers','CustomersController');
+
+    /**
+     *  Addresses Route(s)
+     */
+    Route::resource('/addresses','AddressesController');
 });

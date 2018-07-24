@@ -5,11 +5,11 @@
                 <img src="{{asset('images/mt-bg.jpg')}}" width="100%" height="100%" alt="">
             </div>
             {{-- Get the picture of authenicated user from gravatar --}}
-            <a href="#"><img class="circle" src="{{Auth::guard('admin')->user()->gravatar}}"></a>
+            <a href="{{route('admin.profile')}}"><img class="circle" src="{{Auth::guard('admin')->user()->gravatar}}"></a>
             {{-- Get the name of authenicated user --}}
-            <a href="#"><span class="white-text name">{{ Auth::guard('admin')->user()->name }}</span></a>
+            <a href="{{route('admin.profile')}}"><span class="white-text name">{{ Auth::guard('admin')->user()->name }}</span></a>
             {{-- Get the email of authenicated user --}}
-            <a href="#"><span class="white-text email">{{ Auth::guard('admin')->user()->email }}</span></a>
+            <a href="{{route('admin.profile')}}"><span class="white-text email">{{ Auth::guard('admin')->user()->email }}</span></a>
         </div>
     </li>
     <li>
@@ -37,6 +37,44 @@
                     <a href="{{route('admin.categories.index')}}" class="grey-text text-darken-1">
                         <i class="material-icons">list</i>
                         Categories List
+                    </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+    </li>
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header waves-effect grey-text text-darken-1">
+                <i class="material-icons pl-15 grey-text text-darken-1">local_grocery_store</i>
+                <span class="pl-15">Manage Sales</span>
+            </a>
+            <div class="collapsible-body">
+              <ul>
+                <li>
+                    <a href="{{route('admin.orders.index')}}" class="waves-effect waves-light grey-text text-darken-1">
+                        <i class="material-icons">collections_bookmark</i>
+                        Manage Orders
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.payments.index')}}" class="waves-effect waves-light grey-text text-darken-1">
+                        <i class="material-icons">credit_card</i>
+                        Manage Payments
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.customers.index')}}" class="waves-effect waves-light grey-text text-darken-1">
+                        <i class="material-icons">supervisor_account</i>
+                        Manage Customers
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.addresses.index')}}" class="waves-effect waves-light grey-text text-darken-1">
+                        <i class="material-icons">business</i>
+                        Manage Addresses
                     </a>
                 </li>
               </ul>

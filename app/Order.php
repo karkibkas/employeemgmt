@@ -39,4 +39,11 @@ class Order extends Model
     public function payment(){
         return $this->hasOne('App\Payment','order_id');
     }
+
+    /**
+     *  Many to One Relationship
+     */
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }

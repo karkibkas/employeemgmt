@@ -8,6 +8,10 @@ body {
     overflow-x: hidden;
 }
 
+p{
+    margin:5px;
+}
+
 main {
     flex: 1 0 auto;
     padding-top: 2px;

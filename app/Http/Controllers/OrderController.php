@@ -94,7 +94,7 @@ class OrderController extends Controller
         $payment = $this->processPayment($request->nonce,$total);
         
         //create a unique hash for order.
-        $hash = bin2hex(random_bytes(32));
+        //$hash = bin2hex(random_bytes(32));
 
         //create the order.
         $order = $this->createOrder($hash,$address->id,$total);
@@ -177,7 +177,7 @@ class OrderController extends Controller
          *  instance with Auth::user().
          */
         return Auth::user()->orders()->create([
-            'hash' => $hash,
+        //  'hash' => $hash,
             'paid' => false,
             'total' => $total,
             'address_id' => $address_id,

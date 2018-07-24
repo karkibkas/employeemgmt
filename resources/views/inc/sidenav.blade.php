@@ -53,11 +53,11 @@
                 <img src="{{asset('images/mt-bg.jpg')}}" width="100%" height="100%" alt="">
             </div>
             {{-- Get picture of authenicated user from gravatar --}}
-            <a href="#"><img class="circle" src="{{Auth::user()->gravatar}}"></a>
+            <a href="{{route('profile')}}"><img class="circle" src="{{Auth::user()->gravatar}}"></a>
             {{-- Get first and last name of authenicated user --}}
-            <a href="#"><span class="white-text name">{{ Auth::user()->name }}</span></a>
+            <a href="{{route('profile')}}"><span class="white-text name">{{ Auth::user()->name }}</span></a>
             {{-- Get email of authenicated user --}}
-            <a href="#"><span class="white-text email">{{ Auth::user()->email }}</span></a>
+            <a href="{{route('profile')}}"><span class="white-text email">{{ Auth::user()->email }}</span></a>
         </div>
     </li>
     <li>
