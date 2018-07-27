@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePaymentsTable extends Migration
+class AddAddressAndUserToOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreatePaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('order_id');
-            $table->boolean('failed');
-            $table->string('transaction_id')->nullable();
-            $table->timestamps();
+        Schema::table('orders', function (Blueprint $table) {
+            $table->foreign('address_id')->references('id')->on('addresses');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -29,6 +26,8 @@ class CreatePaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::table('orders', function (Blueprint $table) {
+            //
+        });
     }
 }

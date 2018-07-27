@@ -32,10 +32,12 @@
         </div>
     </div>
     <div class="row">
-        @foreach($products as $product)
+        @forelse($products as $product)
             @component('components.product',['product' => $product])
             @endcomponent
-        @endforeach
+        @empty
+            <h4 class="center grey-text text-darken-2">No Products to Display!</h4>
+        @endforelse
     </div>
     <br><br>
     <div class="center-align">

@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($customers as $customer)
+                    @forelse($customers as $customer)
                         <tr>
                             <td>{{$loop->index + 1 }}</td>
                             <td>{{$customer->id}}</td>
@@ -39,7 +39,13 @@
                                 </div>
                             </td>
                         </tr>    
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="8">
+                                <h4 class="center grey-text text-darken-2">No Customers to Display!</h4>
+                            </td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
                 <br>

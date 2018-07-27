@@ -19,7 +19,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($orders as $order)
+                            @forelse($orders as $order)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{Auth::user()->name}}</td>
@@ -41,7 +41,13 @@
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="7">
+                                        <h4 class="center grey-text text-darken-2">No Orders To Display!</h4>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                     <br><br>

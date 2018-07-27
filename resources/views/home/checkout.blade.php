@@ -49,7 +49,10 @@
                             </div>
                             <div class="input-field">
                                 <div id="dropin-container"></div>
-                                <button id="check-out-btn" class="btn center">Request Payment Method</button>
+                                <br>
+                                <div class="row">
+                                    <button id="check-out-btn" class="btn center col s8 offset-s2">Checkout</button>
+                                </div>
                             </div>
                             <input type="hidden" name="nonce" id="nonce">
                         </div>
@@ -62,7 +65,6 @@
                 @component('components.cart-summary')
                 @endcomponent
                 <br>
-                <a href="#" class="btn waves-effect waves-light" onclick="this.preventDefault;document.querySelector('#checkout-form').submit()">Place Order</a>
             </div>
         </div>
     </div>
@@ -91,6 +93,7 @@
                         instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
                         // Submit payload.nonce to your server
                         $('#nonce').val(payload.nonce);
+                        document.querySelector('#checkout-form').submit();
                         });
                     });
                     });

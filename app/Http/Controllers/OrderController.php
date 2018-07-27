@@ -67,6 +67,9 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        //Validate the Request
+        $this->validateOrder($request);
+        
         //If not Authenticated.
         $this->notAuthenticated();
 
@@ -78,8 +81,6 @@ class OrderController extends Controller
                 ]);
         }
 
-        //Validate the Request
-        $this->validateOrder($request);
 
         /**
          *  Get the total from cart.
@@ -97,7 +98,7 @@ class OrderController extends Controller
         //$hash = bin2hex(random_bytes(32));
 
         //create the order.
-        $order = $this->createOrder($hash,$address->id,$total);
+        $order = $this->createOrder($address->id,$total);
 
         //Payment process failed
         if(!$payment->success){
@@ -171,7 +172,7 @@ class OrderController extends Controller
      * @param float $total
      * @return App\Order
      */
-    private function createOrder($hash ,$address_id ,$total ){
+    private function createOrder($address_id ,$total ){
         /** 
          *  we can get the current authenticated user
          *  instance with Auth::user().

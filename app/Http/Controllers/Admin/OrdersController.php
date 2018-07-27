@@ -67,6 +67,7 @@ class OrdersController extends Controller
 
         $order = Order::findOrFail($id);
         
+        $this->ordersProducts($request,$order);
         $this->updateOrder($request,$order);
 
         return redirect()
@@ -82,10 +83,14 @@ class OrdersController extends Controller
      */
     public function destroy($id)
     {
-        Order::destroy($id);
-        return redirect()
-            ->back()
-            ->with('status','Selected Order has been deleted!');
+        $order = Order::findOrFail($id);
+        if($order->products && $order->address && $order->payment){
+            return $this->redirect('Cannot deleted an Order thats related to payments!');
+        }
+        
+        $order->delete();
+        return $this->redirect('Selected Order has been deleted!');
+        
     }
 
 
@@ -114,5 +119,14 @@ class OrdersController extends Controller
         $order->address_id = $request->address;
         $order->total = $request->total;
         $order->save();
+    }
+    
+    /**
+     *  redirect with message
+     */
+    private function redirect($msg){
+        return redirect()
+            ->back()
+            ->with('status',$msg);
     }
 }

@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($addresses as $address)
+                        @forelse($addresses as $address)
                             <tr>
                                 <td>{{$loop->index + 1}}</td>
                                 <td>{{$address->id}}</td>
@@ -48,7 +48,13 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="8">
+                                <h4 class="center grey-text text-darken-2">No Addresses to Display!</h4>
+                            </td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
                 <br>

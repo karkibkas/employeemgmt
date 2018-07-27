@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($orders as $order)
+                        @forelse($orders as $order)
                             <tr>
                                 <td>{{$order->id}}</td>
                                 <td>{{$order->user->name}}</td>
@@ -50,7 +50,13 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="8">
+                                    <h4 class="center grey-text text-darken-2">No Orders to Display!</h4>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
                 <br>

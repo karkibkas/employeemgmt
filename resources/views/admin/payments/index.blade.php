@@ -19,7 +19,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($payments as $payment)
+                        @forelse($payments as $payment)
                             <tr>
                                 <td>{{$loop->index + 1}}</td>
                                 <td>{{$payment->order_id}}</td>
@@ -45,7 +45,13 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="7">
+                                    <h4 class="center grey-text text-darken-2">No Payments to Display!</h4>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
                 <br><br>

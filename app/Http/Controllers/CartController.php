@@ -19,18 +19,27 @@ class CartController extends Controller
         $qty = $request->_qty ;
         $product = Product::findOrFail($id);
 
-        //Add item to Cart
-        Cart::add(
-            $product->slug,
-            $product->title,
-            $qty,
-            $product->price
-        );
+        if($product->inStock()){
+            //Add item to Cart
+            Cart::add(
+                $product->slug,
+                $product->title,
+                $qty,
+                $product->price
+            );
+            return response()->json([
+                'success'     =>  true,
+                'cart_count'  =>  Cart::count(),
+                'msg'         =>  'Your Item has been added to Cart!'
+            ]);
+        }
+
         return response()->json([
             'success'     =>  true,
             'cart_count'  =>  Cart::count(),
-            'msg'         =>  'Your Item has been added to Cart!'
+            'msg'         =>  'Item is out of stock!'
         ]);
+
     }
 
     /**

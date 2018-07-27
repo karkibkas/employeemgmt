@@ -19,7 +19,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($wishlists as $wishlist)
+                            @forelse($wishlists as $wishlist)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
                                     <td>
@@ -44,7 +44,13 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="7">
+                                        <h5 class="center">Add <a href="{{route('products')}}">Products</a> in Wishlist!</h5>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                     <br><br>

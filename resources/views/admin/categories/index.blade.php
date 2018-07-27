@@ -15,7 +15,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($categories as $category)
+                        @forelse($categories as $category)
                             <tr>
                                 <td>{{$loop->index + 1}}</td>
                                 <td>{{$category->id}}</td>
@@ -45,7 +45,13 @@
                                     @method('DELETE')
                                 </form>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="6">
+                                    <h4 class="center grey-text text-darken-2">No Categories to Display!</h4>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

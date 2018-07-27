@@ -21,7 +21,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($products as $product)
+                    @forelse($products as $product)
                         <tr>
                             <td>{{$loop->index + 1}}</td>
                             <td>
@@ -45,7 +45,13 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="9">
+                                <h4 class="center grey-text text-darken-2">No Products to Display!</h4>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
             <br><br>

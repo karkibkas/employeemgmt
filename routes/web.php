@@ -79,7 +79,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
         Route::get('/register', 'RegisterController@showRegisterationForm')->name('register');
         Route::post('/register', 'RegisterController@register');
         Route::post('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-        Route::get('/password/reset','ResetPasswordController@showLinkRequestForm')->name('password.request');
+        Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
         Route::post('/password/reset', 'ResetPasswordController@reset');
         Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
     });

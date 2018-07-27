@@ -30,12 +30,15 @@ main {
     background: linear-gradient(-60deg,#ef5350 ,#BA68C8);
 }
 
+.card-bg{
+    background: linear-gradient(110deg,#81c784,#26a69a,#00bcd4);
+}
+
 .cart-icon{
     margin-top: 3px;
 }
 
-.card-panel{
-    
+.product-card{
     border-radius: 5px;
 }
 
@@ -132,4 +135,64 @@ main {
 
 .login-panel > h4{
     margin:0;
+}
+
+.prod-chip{
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 15px;
+    opacity: 0.9;
+}
+
+.login-card{
+    padding:0 !important;
+    border-radius: 7px;
+}
+
+@media only screen and (min-width : 1202px) {
+    .login-container{
+        padding:0 29.1% 0 29.1% !important;
+    }
+}
+
+.login-title > h4{
+    margin: 0;
+    font-size: 2em;
+}
+
+.login-title{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding:13px;
+}
+
+.login-content{
+    padding:15px;
+}
+
+/* label underline focus color */
+.login-field input:focus {
+    border-bottom: 1px solid #ba68c8 !important;
+    box-shadow: 0 1px 0 0 #ba68c8 !important;
+}
+
+/* icon prefix focus color */
+.login-field .prefix.active {
+    color: #ba68c8 !important;
+}
+
+.login-field input:focus + label {
+    color: #ba68c8 !important;
+}
+
+
+.checkbox-indigo[type="checkbox"] + .checkbox-text:before{
+    border: 2px solid #ba68c8;
+    background: transparent;
+}
+.checkbox-indigo[type="checkbox"]:checked + .checkbox-text:before{
+    border: 2px solid transparent;
+    border-bottom: 2px solid #ba68c8;
+    border-right: 2px solid #ba68c8;
+    background: transparent;
 }
