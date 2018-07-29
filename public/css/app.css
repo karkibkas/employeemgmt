@@ -19,7 +19,7 @@ main {
 
 .container-fluid{
     margin: 0 auto;
-    width: 85%;
+    width: 90%;
 }
 
 .bg{
@@ -31,7 +31,19 @@ main {
 }
 
 .card-bg{
-    background: linear-gradient(110deg,#81c784,#26a69a,#00bcd4);
+    background: linear-gradient(160deg,#009688,#4DD0E1);
+}
+
+.card-bg2{
+    background: linear-gradient(160deg,#43A047,#C0CA33);
+}
+
+.card-bg3{
+    background: linear-gradient(160deg,#5C6BC0,#42A5F5,#64B5F6);
+}
+
+.card-bg4{
+    background: linear-gradient(160deg,#f44336,#F06292,#F06292);
 }
 
 .cart-icon{
@@ -149,12 +161,6 @@ main {
     border-radius: 7px;
 }
 
-@media only screen and (min-width : 1202px) {
-    .login-container{
-        padding:0 29.1% 0 29.1% !important;
-    }
-}
-
 .login-title > h4{
     margin: 0;
     font-size: 2em;
@@ -185,14 +191,51 @@ main {
     color: #ba68c8 !important;
 }
 
-
+/* Checkbox color START */
 .checkbox-indigo[type="checkbox"] + .checkbox-text:before{
     border: 2px solid #ba68c8;
     background: transparent;
 }
+
 .checkbox-indigo[type="checkbox"]:checked + .checkbox-text:before{
     border: 2px solid transparent;
     border-bottom: 2px solid #ba68c8;
     border-right: 2px solid #ba68c8;
     background: transparent;
+}
+
+/* Checkbox color END */
+
+.dashboard > .col > .card-panel{
+    padding: 0 !important;
+    padding:15px 15px 10px 15px !important;
+}
+
+.dashboard > .col > .card-panel > p{
+    margin: 0 !important;
+    margin: 10px 0 5px 0 !important;
+}
+
+.dashboard > .col > .card-panel > a{
+    margin: 0 !important;
+}
+
+.card-val{
+    font-size: 40px;
+}
+
+.text-uppercase{
+    text-transform: uppercase;
+}
+
+.link-line:hover{
+    text-decoration: underline !important;
+}
+
+
+/* Media Queries */
+@media only screen and (min-width : 1202px) {
+    .login-container{
+        padding:0 29.1% 0 29.1% !important;
+    }
 }

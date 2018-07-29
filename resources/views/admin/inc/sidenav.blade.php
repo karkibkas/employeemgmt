@@ -29,13 +29,13 @@
               <ul>
                 <li>
                     <a href="{{route('admin.products.index')}}" class="grey-text text-darken-1">
-                        <i class="material-icons">list</i>
+                        <i class="material-icons">shopping_basket</i>
                         Products List
                     </a>
                 </li>
                 <li>
                     <a href="{{route('admin.categories.index')}}" class="grey-text text-darken-1">
-                        <i class="material-icons">list</i>
+                        <i class="material-icons">apps</i>
                         Categories List
                     </a>
                 </li>
@@ -91,7 +91,7 @@
     <li class="show-on-med-and-small hide-on-large-only divider"></li>
     <li class="show-on-med-and-small hide-on-large-only">
         <a href="#" class="waves-effect grey-text text-darken-1" onclick="this.preventDefault;document.querySelector('#admin-logout').submit()">
-            <i class="material-icons grey-text text-darken-1">person</i>
+            <i class="material-icons grey-text text-darken-1">exit_to_app</i>
             Logout
         </a>
         <form action="{{route('admin.logout')}}" class="hide" id="admin-logout" method="post">

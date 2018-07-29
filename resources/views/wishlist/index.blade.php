@@ -35,10 +35,16 @@
                                         <a href="#" class="btn-floating waves-effect waves-light btn-small add-cart" data-id="{{$wishlist->product->id}}">
                                             <i class="material-icons">add_shopping_cart</i>
                                         </a>
-                                        <a href="#" class="btn-floating waves-effect waves-light btn-small red" onclick="this.preventDefault;document.querySelector('#delete-wishlist').submit()">
+                                        <a href="#delete-modal-{{$wishlist->id}}" class="btn-floating waves-effect waves-light btn-small red modal-trigger">
                                             <i class="material-icons">delete</i>
                                         </a>
-                                        <form action="{{route('wishlist.destroy',$wishlist->id)}}" method="post" class="hide" id="delete-wishlist">
+                                        @component('components.confirm',[
+                                            'id'    => 'delete-wishlist-'.$wishlist->id,
+                                            'modal' => 'delete-modal-'.$wishlist->id,
+                                            'title' => 'Wishlist'
+                                        ])
+                                        @endcomponent
+                                        <form action="{{route('wishlist.destroy',$wishlist->id)}}" method="post" class="hide" id="delete-wishlist-{{$wishlist->id}}">
                                             @csrf
                                             @method('DELETE')
                                         </form>

@@ -32,10 +32,10 @@
     </header>
 
     <main>
-        <br><br><br>
+        <br><br>
         {{-- Page content here --}}
         @yield('content')
-        <br><br><br>
+        <br><br>
     </main>
 
     {{-- Footer here --}}

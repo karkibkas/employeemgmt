@@ -67,7 +67,6 @@ class OrdersController extends Controller
 
         $order = Order::findOrFail($id);
         
-        $this->ordersProducts($request,$order);
         $this->updateOrder($request,$order);
 
         return redirect()
