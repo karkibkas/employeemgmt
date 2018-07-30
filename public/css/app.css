@@ -191,6 +191,18 @@ main {
     color: #ba68c8 !important;
 }
 
+/* textarea color START */
+.login-field textarea:focus {
+    border-bottom: 1px solid #ba68c8 !important;
+    box-shadow: 0 1px 0 0 #ba68c8 !important;
+}
+
+.login-field textarea:focus + label {
+    color: #ba68c8 !important;
+}
+
+/* textarea color END */
+
 /* Checkbox color START */
 .checkbox-indigo[type="checkbox"] + .checkbox-text:before{
     border: 2px solid #ba68c8;
@@ -232,10 +244,25 @@ main {
     text-decoration: underline !important;
 }
 
+.slider-img{
+    height: 80vh !important;
+}
+
+.featured-product{
+    margin-left:3px;
+    margin-right:3px;
+}
+
 
 /* Media Queries */
 @media only screen and (min-width : 1202px) {
     .login-container{
         padding:0 29.1% 0 29.1% !important;
+    }
+}
+
+@media only screen and (max-width : 602px) {
+    .slider-img{
+        height: 55vh !important;
     }
 }

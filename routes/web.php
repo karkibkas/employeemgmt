@@ -17,8 +17,15 @@
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/products', 'HomeController@products')->name('products');
 Route::get('/products/{slug}','HomeController@showProduct')->name('product-details');
-Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/about', 'HomeController@about')->name('about');
+
+/**
+ * Contact Route(s)
+ */
+Route::prefix('/contact')->group(function(){
+    Route::get('/', 'HomeController@contact')->name('contact');
+    Route::post('/','ContactController@store');
+});
 
 /**
  *  Checkout Route(s)

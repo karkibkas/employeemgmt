@@ -36,7 +36,7 @@
                         <div class="row"></div>
                         <div class="divider"></div>
                         <div class="row"></div>
-                        <button type="submit" class="btn mb-5 bg left">Login</button>
+                        <button type="submit" class="btn mb-5 bg left waves-effect waves-light">Login</button>
                         <a href="{{route($reset_route)}}" class="btn bg right waves-effect waves-light">Forgot Password</a>
                         <br><br><br>
                     </form>

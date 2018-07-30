@@ -16,9 +16,6 @@
             <li class="waves-effect">
                 <a href="{{route('about')}}">About</a>
             </li>
-            <li class="waves-effect">
-                <a href="{{route('contact')}}">Contact</a>
-            </li>
             @auth
                 <li>
                     <a href="#" class="dropdown-trigger" data-target="user-dropdown">

@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <link rel="stylesheet" href="{{asset('css/materialize.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <link rel="stylesheet" href="{{asset('css/animate.css')}}">
+    @yield('css')
     @if(auth::guard('admin')->check())
         <link rel="stylesheet" href="{{asset('css/admin.css')}}">
     @endif

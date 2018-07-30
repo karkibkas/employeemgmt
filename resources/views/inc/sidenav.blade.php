@@ -20,12 +20,6 @@
         </a>
     </li>
     <li>
-        <a href="{{route('contact')}}" class="waves-effect grey-text text-lighten-3">
-            <i class="material-icons grey-text text-lighten-3 left">contact_phone</i>
-            Contact
-        </a>
-    </li>
-    <li>
         <a href="{{route('login')}}" class="waves-effect grey-text text-lighten-3">
             <i class="material-icons left grey-text text-lighten-3">person_outline</i>
             <span>Login</span>

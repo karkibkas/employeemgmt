@@ -7,10 +7,30 @@
 document.addEventListener('DOMContentLoaded', function() {
     //Initialize all the components of materialize css
     M.AutoInit();
+    
     var dropdowns = document.querySelectorAll('.user-dropdown');
     M.Dropdown.init(dropdowns, {
         constrainWidth:false
     });
+
+    /**
+     *  If we have the carousel element,
+     *  then we want to execute this code.
+     */
+    if(document.querySelector('.carousel')){
+        var carousel = document.querySelector('.carousel');
+        var instance = M.Carousel.init(carousel, {
+            indicators:true,
+            fullWidth:true
+        });
+
+        var slider = M.Carousel.getInstance(carousel);
+        
+        setInterval(function(){
+            slider.next(1);
+        },3500);
+    }
+
 });
 
 // Get CSRF-TOKEN
