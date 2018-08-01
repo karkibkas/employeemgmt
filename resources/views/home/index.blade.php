@@ -81,9 +81,7 @@
         $(document).ready(function(){
             $(".owl-carousel").owlCarousel({
                 loop:true,
-                margin:10,
-                nav:true,
-                navClass:'owl-nav',
+                margin:15,
                 autoplay:true,
                 autoplayTimeout:5000,
                 autoplayHoverPause:false,

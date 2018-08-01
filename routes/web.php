@@ -46,8 +46,10 @@ Route::prefix('/profile')->group(function(){
 /**
  *  Customer order history Route(s)
  */
-Route::get('/order/history','OrderController@index')->name('order.index');
-Route::get('/order/history/{id}','OrderController@show')->name('order.show');
+Route::prefix('order/history')->name('order.')->group(function(){
+    Route::get('/','OrderController@index')->name('index');
+    Route::get('/{id}','OrderController@show')->name('show');
+});
 
 // get the braintree client token
 Route::get('/braintree/token','BraintreeController@token');
@@ -61,9 +63,14 @@ Route::prefix('wishlist')->name('wishlist.')->group(function(){
     Route::delete('/{id}','WishlistsController@destroy')->name('destroy');
 });
 
+/**
+ *  Reviews Route(s)
+ */
+Route::post('/review','ReviewsController@store')->name('reviews.store');
+
 
 /**
- *  prefixing routes and grouping them together.
+ *  Cart Route(s)
  */
 Route::prefix('/cart')->name('cart.')->group(function(){
     Route::get('/', 'HomeController@cart')->name('index');
@@ -131,4 +138,9 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
      *  Addresses Route(s)
      */
     Route::resource('/addresses','AddressesController');
+
+    /**
+     *  Customer Reviews Route(s)
+     */
+    Route::resource('/reviews','ReviewsController');
 });

@@ -23,7 +23,7 @@
           <li>
             <a class="collapsible-header waves-effect grey-text text-darken-1">
                 <i class="material-icons pl-15 grey-text text-darken-1">shop</i>
-                <span class="pl-15">Manage Products</span>
+                <span class="pl-15">Manage Store</span>
             </a>
             <div class="collapsible-body">
               <ul>
@@ -37,6 +37,12 @@
                     <a href="{{route('admin.categories.index')}}" class="grey-text text-darken-1">
                         <i class="material-icons">apps</i>
                         Categories List
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.reviews.index')}}" class="grey-text text-darken-1">
+                        <i class="material-icons">rate_review</i>
+                        Product Reviews
                     </a>
                 </li>
               </ul>

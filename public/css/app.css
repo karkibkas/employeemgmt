@@ -6,6 +6,7 @@ body {
     padding: 0;
     font-family: 'Raleway', sans-serif;
     overflow-x: hidden;
+    color: #616161;
 }
 
 p{
@@ -248,11 +249,22 @@ main {
     height: 80vh !important;
 }
 
-.featured-product{
-    margin-left:3px;
-    margin-right:3px;
+.star{
+    font-size: 20px !important;
 }
 
+.tabs .indicator {
+    background-color:#ba68c8 !important;
+}
+
+/* change the text color of dropdown and select element */
+ul.dropdown-content.select-dropdown li span {
+    color: #ba68c8;
+}
+
+.collection-item{
+    min-height: 50px !important;
+}
 
 /* Media Queries */
 @media only screen and (min-width : 1202px) {

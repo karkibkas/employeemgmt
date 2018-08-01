@@ -19,11 +19,11 @@
                 Price: <span class="val">${{$product->price}}</span>
                 <div class="d-flex">
                     <span>Ratings : </span>
-                    <i class="material-icons yellow-text">star</i>
-                    <i class="material-icons yellow-text">star</i>
-                    <i class="material-icons yellow-text">star</i>
-                    <i class="material-icons yellow-text">star</i>
-                    <i class="material-icons yellow-text">star</i>
+                    <i class="material-icons yellow-text star">star</i>
+                    <i class="material-icons yellow-text star">star</i>
+                    <i class="material-icons yellow-text star">star</i>
+                    <i class="material-icons yellow-text star">star</i>
+                    <i class="material-icons yellow-text star">star</i>
                 </div>
                 <div class="center prod-options">
                     <a href="{{route('product-details',$product->slug)}}" data-id="{{$product->id}}" class="add-cart tooltipped btn bg2 waves-effect waves-light {{($product->outOfStock()) ? 'disabled white-text' : ''}}" data-position="bottom" data-tooltip="Add to Cart">

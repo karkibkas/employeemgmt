@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Review;
 use Auth;
 
 class HomeController extends Controller
@@ -44,8 +45,13 @@ class HomeController extends Controller
     public function showProduct($slug)
     {
         $product = Product::where('slug',$slug)->first();
+        
+        $reviews = Review::orderBy('created_at','desc')
+            ->paginate(10);
+
         return view('home.product-details',[
-            'product' => $product
+            'product' => $product,
+            'reviews' => $reviews,
         ]);
     }
 
