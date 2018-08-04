@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Review;
+use App\Category;
 use Auth;
 
 class HomeController extends Controller
@@ -27,12 +28,20 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function products()
+    public function products(Request $request)
     {
-        $products = Product::orderBy('created_at')->paginate(20);
+        $products = NULL;
+        if($request->category){
+            $products = Category::where('slug',request()->category)->first()->products()->paginate(12);
+        }else{
+            $products = Product::orderBy('created_at','desc')->paginate(12);
+        }
+        
+        $categories = Category::all();
         
         return view('home.products',[
-          'products' => $products
+          'products' => $products,
+          'categories' => $categories,
         ]);
     }
 
@@ -46,7 +55,7 @@ class HomeController extends Controller
     {
         $product = Product::where('slug',$slug)->first();
         
-        $reviews = Review::orderBy('created_at','desc')
+        $reviews = Review::where(['status' => true,'product_id' => $product->id])->orderBy('created_at','desc')
             ->paginate(10);
 
         return view('home.product-details',[

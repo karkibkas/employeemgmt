@@ -19,7 +19,7 @@
                                 @endif
                             </div>
                             <div class="row"></div>
-                            <button type="submit" class="btn bg waves-effect waves-light col s12 xl6 offset-xl3">Submit</button>
+                            <button type="submit" class="btn bg waves-effect waves-light col s12 xl6 offset-xl3">Update</button>
                         </div>
                     </form>
                 </div>

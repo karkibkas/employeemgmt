@@ -96,6 +96,7 @@ class ReviewsController extends Controller
             'product'     => 'required|integer|min:1',
             'description' => 'required|string|min:20',
             'rating'      => 'required|between:1,5',
+            'status'      => 'required|boolean'
         ]);
     }
 
@@ -111,6 +112,7 @@ class ReviewsController extends Controller
         $review->product_id = $request->product;
         $review->text = $request->description;
         $review->rating = $request->rating;
+        $review->status = $request->status;
         $review->save();
     }
 }

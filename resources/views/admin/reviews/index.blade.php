@@ -13,6 +13,7 @@
                                 <th>User ID</th>
                                 <th>Product ID</th>
                                 <th>Rating</th>
+                                <th>Status</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
                                 <th>Actions</th>
@@ -25,6 +26,7 @@
                                     <td class="val">{{$review->user_id}}</td>
                                     <td class="val">{{$review->product_id}}</td>
                                     <td class="val">{{$review->rating}}</td>
+                                    <td>{{($review->status) ? 'Enabled' : 'Disabled' }}</td>
                                     <td>{{$review->created_at->diffForHumans()}}</td>
                                     <td>{{$review->updated_at->diffForHumans()}}</td>
                                     <td>

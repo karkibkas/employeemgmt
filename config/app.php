@@ -150,10 +150,24 @@ return [
         /*
          * Package Service Providers...
          */
-        //LaravelCart package 
+
+        /**
+         * LaravelCart package 
+         * https://github.com/Crinsane/LaravelShoppingcart
+         */
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
-        //Ckeditor package
+        
+        /** 
+         * Ckeditor package
+         * https://github.com/UniSharp/laravel-ckeditor
+         */
         Unisharp\Ckeditor\ServiceProvider::class,
+        
+        /**
+         * Laravel-report-generator
+         * https://github.com/Jimmy-JS/laravel-report-generator
+         */
+        Jimmyjs\ReportGenerator\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -211,8 +225,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        // Shopping cart aliases
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
-
+        // laravel-report-generator aliases
+        'PdfReport' => Jimmyjs\ReportGenerator\Facades\PdfReportFacade::class,
+        'ExcelReport' => Jimmyjs\ReportGenerator\Facades\ExcelReportFacade::class,
+        'CSVReport' => Jimmyjs\ReportGenerator\Facades\CSVReportFacade::class,
     ],
 
 ];

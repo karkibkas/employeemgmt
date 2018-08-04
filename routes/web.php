@@ -143,4 +143,15 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
      *  Customer Reviews Route(s)
      */
     Route::resource('/reviews','ReviewsController');
+
+    /**
+     *  Reports Route(s)
+     */
+    Route::get('/reports','ReportsController@index')->name('reports.index');
+    
+    Route::prefix('/reports')->namespace('Reports')->name('reports.')->group(function(){
+        Route::get('/pdf','PDFController@makePDFReport')->name('pdf');
+        Route::get('/excel','ExcelController@makeExcelReport')->name('excel');
+        Route::get('/csv','CSVController@makeCSVReport')->name('csv');
+    });
 });

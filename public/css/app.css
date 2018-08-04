@@ -250,7 +250,7 @@ main {
 }
 
 .star{
-    font-size: 20px !important;
+    font-size: 17px !important;
 }
 
 .tabs .indicator {
@@ -258,12 +258,16 @@ main {
 }
 
 /* change the text color of dropdown and select element */
-ul.dropdown-content.select-dropdown li span {
+.login-field ul.dropdown-content.select-dropdown li span {
     color: #ba68c8;
 }
 
 .collection-item{
     min-height: 50px !important;
+}
+
+.sm-txt{
+    font-size: 13.4px;
 }
 
 /* Media Queries */
@@ -276,5 +280,8 @@ ul.dropdown-content.select-dropdown li span {
 @media only screen and (max-width : 602px) {
     .slider-img{
         height: 55vh !important;
+    }
+    .star{
+        font-size: 21px !important;
     }
 }

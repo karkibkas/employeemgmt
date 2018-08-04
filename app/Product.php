@@ -67,4 +67,8 @@ class Product extends Model
     public function order(){
         return $this->belongsToMany('App\Order','orders_products')->withPivot('qty');
     }
+
+    public function reviews(){
+        return $this->hasMany('App\Review');
+    }
 }

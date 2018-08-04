@@ -6,13 +6,14 @@
             <br>
             <h4 class="center grey-text text-darken-1">Products List</h4>
             <br>
-            <table class="responsive-table">
+            <table class="responsive-table centered">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Image</th>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Rating</th>
                         <th>Category</th>
                         <th>Quantity</th>
                         <th>Created at</th>
@@ -29,6 +30,7 @@
                             </td>
                             <td>{{$product->id}}</td>
                             <td>{{$product->title}}</td>
+                            <td>{{($product->reviews->avg('rating')) ? : 'None'}}</td>
                             <td>{{$product->hasCategory->title}}</td>
                             <td class="center">{{$product->quantity}}</td>
                             <td>{{$product->created_at->diffForHumans()}}</td>

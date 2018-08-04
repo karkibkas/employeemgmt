@@ -127,6 +127,7 @@ class CategoriesController extends Controller
      */
     private function createOrUpdateCategory(Category $category,Request $request){
         $category->title = $request->title;
+        $category->slug  = str_replace(' ','-',$request->title);
         $category->save();
     }
 }

@@ -40,7 +40,19 @@
                                 <textarea name="description" id="description" class="materialize-textarea">{{old('description') ? : $review->text}}</textarea>
                                 <label for="description">Description</label>
                             </div>
-                            <div class="input-field col s12 m4 offset-m4 l4 offset-l4 login-field">
+                            <div class="input-field col s12 m6 login-field">
+                                <select name="status" id="status">
+                                    <option value="0" {{(!$review->status) ? 'selected' : ''}}>Disabled</option>
+                                    <option value="1" {{($review->status) ? 'selected' : ''}}>Enabled</option>
+                                </select>
+                                <label>Rating</label>
+                                @if($errors->has('status'))
+                                    <span class="helper-text red-text">
+                                        {{$errors->first('status')}}
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="input-field col s12 m6 login-field">
                                 <select name="rating" id="rating">
                                     @for($i = 1; $i <= 5; $i++)
                                         <option value="{{$i}}" {{ ($i == $review->rating) ? 'selected' : '' }}>{{$i}}</option>

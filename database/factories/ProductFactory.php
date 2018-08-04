@@ -9,6 +9,7 @@ $factory->define(App\Product::class, function (Faker $faker) {
         'image'        =>  'product.jpeg',
         'slug'         =>  $faker->slug(),
         'price'        =>  $faker->randomFloat(NULL, 0,10000),
-        'quantity'     =>  $faker->numberBetween(10,100)
+        'quantity'     =>  $faker->numberBetween(10,100),
+        'category'     =>  1,
     ];
 });

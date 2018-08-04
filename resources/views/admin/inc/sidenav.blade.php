@@ -89,6 +89,12 @@
         </ul>
     </li>
     <li>
+        <a href="{{route('admin.reports.index')}}" class="waves-effect grey-text text-darken-1">
+            <i class="material-icons grey-text text-darken-1">chrome_reader_mode</i>
+            Reports
+        </a>
+    </li>
+    <li>
         <a href="#" class="waves-effect grey-text text-darken-1">
             <i class="material-icons grey-text text-darken-1">settings</i>
             Settings

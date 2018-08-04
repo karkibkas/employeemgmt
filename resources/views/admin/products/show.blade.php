@@ -32,6 +32,14 @@
                         <strong>Quantity: </strong>
                         <span>{{$product->quantity}}</span>
                     </p>
+                    <p>
+                        <strong class="left">Rating: </strong>
+                        <span>
+                            @for($i = 0; $i<$product->reviews->avg('rating'); $i++)
+                                <i class="material-icons yellow-text text-darken-1">star</i>
+                            @endfor
+                        </span>
+                    </p>
                 </li>
                 <li class="collection-item">
                     <div class="row">

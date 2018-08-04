@@ -16,14 +16,12 @@
                     <a href="#" class="grey-text text-darken-2 truncate">{{$product->title}}</a>
                 </div>
                 <br>
-                Price: <span class="val">${{$product->price}}</span>
+                <span class="sm-txt">Price:</span> <span class="sm-txt val">${{$product->price}}</span>
                 <div class="d-flex">
-                    <span>Ratings : </span>
-                    <i class="material-icons yellow-text star">star</i>
-                    <i class="material-icons yellow-text star">star</i>
-                    <i class="material-icons yellow-text star">star</i>
-                    <i class="material-icons yellow-text star">star</i>
-                    <i class="material-icons yellow-text star">star</i>
+                    <span class="sm-txt">Rating : </span>
+                    @for($i = 0; $i<$product->reviews->avg('rating'); $i++)
+                        <i class="material-icons yellow-text text-darken-1 star">star</i>
+                    @endfor
                 </div>
                 <div class="center prod-options">
                     <a href="{{route('product-details',$product->slug)}}" data-id="{{$product->id}}" class="add-cart tooltipped btn bg2 waves-effect waves-light {{($product->outOfStock()) ? 'disabled white-text' : ''}}" data-position="bottom" data-tooltip="Add to Cart">
