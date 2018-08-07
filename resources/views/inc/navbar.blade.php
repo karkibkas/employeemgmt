@@ -1,4 +1,4 @@
-<nav class="nav-wrapper bg">
+<nav class="nav-wrapper bg" id="navbar">
     <div class="container-fluid">
         <a href="{{route('index')}}" class="brand-logo">LARACART</a>
         <ul class="show-on-med-and-small">
@@ -56,9 +56,21 @@
                     <span class="cart-count">({{Cart::count()}})</span>
                 </a>
             </li>
+            <li id="search-box">
+                <form action="{{route('search')}}" id="search-form">
+                    <div>
+                        <a href="#" id="search-icon" class="left">
+                            <i class="material-icons grey-text">search</i>
+                        </a>
+                        <input type="search" name="search" id="search" required class="browser-default" placeholder="Search Products">
+                        <a href="#" id="search-close" class="right">
+                            <i class="material-icons transparent-text close-icon">close</i>
+                        </a>
+                    </div>
+                    <ul id="search-results" class="collection z-depth-2 grey lighten-4 grey-text text-darken-2"></ul>
+                </form>
+            </li>
         </ul>
     </div>
 </nav>
-
-{{-- Include SideNav that's appropriate for normal users or guests --}}
 @include('inc.sidenav')

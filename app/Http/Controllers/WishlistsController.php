@@ -53,13 +53,13 @@ class WishlistsController extends Controller
         if(!$result->wasRecentlyCreated){
             return response()
             ->json([
-                'msg' => 'Product already exists in the wishlist!'
+                'message' => 'Product already exists in the wishlist!'
             ]);
         }
 
         return response()
             ->json([
-                'msg' => 'Product added to wishlist'
+                'message' => 'Product added to wishlist'
             ]);
     }
 

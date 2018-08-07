@@ -4,48 +4,250 @@
  * This file will handle ajax requests, dom events, etc.
  */
 
-document.addEventListener('DOMContentLoaded', function() {
+// Get CSRF-TOKEN
+const _token = $('meta[name=csrf-token]').attr('content');
+
+$(document).ready(function () {
     //Initialize all the components of materialize css
     M.AutoInit();
-    
+
+    stickyNavbar();
+    carousalSlider();
+    mobileSearch();
+    navSearch();
+    addToCart();
+    addToWishlist();
+    updateCart();
+});
+
+/**
+ * get the dropdown instances
+ * and make constrain width to
+ * false.
+ */
+function autoWidthDropDown() {
     var dropdowns = document.querySelectorAll('.user-dropdown');
     M.Dropdown.init(dropdowns, {
-        constrainWidth:false
+        constrainWidth: false
     });
+}
 
+/**
+ * Make the carousal slider
+ * slide automatically with a
+ * timeout of 3500 milliseconds.
+ */
+function carousalSlider() {
     /**
      *  If we have the carousel element,
      *  then we want to execute this code.
      */
-    if(document.querySelector('.carousel')){
+    if (document.querySelector('.carousel')) {
         var carousel = document.querySelector('.carousel');
-        var instance = M.Carousel.init(carousel, {
-            indicators:true,
-            fullWidth:true
+        M.Carousel.init(carousel, {
+            indicators: true,
+            fullWidth: true
         });
-
         var slider = M.Carousel.getInstance(carousel);
-        
-        setInterval(function(){
+        setInterval(function () {
             slider.next(1);
-        },3500);
+        }, 3500);
     }
+}
 
-});
+/**
+ * Hide the navbar on scroll up
+ * and show on scroll down.
+ */
+function stickyNavbar() {
+    let prevScrollpos = window.pageYOffset;
+    window.onscroll = function () {
+        const navbar = $('#navbar').get(0);
+        let currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+            navbar.style.top = "0";
+        }
+        else {
+            navbar.style.top = "-65px";
+        }
+        prevScrollpos = currentScrollPos;
+    };
+}
 
-// Get CSRF-TOKEN
-const _token = $('meta[name=csrf-token]').attr('content');
+/**
+ * Handle search functionality on
+ * small devices.
+ */
+function mobileSearch() {
+    //Search box element
+    const mobileSearch = $('#mobile-search');
 
-$(document).ready(function(){
+    //Close icon element on search box
+    const closeIcon = $('.close-icon-mb');
+    
+    //when close icon on search box is click.
+    $('#search-close-mb').click(function (e) {
+        e.preventDefault();
+        $('#search-results-mb').hide();
+        mobileSearch.val('');
+    });
 
-    $('body').delegate('.add-cart','click',function(e){
+    const searchIcon = $('#search-icon');
+    const searchForm = $('#search-form');
+
+    submitSearch(searchIcon,searchForm);
+
+    searchFocusBlur(mobileSearch, closeIcon);
+
+    //Handle the actual search functionality.
+    search(
+        mobileSearch,
+        $('#search-results-mb').get(0),
+        searchResult,
+        searchForm
+    );
+}
+
+/**
+ * Handle search functionality on
+ * large screens.
+ */
+function navSearch(){
+    //Search box element.
+    const Search = $('#search');
+    
+    //Close icon element on the search box.
+    const closeIcon = $('.close-icon');
+
+    //when close icon on search box is click.
+    $('#search-close').click(function(e){
+        e.preventDefault();
+        //hide the search results element.
+        $('#search-results').hide();
+        //clear the search box.
+        Search.val('');
+    });
+
+    const searchIcon = $('#search-icon-mb');
+    const searchForm = $('#search-form-mb');
+
+    submitSearch(searchIcon,searchForm);
+
+    searchFocusBlur(Search, closeIcon);
+
+    //Handle the actual search functionality.
+    search(
+        Search,
+        $('#search-results').get(0),
+        searchResult
+    );
+}
+
+/**
+ * Submit the Search form instead of
+ * making an ajax request.
+ *  
+ * @param {*} searchIcon 
+ * @param {*} searchForm 
+ */
+function submitSearch(searchIcon,searchForm) {
+    searchIcon.click(function (e) {
+        e.preventDefault();
+        searchForm.submit();
+    });
+}
+
+/**
+ * When Search box has gained or lost focus.
+ * (Both small and large devices)
+ * 
+ * @param {*} Search 
+ * @param {*} closeIcon 
+ */
+function searchFocusBlur(Search, closeIcon) {
+    Search.focus(function () {
+        closeIcon.addClass('grey-text');
+        closeIcon.removeClass('transparent-text');
+        closeIcon.css('opacity', '1');
+    });
+    Search.blur(function () {
+        closeIcon.css('opacity', '0');
+    });
+}
+
+/**
+ * Handle Search with AJAX request.
+ * 
+ * @param {*} elID 
+ * @param {*} resElID 
+ * @param {*} successCallback  
+ */
+function search(elID, resElID, successCallback) {
+    elID.on('keyup input propertychange', function () {
+        let str = $(this).val();
+        console.log(str.length);
+        if (str.length <= 1) {
+            resElID.style.display = "";
+        }
+        else {
+            makeAJAXRequest(
+                '/search/' + str,
+                'GET',
+                null,
+                function (res) {
+                    successCallback(res,resElID,str);
+                }
+            );
+        }
+    });
+}
+
+/**
+ * Handle successful ajax request callback.
+ * 
+ * @param {*} res
+ * @param {*} resElID
+ * @param {*} searchForm
+ */
+function searchResult(res, resElID,search) {
+    if (res.products.length != 0) {
+        let products = res.products;
+        resElID.innerHTML = "";
+        resElID.style.display = 'block';
+        for (const i in products) {
+            console.log(products[i].title);
+            resElID.innerHTML += `
+                <a href="/products/${products[i].slug}" class="truncae grey-text text-darken-1 collection-item">
+                    ${products[i].title}
+                </a>`;
+        }
+        resElID.innerHTML +=`
+            <a href="/search?search=`+search+`" class="collection-item center">
+                Show all results
+            </a>
+        `;
+    }else{
+        resElID.innerHTML = "";
+        resElID.innerHTML = `
+            <a href="#" class="collection-item grey-text text-darken-2">
+                Nothing found!
+            </a>
+        `;
+    }
+}
+
+/**
+ * Handle Add to Cart AJAX Request.
+ */
+function addToCart(){
+    $('body').delegate('.add-cart', 'click', function (e) {
         // get the attribute value of element with #add-cart id.
         let id = $(this).attr('data-id');
 
         // get the text (value) of selected quantity
         let qty = $('#qty :selected').text();
-        if(!qty){
-            qty = 1 ;
+        if (!qty) {
+            qty = 1;
         }
         const data = {
             _token: _token,
@@ -61,54 +263,148 @@ $(document).ready(function(){
             '/cart/add',
             'POST',
             data,
-            function(res){
-                addCart(res)
+            function (res) {
+                addCartSuccess(res)
             }
         )
     })
+}
 
-    $('body').delegate('.update-cart', 'click',function(e){
+/**
+ * Handle AJAX request for updating
+ * the cart.
+ */
+function updateCart(){
+    $('body').delegate('.update-cart', 'click', function (e) {
         e.preventDefault();
         // "this" means the current object, in our case
         // it's #update-cart.
         const id = $(this).attr('data-id');
-        const qty = $('#qty-'+id+' :selected').text();
-        const rowId = $('#rowId-'+id).val();
+        const qty = $('#qty-' + id + ' :selected').text();
+        const rowId = $('#rowId-' + id).val();
         const data = {
-                _token: _token,
-                _rowId: rowId,
-                _qty: qty
-            };
-        
-            makeAJAXRequest(
+            _token: _token,
+            _rowId: rowId,
+            _qty: qty
+        };
+
+        makeAJAXRequest(
             '/cart/update',
             'POST',
             data,
-            function(res){
-                updateCart(res,id)
+            function (res) {
+                updateCartSuccess(res, id)
             }
         );
     });
+}
 
+/**
+ * callback function for successful
+ * ajax request for updating cart item. 
+ * 
+ * @param {*} res 
+ * @param {*} id 
+ */
+function updateCartSuccess(res, id) {
+    //update the cart-subtotal
+    $('.cart-subtotal').text('$' + res.subtotal + ' /-');
+
+    //update the cart-tax
+    $('.cart-tax').text('$' + res.tax + ' /-');
+
+    //update the cart-total
+    $('.cart-total').text('$' + res.total + ' /-');
+
+    //Cart Count
+    const cartTotal = res.cart_count;
+
+    // if an item was deleted from cart
+    if (res.type === 'delete') {
+        /** 
+         * add css classes before removing the element.
+         * so it has a nice animation to it.
+         */
+        $('tr[data-id=' + id + ']').addClass('animated fadeOut');
+
+        setTimeout(function () {
+            $('tr[data-id=' + id + ']').on('transitionend', function (e) {
+                $(this).remove();
+            });
+            if (cartTotal === 0) {
+                $('.checkout-btn').addClass('disabled');
+                $('.cart-items')
+                    .remove();
+
+                $('.cart-panel')
+                    .html(`<h5 class="animated fadeIn grey-text text-darken-2 center">Your cart is empty! <a href="/products"> Start Shopping</a></h5>`);
+            }
+        }, 300);
+    }
+    
+    makeToast(res.msg);
+
+    updateCartTotal(cartTotal);
+}
+
+
+/**
+ * callback function for successful
+ * ajax request for adding cart item.
+ * 
+ * @param {*} res 
+ */
+function addCartSuccess(res) {
+    if (res.success == true) {
+        const msg = `${res.msg}  <a href="/cart" class="btn-flat blue-text"> Cart</a>`;
+        makeToast(msg);
+        updateCartTotal(res.cart_count);
+    }
+}
+
+/**
+ * Update Cart Total
+ * 
+ * @param {*} cartTotal 
+ */
+function updateCartTotal(cartTotal) {
+    $('.cart-count').text(`(${cartTotal})`);
+}
+
+/**
+ * Handle AJAX request for adding
+ * products to wishlist.
+ */
+function addToWishlist(){
     // Handle add product to wishlist request
-    $('body').delegate('.add-wishlist','click',function(e){
+    $('body').delegate('.add-wishlist', 'click', function (e) {
         e.preventDefault();
         const id = $(this).attr('data-id');
         const data = {
-                _token: _token,
-                _id: id
-            };
-        
-            makeAJAXRequest(
+            _token: _token,
+            _id: id
+        };
+
+        makeAJAXRequest(
             '/wishlist/add',
             'POST',
             data,
+            function (res) {
+                const msg = `${res.message} <a href="/wishlist" class="btn-flat blue-text">Wishlist</a>`;
+                makeToast(msg);
+            },
             function(res){
-                makeToast(res.msg);
+                /**
+                 * response status 401 means
+                 * that we are unauthenticated.
+                 */
+                if(res.status == 401){
+                    makeToast("Please Login or Register to use Wishlist");
+                }
             }
         );
     })
-});
+}
 
 /**
  * Make ajax request
@@ -118,72 +414,15 @@ $(document).ready(function(){
  * @param {*} data 
  * @param {*} success 
  */
-function makeAJAXRequest(url,method,data,success){
+function makeAJAXRequest(url, method, data, success, error) {
     $.ajax({
         method: method,
         dataType: 'json',
         url: url,
         data: data,
-        success: success
+        success: success,
+        error: error
     });
-}
-
-/**
- * callback function for successful
- * ajax request for updating cart item. 
- * 
- * @param {*} data 
- * @param {*} id 
- */
-function updateCart(data,id){
-    //update the cart-subtotal
-    $('.cart-subtotal').text('$'+data.subtotal+' /-');
-
-    //update the cart-tax
-    $('.cart-tax').text('$'+data.tax+' /-');
-
-    //update the cart-total
-    $('.cart-total').text('$'+data.total+' /-');
-
-    // if an item was deleted from cart
-    if(data.type === 'delete'){
-        /** 
-         * add a css classes before remove the item.
-         * so it has a nice animation to it.
-         */
-        $('tr[data-id='+id+']').addClass('animated zoomOut');
-        setTimeout(function(){
-            $('tr[data-id='+id+']').on('transitionend',function(e){
-                $(this).remove();
-            });
-            if(data.cart_count === 0){
-                $('.checkout-btn').addClass('disabled');
-                $('.cart-items')
-                .remove();
-                
-                $('.cart-panel')
-                .html(`<h5 class="animated fadeIn grey-text text-darken-2 center">Your cart is empty! <a href="/products"> Start Shopping</a></h5>`);
-            }else{
-                
-            }
-        },300);
-    }
-    makeToast(data.msg);
-    $('.cart-count').text('('+data.cart_count+')');
-}
-
-
-/**
- * callback function for successful
- * ajax request for adding cart item.
- * 
- * @param {*} data 
- */
-function addCart(data){
-    if(data.success == true){
-        makeToast(data.msg+' <a href="/cart" class="btn-flat blue-text"> Cart</a>');
-        $('.cart-count').text('('+data.cart_count+')');
-    }
 }
 
 /**
@@ -191,18 +430,18 @@ function addCart(data){
  * 
  * @param {*} msg 
  */
-function makeToast(msg){
+function makeToast(msg) {
     M.toast({
-        html: `<span>`+msg+`</span><button class='btn-flat toast-action' onclick='dismissToast()'><i class='material-icons yellow-text'>close</i></button>`,
-        inDuration:500,
-        outDuration:1000
+        html: `<span>` + msg + `</span><button class='btn-flat toast-action' onclick='dismissToast()'><i class='material-icons yellow-text'>close</i></button>`,
+        inDuration: 500,
+        outDuration: 1000
     });
 }
 
 /**
  *  Dismiss the Toast on click
  */
-function dismissToast(){
+function dismissToast() {
     let toastElement = document.querySelector('.toast');
     let toastInstance = M.Toast.getInstance(toastElement);
     toastInstance.dismiss();

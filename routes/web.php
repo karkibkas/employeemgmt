@@ -19,6 +19,15 @@ Route::get('/products', 'HomeController@products')->name('products');
 Route::get('/products/{slug}','HomeController@showProduct')->name('product-details');
 Route::get('/about', 'HomeController@about')->name('about');
 
+//Search Route(s)
+Route::prefix('/search')->group(function(){
+    //Handle Normal Search
+    Route::get('/','SearchController@search')->name('search');
+
+    //Handle Ajax Search
+    Route::get('/{str}','SearchController@ajaxSearch');
+});
+
 /**
  * Contact Route(s)
  */

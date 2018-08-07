@@ -32,9 +32,13 @@ class HomeController extends Controller
     {
         $products = NULL;
         if($request->category){
-            $products = Category::where('slug',request()->category)->first()->products()->paginate(12);
+            $products = Category::where('slug',request()->category)
+                ->first()
+                ->products()
+                ->paginate(12);
         }else{
-            $products = Product::orderBy('created_at','desc')->paginate(12);
+            $products = Product::orderBy('created_at','desc')
+                ->paginate(12);
         }
         
         $categories = Category::all();
@@ -53,9 +57,11 @@ class HomeController extends Controller
      */
     public function showProduct($slug)
     {
-        $product = Product::where('slug',$slug)->first();
+        $product = Product::where('slug',$slug)
+            ->first();
         
-        $reviews = Review::where(['status' => true,'product_id' => $product->id])->orderBy('created_at','desc')
+        $reviews = Review::where(['status' => true,'product_id' => $product->id])
+            ->orderBy('created_at','desc')
             ->paginate(10);
 
         return view('home.product-details',[

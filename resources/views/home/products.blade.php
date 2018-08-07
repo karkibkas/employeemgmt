@@ -1,7 +1,14 @@
 @extends('layouts.app')
 @section('content')
 <div class="container-fluid">
-    <br><br>
+    <h4 class="center">
+        @isset($title)
+            {{$title}}
+        @else
+            Our Latest Products
+        @endisset
+    </h4>
+    <br>
     <div class="row">
         <div class="div col s12 m6 l5 offset-l2 xl4 offset-xl4">
             <form action="#" method="get">
@@ -34,8 +41,10 @@
         <div class="col s12 m12 l9">
             <div class="row">
                 @forelse($products as $product)
+                <div class="col s12 m6 l4 xl3">
                     @component('components.product',['product' => $product])
                     @endcomponent
+                </div>
                 @empty
                     <h4 class="center grey-text text-darken-2">No Products to Display!</h4>
                 @endforelse

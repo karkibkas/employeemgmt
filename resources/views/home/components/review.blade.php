@@ -40,7 +40,7 @@
     @endauth
     @forelse($reviews as $review)
         <ul class="collection review">
-            <li class="collection-item avatar">
+            <li class="collection-item avatar review-item">
                 <img src="{{$review->user->gravatar}}" alt="{{$review->user->name}}" class="circle">
                 <span class="title grey-text text-darken-1">{{$review->user->name}} &nbsp;</span>
                 <span> {{$review->created_at->diffForHumans()}}</span>

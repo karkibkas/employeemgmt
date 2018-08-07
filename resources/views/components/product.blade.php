@@ -1,37 +1,36 @@
-<div class="col s12 m6 l4 xl3">
-    <a href="{{route('product-details',$product->slug)}}">
-        <div class="card-panel product-card no-padding hoverable">
-            <div class="prod-card-img">
-                @if($product->outOfStock())
-                    <span class="chip red lighten-1 white-text prod-chip">out of stock!</span>
-                @endif
-                @if($product->hasLowStock())
-                    <span class="chip yellow prod-chip">Low Stock!</span>
-                @endif
-                <img src="{{asset('storage/products/'.$product->image)}}" alt="">
+<a href="{{route('product-details',$product->slug)}}">
+    <div class="card-panel product-card no-padding hoverable">
+        <div class="prod-card-img">
+            @if($product->outOfStock())
+                <span class="chip red lighten-1 white-text prod-chip">out of stock!</span>
+            @endif
+            @if($product->hasLowStock())
+                <span class="chip yellow prod-chip">Low Stock!</span>
+            @endif
+            <img src="{{asset('storage/products/'.$product->image)}}" alt="">
+        </div>
+        <div class="prod-details">
+            <div class="prod-title">
+                
+                <a href="#" class="grey-text text-darken-2 truncate">{{$product->title}}</a>
             </div>
-            <div class="prod-details">
-                <div class="prod-title">
-                    
-                    <a href="#" class="grey-text text-darken-2 truncate">{{$product->title}}</a>
-                </div>
-                <br>
-                <span class="sm-txt">Price:</span> <span class="sm-txt val">${{$product->price}}</span>
-                <div class="d-flex">
-                    <span class="sm-txt">Rating : </span>
-                    @for($i = 0; $i<$product->reviews->avg('rating'); $i++)
-                        <i class="material-icons yellow-text text-darken-1 star">star</i>
-                    @endfor
-                </div>
-                <div class="center prod-options">
-                    <a href="{{route('product-details',$product->slug)}}" data-id="{{$product->id}}" class="add-cart tooltipped btn bg2 waves-effect waves-light {{($product->outOfStock()) ? 'disabled white-text' : ''}}" data-position="bottom" data-tooltip="Add to Cart">
-                        <i class="material-icons">add_shopping_cart</i>
-                    </a>
-                    <a href="#" data-id="{{$product->id}}" class="add-wishlist tooltipped btn bg2 waves-effect waves-light" data-position="bottom" data-tooltip="Add to wishlist">
-                        <i class="material-icons">favorite_border</i>
-                    </a>
-                </div>
+            <br>
+            <span class="sm-txt">Price:</span> <span class="sm-txt val">${{$product->price}}</span>
+            <div class="d-flex">
+                <span class="sm-txt">Rating : </span>
+                @component('components.review-count',[
+                    'product' => $product
+                ])
+                @endcomponent
+            </div>
+            <div class="center prod-options">
+                <a href="{{route('product-details',$product->slug)}}" data-id="{{$product->id}}" class="add-cart tooltipped btn bg2 waves-effect waves-light {{($product->outOfStock()) ? 'disabled white-text' : ''}}" data-position="bottom" data-tooltip="Add to Cart">
+                    <i class="material-icons">add_shopping_cart</i>
+                </a>
+                <a href="#" data-id="{{$product->id}}" class="add-wishlist tooltipped btn bg2 waves-effect waves-light" data-position="bottom" data-tooltip="Add to wishlist">
+                    <i class="material-icons">favorite_border</i>
+                </a>
             </div>
         </div>
-    </a>
-</div>
+    </div>
+</a>
