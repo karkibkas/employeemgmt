@@ -4,13 +4,17 @@
  * This file will handle ajax requests, dom events, etc.
  */
 
-// Get CSRF-TOKEN
+//CSRF-TOKEN for AJAX Requests.
 const _token = $('meta[name=csrf-token]').attr('content');
 
 $(document).ready(function () {
     //Initialize all the components of materialize css
     M.AutoInit();
 
+    /**
+     * Navigate to the function definition
+     * for details.
+     */
     stickyNavbar();
     carousalSlider();
     mobileSearch();
@@ -92,20 +96,19 @@ function mobileSearch() {
         mobileSearch.val('');
     });
 
-    const searchIcon = $('#search-icon');
-    const searchForm = $('#search-form');
-
-    submitSearch(searchIcon,searchForm);
-
     searchFocusBlur(mobileSearch, closeIcon);
 
     //Handle the actual search functionality.
     search(
         mobileSearch,
         $('#search-results-mb').get(0),
-        searchResult,
-        searchForm
+        searchResult
     );
+
+    const searchIcon = $('#search-icon-mb');
+    const searchForm = $('#search-form-mb');
+
+    submitSearch( searchIcon, searchForm, mobileSearch);
 }
 
 /**
@@ -128,11 +131,6 @@ function navSearch(){
         Search.val('');
     });
 
-    const searchIcon = $('#search-icon-mb');
-    const searchForm = $('#search-form-mb');
-
-    submitSearch(searchIcon,searchForm);
-
     searchFocusBlur(Search, closeIcon);
 
     //Handle the actual search functionality.
@@ -141,19 +139,29 @@ function navSearch(){
         $('#search-results').get(0),
         searchResult
     );
+
+    const searchIcon = $('#search-icon');
+    const searchForm = $('#search-form');
+
+    submitSearch( searchIcon, searchForm, Search);
 }
 
 /**
  * Submit the Search form instead of
- * making an ajax request.
- *  
+ * making an AJAX request.
+ * 
  * @param {*} searchIcon 
  * @param {*} searchForm 
+ * @param {*} Search 
  */
-function submitSearch(searchIcon,searchForm) {
+function submitSearch( searchIcon, searchForm, Search) {
     searchIcon.click(function (e) {
         e.preventDefault();
-        searchForm.submit();
+
+        //if search box is not empty
+        if (Search.val() != '') {
+            searchForm.submit();
+        }
     });
 }
 
@@ -185,7 +193,6 @@ function searchFocusBlur(Search, closeIcon) {
 function search(elID, resElID, successCallback) {
     elID.on('keyup input propertychange', function () {
         let str = $(this).val();
-        console.log(str.length);
         if (str.length <= 1) {
             resElID.style.display = "";
         }
@@ -215,7 +222,6 @@ function searchResult(res, resElID,search) {
         resElID.innerHTML = "";
         resElID.style.display = 'block';
         for (const i in products) {
-            console.log(products[i].title);
             resElID.innerHTML += `
                 <a href="/products/${products[i].slug}" class="truncae grey-text text-darken-1 collection-item">
                     ${products[i].title}

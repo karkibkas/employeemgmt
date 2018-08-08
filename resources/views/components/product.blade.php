@@ -7,7 +7,8 @@
             @if($product->hasLowStock())
                 <span class="chip yellow prod-chip">Low Stock!</span>
             @endif
-            <img src="{{asset('storage/products/'.$product->image)}}" alt="">
+            <span class="chip blue lighten-5 blue-text val prod-qty">{{$product->quantity}}</span>
+            <img src="{{asset('storage/products/'.$product->image)}}" alt="{{$product->title}}">
         </div>
         <div class="prod-details">
             <div class="prod-title">

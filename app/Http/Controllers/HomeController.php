@@ -30,18 +30,35 @@ class HomeController extends Controller
      */
     public function products(Request $request)
     {
-        $products = NULL;
-        if($request->category){
-            $products = Category::where('slug',request()->category)
-                ->first()
-                ->products()
-                ->paginate(12);
-        }else{
-            $products = Product::orderBy('created_at','desc')
-                ->paginate(12);
-        }
+        $this->validateRequest($request);
+
+        $sortBy = $request->sort_by;
         
+        //if we don't have any count then set it to 12.
+        $items = ($request->items_per_page) ? : 12;
+
         $categories = Category::all();
+        
+        $category = $request->category;
+        
+        switch ($sortBy) {
+            case 'name':
+                $products = $this->getProducts($category,'title','desc',$items);
+            break;
+            
+            case 'high-to-low':
+                $products = $this->getProducts($category,'price','desc',$items);
+            break;
+            
+            case 'low-to-high':
+                $products = $this->getProducts($category,'price','asc',$items);
+            break;
+            
+            case 'latest':
+            default:
+                $products = $this->getProducts($category,'created_at','desc',$items);
+            break;
+        }
         
         return view('home.products',[
           'products' => $products,
@@ -117,5 +134,42 @@ class HomeController extends Controller
         }
 
         return view('home.checkout');
+    }
+
+    /**
+     * Get products by options or just retrieve all.
+     * 
+     * @param string $category
+     * @param string $sortBy
+     * @param string $order
+     * @param int $item
+     * @return \Illuminate\Support\Collection
+     */
+    private function getProducts( $category, $sortBy = "created_at", $order = "desc", $items = 12){
+        if(!$category || $category == "all"){
+            return Product::orderBy('created_at','desc')
+                ->paginate($items);
+        }else{
+            return Category::where('slug',$category)
+                ->first()
+                ->products()
+                ->orderBy($sortBy,$order)
+                ->paginate($items);
+        }
+    }
+
+
+    /**
+     * Validate the Request
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return void
+     */
+    private function validateRequest(Request $request){
+        $this->validate($request,[
+            'sort_by' => 'nullable|alpha_dash',
+            'items_per_page' => 'nullable|integer|min:1|max:25',
+            'category' => 'nullable|alpha_dash',
+        ]);
     }
 }
