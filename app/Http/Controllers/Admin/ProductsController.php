@@ -10,6 +10,16 @@ use App\Category;
 
 class ProductsController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | ProductsController
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for displaying a list of products ,
+    | displaying details of a single product , creating ,updating and
+    | deleting products.
+    |
+    */
 
     /**
      * Create a new controller instance.
@@ -18,8 +28,6 @@ class ProductsController extends Controller
      */
     public function __construct()
     {
-        // for guests that are not logged in as admin.
-        // Except for logout method.
         $this->middleware('auth:admin');
     }
 

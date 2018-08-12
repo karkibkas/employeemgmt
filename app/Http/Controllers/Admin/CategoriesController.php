@@ -8,6 +8,16 @@ use App\Category;
 
 class CategoriesController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | CategoriesController
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for displaying a list of categories,
+    | creating, updating and deleting addresses.
+    |
+    */
+
     /**
      * Create a new controller instance.
      *
@@ -15,8 +25,6 @@ class CategoriesController extends Controller
      */
     public function __construct()
     {
-        // for guests that are not logged in as admin.
-        // Except for logout method.
         $this->middleware('auth:admin');
     }
 

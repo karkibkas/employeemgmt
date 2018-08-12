@@ -8,6 +8,14 @@ use Auth;
 
 class ReviewsController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | ReviewsController
+    |--------------------------------------------------------------------------
+    |
+    | This controller will store customer reviews for products to the database.
+    |
+    */
 
     /**
      * Create a controller instance
@@ -52,7 +60,7 @@ class ReviewsController extends Controller
     }
 
     /**
-     * create a review.
+     * Create the Review.
      * 
      * @param \Illuminate\Http\Request $request
      * @return void 

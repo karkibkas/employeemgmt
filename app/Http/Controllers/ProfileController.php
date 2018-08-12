@@ -8,6 +8,15 @@ use Hash;
 
 class ProfileController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | ProfileController
+    |--------------------------------------------------------------------------
+    |
+    | This controller will Show and Update customer profile.
+    |
+    */
+
 
     /**
      * Create a new controller instance.

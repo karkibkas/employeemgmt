@@ -16,6 +16,19 @@ use PdfReport;
 
 class PDFController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | CSVController
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for generating reports in CSV format.
+    | This controller makes use of traits so we can reuse all methods.
+    | find the traits from above use statements.
+    | PDF stands for Portable Document File.
+    |
+    */
+
+
     /**
      * This Controller uses Traits
      * to provide reusable methods.
@@ -25,6 +38,16 @@ class PDFController extends Controller
         ProductsReport,
         CustomersReport;
     
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Download pdf report.
      * 

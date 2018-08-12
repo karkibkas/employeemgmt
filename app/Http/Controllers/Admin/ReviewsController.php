@@ -10,6 +10,15 @@ use App\User;
 
 class ReviewsController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | ReviewsController
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for displaying a list of customer reviews
+    | for products, updating and deleting those reviews.
+    |
+    */
 
     /**
      * Create a new controller instance.

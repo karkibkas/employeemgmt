@@ -8,6 +8,16 @@ use App\Product;
 
 class SearchController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | SearchController
+    |--------------------------------------------------------------------------
+    |
+    | This controller Handle's AJAX search or just submitted product search.
+    |
+    */
+
+
     /**
      * Perform Product Search
      * 

@@ -8,6 +8,27 @@ use App\Payment;
 
 class PaymentsController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | OrdersController
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for displaying a list of payments that have
+    | been processed with braintree or failed payments and also responsible for
+    | deleting those payments.
+    |
+    */
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    
     /**
      * Display a listing of the Payments.
      *

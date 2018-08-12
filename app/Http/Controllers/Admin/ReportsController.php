@@ -11,6 +11,15 @@ use Carbon\Carbon;
 
 class ReportsController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | ReportsController
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for displaying page that will generate
+    | orders, customers, and products reports.
+    |
+    */
 
     public function __construct(){
         $this->middleware('auth:admin');

@@ -6,6 +6,16 @@ use Illuminate\Http\Request;
 
 trait Report{
 
+    /*
+    |--------------------------------------------------------------------------
+    | Report Trait
+    |--------------------------------------------------------------------------
+    |
+    | This trait provides reusable methods like validation, report file name 
+    | to be dowloaded, and report metadata.
+    |
+    */
+
     /**
      * Validate the Request.
      * 

@@ -24,19 +24,19 @@
                         </thead>
                         <tbody>
                             @foreach(Cart::content() as $product)
-                                <tr data-id="{{$product->id}}">
+                                <tr data-id="{{$product->model->slug}}">
                                     <td>{{$loop->index + 1}}</td>
                                     <td>
                                         <div>
-                                            <img src="{{('storage/products/'.App\Product::where('slug' , $product->id)->first()->image)}}" width="50px"  height="50px"  alt="">
+                                            <img src="{{('storage/products/'.$product->model->image)}}" width="50px"  height="50px"  alt="{{$product->model->slug}}">
                                         </div>
                                     </td>
                                     <td>
                                         
-                                        @if(!App\Product::where('slug' , $product->id)->first()->hasStock($product->qty))
-                                            <a class="tooltipped red-text" data-position="bottom" data-tooltip="This item has insufficient stock!" href="{{route('product-details',$product->id)}}">{{$product->name}}</a>
+                                        @if(!$product->model->hasStock($product->qty))
+                                            <a class="tooltipped red-text" data-position="bottom" data-tooltip="This item has insufficient stock!" href="{{route('product-details',$product->model->slug)}}">{{$product->name}}</a>
                                         @else
-                                            <a href="{{route('product-details',$product->id)}}">{{$product->name}}</a>
+                                            <a href="{{route('product-details',$product->model->slug)}}">{{$product->name}}</a>
                                         @endif
                                     </td>
                                     <td class="val">${{$product->price}}</td>
@@ -44,11 +44,11 @@
                                         <form action="{{route('cart.index')}}" method="post">
                                             @csrf
                                             <div class="row"  style="margin-bottom:0 !important">
-                                                <input type="hidden" id="rowId-{{$product->id}}" value="{{$product->rowId}}">
+                                                <input type="hidden" id="rowId-{{$product->model->slug}}" value="{{$product->rowId}}">
                                                 <div class="input-field col s9 xl5">
-                                                    <select name="qty" id="qty-{{$product->id}}">
+                                                    <select name="qty" id="qty-{{$product->model->slug}}">
                                                         <option value="0">None</option>
-                                                        @for($i = 0; $i < App\Product::where('slug' , $product->id)->first()->quantity; $i++)
+                                                        @for($i = 0; $i < $product->model->quantity; $i++)
                                                             <option value="{{$i+1}}" {{$product->qty == ($i+1) ? 'selected' : '' }}>{{$i + 1}}</option>
                                                         @endfor
                                                     </select>
@@ -56,7 +56,7 @@
                                                 </div>
                                                 <div class="col">
                                                 <br>
-                                                <button type="submit" data-id="{{$product->id}}" class="btn-floating waves-effect bg2 tooltipped update-cart" data-position="bottom" data-tooltip="Update quantity">
+                                                <button type="submit" data-id="{{$product->model->slug}}" class="btn-floating waves-effect bg2 tooltipped update-cart" data-position="bottom" data-tooltip="Update quantity">
                                                     <i class="material-icons">sync</i>
                                                 </button>
                                                 </div>

@@ -16,6 +16,18 @@ use ExcelReport;
 
 class ExcelController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | CSVController
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for generating reports in Excel format.
+    | This controller makes use of traits so we can reuse all methods.
+    | find the traits from above use statements.
+    |
+    */
+
+
     /**
      * This Controller uses OrderTrait
      * to provide reusable methods.
@@ -24,6 +36,16 @@ class ExcelController extends Controller
         OrdersReport,
         ProductsReport,
         CustomersReport;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
 
     /**
      * Download Excel report.

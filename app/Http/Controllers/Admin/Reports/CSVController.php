@@ -16,6 +16,18 @@ use CSVReport;
 
 class CSVController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | CSVController
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for generating reports in CSV format.
+    | This controller makes use of traits so we can reuse all methods.
+    | find the traits from above use statements.
+    | CSV stands for Comma Seperated Values.
+    |
+    */
+
     /**
      * This Controller uses OrderTrait
      * to provide reusable methods.
@@ -25,6 +37,16 @@ class CSVController extends Controller
         CustomersReport,
         ProductsReport;
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    
     /**
      * Download CSV report.
      * 

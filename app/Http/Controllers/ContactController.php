@@ -7,6 +7,15 @@ use App\Contact;
 
 class ContactController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | ContactController
+    |--------------------------------------------------------------------------
+    |
+    | This controller will store contact messages to database.
+    |
+    */
+
 
     /**
      * Store a newly created resource in storage.

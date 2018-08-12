@@ -214,7 +214,7 @@ function search(elID, resElID, successCallback) {
  * 
  * @param {*} res
  * @param {*} resElID
- * @param {*} searchForm
+ * @param {*} search
  */
 function searchResult(res, resElID,search) {
     if (res.products.length != 0) {
@@ -271,6 +271,11 @@ function addToCart(){
             data,
             function (res) {
                 addCartSuccess(res)
+            },
+            function(res){
+                if(res.status == 422){
+                    makeToast("Invalid product please refresh the page!");
+                }
             }
         )
     })
@@ -300,6 +305,9 @@ function updateCart(){
             data,
             function (res) {
                 updateCartSuccess(res, id)
+            },
+            function(res){
+                validationFailed(res.status,"Invalid product please refresh the page!");
             }
         );
     });
@@ -361,11 +369,9 @@ function updateCartSuccess(res, id) {
  * @param {*} res 
  */
 function addCartSuccess(res) {
-    if (res.success == true) {
-        const msg = `${res.msg}  <a href="/cart" class="btn-flat blue-text"> Cart</a>`;
-        makeToast(msg);
-        updateCartTotal(res.cart_count);
-    }
+    const msg = `${res.msg}  <a href="/cart" class="btn-flat blue-text"> Cart</a>`;
+    makeToast(msg);
+    updateCartTotal(res.cart_count);
 }
 
 /**
@@ -404,12 +410,29 @@ function addToWishlist(){
                  * response status 401 means
                  * that we are unauthenticated.
                  */
-                if(res.status == 401){
+                if (res.status == 401) {
                     makeToast("Please Login or Register to use Wishlist");
                 }
+                validationFailed(res.status,"Invalid product please refresh the page!");
             }
         );
     })
+}
+
+/**
+ * Validatation Failed when making
+ * an AJAX request.
+ * 
+ * @param {*} status 
+ * @param {*} msg 
+ */
+function validationFailed(status,msg){
+    /**
+     * validation Failed
+     */
+    if(status == 422){
+        makeToast(msg);
+    }
 }
 
 /**
@@ -419,6 +442,7 @@ function addToWishlist(){
  * @param {*} method 
  * @param {*} data 
  * @param {*} success 
+ * @param {*} error
  */
 function makeAJAXRequest(url, method, data, success, error) {
     $.ajax({

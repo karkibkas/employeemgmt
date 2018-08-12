@@ -8,6 +8,17 @@ use App\Product;
 
 class CartController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | CartController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles all the functionality like adding products to
+    | the cart, updating products or removing them from the cart.
+    |
+    */
+
+
     /**
      * Add Item to Cart
      *
@@ -15,66 +26,82 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function addCart(Request $request){
+        $this->validate($request,[
+            '_id' => 'required|integer',
+            '_qty' => 'required|integer',
+        ]);
+
         $id = $request->_id ;
         $qty = $request->_qty ;
         $product = Product::findOrFail($id);
 
+        //if product has available stock
         if($product->inStock()){
             //Add item to Cart
             Cart::add(
-                $product->slug,
+                $product->id,
                 $product->title,
                 $qty,
                 $product->price
-            );
-            return response()->json([
-                'success'     =>  true,
-                'cart_count'  =>  Cart::count(),
-                'msg'         =>  'Your Item has been added to Cart!'
-            ]);
+            )->associate('App\Product');
+
+            return $this->addCartResponse('Your Item has been added to Cart!');
         }
 
-        return response()->json([
-            'success'     =>  true,
-            'cart_count'  =>  Cart::count(),
-            'msg'         =>  'Item is out of stock!'
-        ]);
+        return $this->addCartResponse('Item is out of stock!');
 
+    }
+
+    /**
+     * Return Json Reponse when adding an
+     * item to the cart.
+     * 
+     * @param string $msg
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function addCartResponse($msg){
+        return response()->json([
+            'cart_count'  =>  Cart::count(),
+            'msg'         =>  $msg,
+        ]);
     }
 
     /**
      * Update/Remove Item from Cart
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function updateCart(Request $request){
-        //return response()->json(['success' => 'ok']);
         $qty = $request->_qty;
         $id = $request->_rowId;
         
         // if user selects none then, remove that item from cart.
         if($qty == 0){
             Cart::remove($id);
-            return response()->json([
-                'success'     =>  true,
-                'type'        =>  'delete',
-                'cart_count'  =>  Cart::count(),
-                'total'       =>  Cart::total(),
-                'tax'         =>  Cart::tax(),
-                'subtotal'    =>  Cart::subtotal(),
-                'msg'         => 'Your selected item has been removed from cart!'
-            ]);
+            return $this->updateCartResponse('delete','Your selected item has been removed from cart!');
         }
 
         Cart::update($id,$qty);
+        return $this->updateCartResponse('update','Your item quantity has been updated!');
+    }
+
+    /**
+     * Return Json Response when updating cart
+     * items.
+     * 
+     * @param string $type
+     * @param string $msg
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function updateCartResponse($type,$msg){
         return response()->json([
-            'success'     =>  true,
+            'type'        =>  $type,
             'cart_count'  =>  Cart::count(),
             'total'       =>  Cart::total(),
             'tax'         =>  Cart::tax(),
             'subtotal'    =>  Cart::subtotal(),
-            'msg'         =>  'Your item quantity has been updated!'
+            'msg'         => $msg
         ]);
     }
 }

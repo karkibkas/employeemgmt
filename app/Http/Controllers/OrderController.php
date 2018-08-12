@@ -15,10 +15,16 @@ use App\Events\OrderFailed;
 
 class OrderController extends Controller
 {
-    /**
-     *  NOTICE!
-     *  We are Using User model for Customer.
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | OrderController
+    |--------------------------------------------------------------------------
+    |
+    | This controller will show customer order history page.It will create
+    | orders and process payment to braintree.
+    |
+    | Note : We are Using User model as Customer.
+    */
 
     /**
      * Show customer order history
@@ -73,14 +79,16 @@ class OrderController extends Controller
         //If not Authenticated.
         $this->notAuthenticated();
 
-        if(!$this->areProductsAvailable()){
+        //get the Cart products.
+        $items = Cart::content();
+
+        if(!$this->areProductsAvailable($items)){
             return redirect()
                 ->route('cart.index')
                 ->with([
                     'status' => 'Some products in your cart are low in stock or not available!',
                 ]);
         }
-
 
         /**
          *  Get the total from cart.
@@ -110,9 +118,6 @@ class OrderController extends Controller
                 ->back()
                 ->with('status','Sorry! couldn\'t complete the payment process. Please try again.');
         }
-
-        //get the Cart products.
-        $items = Cart::content();
 
         //get the cart products as eloquent models.
         $products = $this->getProducts($items);
@@ -212,6 +217,7 @@ class OrderController extends Controller
      */
     private function getQuantities($items){
         $qty = [];
+
         foreach($items as $item){
             $qty[] = [ 'qty' => $item->qty ];
         }
@@ -228,9 +234,16 @@ class OrderController extends Controller
      */
     private function getProducts($items){
         $products = [];
-
+            
+        /**
+         * We are associating cart item
+         * with product model.
+         * so we can use $item->model
+         * to access the model.
+         */
         foreach($items as $item){
-            $products[] = Product::where('slug',$item->id)->first();
+            
+            $products[] = $item->model;
         }
 
         return $products;
@@ -270,12 +283,12 @@ class OrderController extends Controller
      * Check if the products in the
      * cart are available or not.
      *
+     * @param array $items
      * @return bool
      */
-    private function areProductsAvailable(){
-        foreach(Cart::content() as $item){
-            $product = Product::where('slug',$item->id)->first();
-            if(!$product->hasStock($item->qty)){
+    private function areProductsAvailable($items){
+        foreach($items as $item){
+            if(!$item->model->hasStock($item->qty)){
                 return false;
             }
         }

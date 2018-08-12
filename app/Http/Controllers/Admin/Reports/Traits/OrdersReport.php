@@ -4,6 +4,17 @@ namespace App\Http\Controllers\Admin\Reports\Traits;
 
 trait OrdersReport{
     
+    /*
+    |--------------------------------------------------------------------------
+    | OrdersReport Trait
+    |--------------------------------------------------------------------------
+    |
+    | This trait provides reusable methods like order columns that are 
+    | displayed on reports and report title, so we can just reuse these methods
+    | in all three reports controller.
+    |
+    */
+
     /**
      * Columns name to display on the report.
      * 

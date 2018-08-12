@@ -8,6 +8,27 @@ use App\Address;
 
 class AddressesController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | AddressesController
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for displaying a list of addresses,
+    | creating, updating and deleting addresses.
+    |
+    */
+
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    
     /**
      * Display a listing of all Addresses.
      *

@@ -9,6 +9,26 @@ use App\Order;
 
 class OrdersController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | OrdersController
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for displaying a list of customer orders,
+    | displaying details of a single order, updating and deleting customer orders.
+    |
+    */
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Display a listing of the Customer Orders.
      *

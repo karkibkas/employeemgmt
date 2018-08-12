@@ -10,25 +10,16 @@ use App\Product;
 class UpdateStock
 {
     /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Handle the event.
+     * update the products quantity.
      *
      * @param  OrderWasCreated  $event
      * @return void
      */
     public function handle(OrderWasCreated $event)
     {
-        foreach($event->products as $product){
-            Product::where('slug',$product->id)->first()->decrement('quantity',$product->qty);
+        foreach($event->products as $item){
+            //increment and decrement are eloquent methods.
+            $item->model->decrement('quantity',$item->qty);
         }
     }
 }

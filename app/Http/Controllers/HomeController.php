@@ -10,6 +10,17 @@ use Auth;
 
 class HomeController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | HomeController
+    |--------------------------------------------------------------------------
+    |
+    | This controller will show pages like home page, products
+    | page, displaying product details, about, cart, search, etc...
+    |
+    */
+
+
     /**
      * Display Index Page.
      *
@@ -114,13 +125,13 @@ class HomeController extends Controller
      */
     public function cart()
     {
-        //dd(\Cart::content());
         return view('home.cart');
     }
 
     /**
-     *  Display Checkout/Order Page
-     *  @return \Illuminate\Http\Response
+     * Display Checkout/Order Page.
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function checkout(){
         if(!Auth::check()){
@@ -140,9 +151,9 @@ class HomeController extends Controller
      * Get products by options or just retrieve all.
      * 
      * @param string $category
-     * @param string $sortBy
-     * @param string $order
-     * @param int $item
+     * @param string|created_at $sortBy
+     * @param string|desc $order
+     * @param int|12 $item
      * @return \Illuminate\Support\Collection
      */
     private function getProducts( $category, $sortBy = "created_at", $order = "desc", $items = 12){

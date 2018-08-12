@@ -10,6 +10,15 @@ use Hash;
 class ProfileController extends Controller
 {
 
+    /*
+    |--------------------------------------------------------------------------
+    | ProfileController
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for displaying updating admin profile.
+    |
+    */
+
     /**
      * Create a new controller instance.
      *

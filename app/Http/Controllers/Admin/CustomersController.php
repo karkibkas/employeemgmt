@@ -9,6 +9,25 @@ use Hash;
 
 class CustomersController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | CustomersController
+    |--------------------------------------------------------------------------
+    |
+    | This controller will store and update customers to the database.
+    |
+    */
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    
     /**
      * Display a listing of the resource.
      *

@@ -12,6 +12,14 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | DashboardController
+    |--------------------------------------------------------------------------
+    |
+    | This controller will display the admin dashboard.
+    |
+    */
 
     /**
      * Create a new controller instance.
@@ -20,8 +28,6 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        // for guests that are not logged in as admin.
-        // Except for logout method.
         $this->middleware('auth:admin');
     }
 
@@ -84,7 +90,7 @@ class DashboardController extends Controller
      * Credit: https://gist.github.com/RadGH/84edff0cc81e6326029c
      * (this method is taken from a comment)
      * 
-     * @param $n
+     * @param int $n
      * @return string
      */
     private function number_format_short( $n ) {
