@@ -158,7 +158,7 @@ class HomeController extends Controller
      */
     private function getProducts( $category, $sortBy = "created_at", $order = "desc", $items = 12){
         if(!$category || $category == "all"){
-            return Product::orderBy('created_at','desc')
+            return Product::orderBy($sortBy,$order)
                 ->paginate($items);
         }else{
             return Category::where('slug',$category)

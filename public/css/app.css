@@ -399,6 +399,13 @@ main {
     transition: top 0.3s;
 }
 
+/* align owl carousal right left icons */
+.owl-nav{
+    margin-top:10px;
+    text-align: center;
+}
+
+
 /* Media Queries */
 @media only screen and (min-width : 1202px) {
     .login-container{
@@ -407,10 +414,16 @@ main {
 }
 
 @media only screen and (max-width : 602px) {
+    
     .slider-img{
         height: 300px !important;
     }
+    
     .star{
         font-size: 21px !important;
+    }
+
+    .featured-product{
+        margin:0 10px 0 10px;
     }
 }

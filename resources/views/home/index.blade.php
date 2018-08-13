@@ -49,7 +49,10 @@
             $(".owl-carousel").owlCarousel({
                 loop:true,
                 margin:15,
+                nav:true,
+                navText:['<i class="material-icons">chevron_left</i>','<i class="material-icons">chevron_right</i>'],
                 autoplay:true,
+                dotsEach:true,
                 autoplayTimeout:5000,
                 autoplayHoverPause:false,
                 responsiveClass:true,
