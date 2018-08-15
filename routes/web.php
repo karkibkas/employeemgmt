@@ -90,6 +90,13 @@ Route::prefix('/cart')->name('cart.')->group(function(){
 // Generate Authentication routes for Users
 Auth::routes();
 
+//Email confirmation Route(s)
+Route::name('auth.resend_confirmation')
+    ->get('/register/confirm/resend', 'Auth\RegisterController@resendConfirmation');
+
+Route::name('auth.confirm')
+    ->get('/register/confirm/{confirmation_code}', 'Auth\RegisterController@confirm');
+
 // Admin Route(s)
 Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     /**

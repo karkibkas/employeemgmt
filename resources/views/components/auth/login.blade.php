@@ -3,6 +3,18 @@
 @section('content')
 <div class="container">
     <div class="row">
+        @if (session('confirmation'))
+            <div class="confirm-alert grey lighten-4" role="alert">
+                {!! session('confirmation') !!}
+            </div>
+            <br>
+        @endif
+        @if ($errors->has('confirmation'))
+            <div class="confirm-alert grey lighten-3">
+                {!! $errors->first('confirmation') !!}
+            </div>
+            <br>
+        @endif
         <div class="col s12 m8 offset-m2 l6 offset-l3 xl12 login-container">
             <div class="card-panel login-card z-depth-3">
                 <div class="login-title bg">

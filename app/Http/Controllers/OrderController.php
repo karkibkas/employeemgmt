@@ -23,7 +23,7 @@ class OrderController extends Controller
     | This controller will show customer order history page.It will create
     | orders and process payment to braintree.
     |
-    | Note : We are Using User model as Customer.
+    | Note : We are Using User model for Customers (I guess, i was too lazy to change that.).
     */
 
     /**
@@ -33,10 +33,10 @@ class OrderController extends Controller
      */
     public function index(){
         /**
-         * get all the orders related to
-         * authenticated customer.
+         * get all the successful orders related to
+         * the authenticated customer.
          */
-        $orders = Auth::user()->orders()->paginate(10);
+        $orders = Auth::user()->orders()->where('paid',true)->paginate(10);
         
         /**
          *  we will use this array to calculate
