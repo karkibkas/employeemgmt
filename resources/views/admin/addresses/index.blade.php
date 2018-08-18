@@ -4,14 +4,40 @@
     <div class="row">
         <div class="col s12">
             <div class="card-panel">
-                <h4 class="center grey-text text-darken-2">Manage Addresses</h4>
+                <h4 class="center">
+                    @if($title)
+                        {{$title}}
+                    @else
+                        Manage Customer Addresses
+                    @endif    
+                </h4>
                 <br>
-                <table class="table-responsive centered">
+                <form action="{{route('admin.addresses.index')}}">
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <input type="text" name="search" id="re-search" value="{{request()->search}}">
+                            <label for="re-search">Search</label>
+                        </div>
+                        <div class="input-field col s12 m4">
+                            <select name="option" id="option">
+                                <option value="address_1" {{(request()->option == "address_1") ? 'selected' : ''}}>Address line 1</option>
+                                <option value="address_2" {{(request()->option == "address_2") ? 'selected' : ''}}>Address line 2</option>
+                                <option value="city" {{(request()->option == "city") ? 'selected' : ''}}>City</option>
+                                <option value="postal_code" {{(request()->option == "postal_code") ? 'selected' : ''}}>Postal Code</option>
+                            </select>
+                            <label for="option">Option</label>
+                        </div>
+                        <br>
+                        <button type="submit" class="col s12 m2 btn waves-effect">Search</button>
+                    </div>
+                </form>
+                <br>
+                <table class="responsive-table centered">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>ID</th>
                             <th>Address line 1</th>
+                            <th>Address line 2</th>
                             <th>City</th>
                             <th>Postal Code</th>
                             <th>Created at</th>
@@ -22,9 +48,9 @@
                     <tbody>
                         @forelse($addresses as $address)
                             <tr>
-                                <td>{{$loop->index + 1}}</td>
                                 <td>{{$address->id}}</td>
                                 <td>{{str_limit($address->address_1,15)}}</td>
+                                <td>{{str_limit($address->address_2,15)}}</td>
                                 <td>{{$address->city}}</td>
                                 <td>{{$address->postal_code}}</td>
                                 <td>{{$address->created_at->diffForHumans()}}</td>
@@ -50,15 +76,24 @@
                             </tr>
                         @empty
                         <tr>
-                            <td colspan="8">
-                                <h4 class="center grey-text text-darken-2">No Addresses to Display!</h4>
-                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="center">No Addresses to Display!</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         @endforelse
                     </tbody>
                 </table>
                 <br>
                 <div class="center-align">
+                    @if($title)
+                        <a href="{{route('admin.addresses.index')}}" class="btn waves-effect">View All</a>
+                        <br>
+                    @endif
                     {{$addresses->links('vendor.pagination.default',[ 'items' => $addresses])}}
                 </div>
                 <br><br>

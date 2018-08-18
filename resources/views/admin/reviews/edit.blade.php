@@ -45,7 +45,7 @@
                                     <option value="0" {{(!$review->status) ? 'selected' : ''}}>Disabled</option>
                                     <option value="1" {{($review->status) ? 'selected' : ''}}>Enabled</option>
                                 </select>
-                                <label>Rating</label>
+                                <label>Status</label>
                                 @if($errors->has('status'))
                                     <span class="helper-text red-text">
                                         {{$errors->first('status')}}

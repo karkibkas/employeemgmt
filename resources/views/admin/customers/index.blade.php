@@ -4,12 +4,35 @@
     <div class="row">
         <div class="col s12">
             <div class="card-panel">
-                <h4 class="center grey-text text-darken-2">Manage Customers</h4>
+                <h4 class="center">
+                    @if($title)
+                        {{$title}}
+                    @else
+                        Manage Customers
+                    @endif    
+                </h4>
                 <br>
+                <form action="{{route('admin.customers.index')}}">
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <input type="text" name="search" id="re-search" value="{{request()->search}}">
+                            <label for="re-search">Search</label>
+                        </div>
+                        <div class="input-field col s12 m4">
+                            <select name="option" id="option">
+                                <option value="name" {{(request()->option == "name") ? 'selected' : ''}}>Name</option>
+                                <option value="email" {{(request()->option == "email") ? 'selected' : ''}}>Email</option>
+                            </select>
+                            <label for="option">Option</label>
+                        </div>
+                        <br>
+                        <button type="submit" class="col s12 m2 btn waves-effect">Search</button>
+                    </div>
+                </form>
+            <br>
                 <table class="responsive-table centered">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>ID</th>
                             <th>Image</th>
                             <th>Name</th>
@@ -22,7 +45,6 @@
                     <tbody>
                     @forelse($customers as $customer)
                         <tr>
-                            <td>{{$loop->index + 1 }}</td>
                             <td>{{$customer->id}}</td>
                             <td>
                                 <img src="{{$customer->gravatar}}" alt="{{$customer->name}}" width="50" height="50" class="circle">
@@ -41,15 +63,23 @@
                         </tr>    
                     @empty
                         <tr>
-                            <td colspan="8">
-                                <h4 class="center grey-text text-darken-2">No Customers to Display!</h4>
-                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="center">No Customers to Display!</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     @endforelse
                     </tbody>
                 </table>
                 <br>
                 <div class="center-align">
+                    @if($title)
+                        <a href="{{route('admin.customers.index')}}" class="btn waves-effect">View All</a>
+                        <br>
+                    @endif
                     {{$customers->links('vendor.pagination.default',[ 'customers' => $customers ])}}
                 </div>
                 <br><br>

@@ -42,11 +42,15 @@
                                     </td>
                                 </tr>
                             @empty
-                                <tr>
-                                    <td colspan="7">
-                                        <h4 class="center grey-text text-darken-2">No Orders To Display!</h4>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="center">No Orders Found!</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                             @endforelse
                         </tbody>
                     </table>

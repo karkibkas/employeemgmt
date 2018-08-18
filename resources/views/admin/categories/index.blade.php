@@ -3,6 +3,24 @@
     <div class="container-fluid">
         <div class="row">
             <div class="card-panel">
+                <h4 class="center">
+                    @if($title)
+                        {{$title}}
+                    @else
+                        Category List
+                    @endif
+                </h4>
+                <br>
+                <form action="{{route('admin.categories.index')}}">
+                    <div class="row">
+                        <div class="input-field col s12 m8">
+                            <input type="text" name="search" id="cat-search">
+                            <label for="cat-search">Category Name</label>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn col s12 m2">Search</button>
+                    </div>
+                </form>
                 <table class="responsive-table">
                     <thead>
                         <tr>
@@ -47,13 +65,27 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6">
-                                    <h4 class="center grey-text text-darken-2">No Categories to Display!</h4>
-                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="center">No Categories to Display!</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
+                <br><br>
+                <div class="center-align">
+                    @if($title)
+                        <a href="{{route('admin.categories.index')}}" class="btn waves-effect">View All</a>
+                        <br>
+                    @endif
+                    {{$categories->appends(request()->query())->links('vendor.pagination.default',[
+                        'items' => $categories
+                    ])}}
+                </div>
+                <br>
             </div>
             <div class="fixed-action-btn">
                 <a href="{{route('admin.categories.create')}}" class="btn-floating btn-large waves-effect waves-light red">

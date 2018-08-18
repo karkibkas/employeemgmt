@@ -34,11 +34,20 @@ class AddressesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $addresses = Address::orderBy('created_at')->paginate(10);
+        $title = null;
+        if($request->search){
+            $search = $request->search;
+            $option = ($request->option) ? : 'address_1' ;
+            $addresses = Address::where($option,'LIKE',"%{$search}%")->paginate(10);
+            $title = "Search results by {$option} for \"{$search}\"";
+        }else{
+            $addresses = Address::orderBy('created_at')->paginate(10);
+        }
         return view('admin.addresses.index',[
-            'addresses' => $addresses
+            'addresses' => $addresses,
+            'title'     => $title
         ]);
     }
 

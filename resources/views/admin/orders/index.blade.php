@@ -4,12 +4,28 @@
     <div class="row">
         <div class="col s12">
             <div class="card-panel">
-                <h4 class="center grey-text text-darken-2">Manage Orders</h4>
+                <h4 class="center">
+                    @if($title)
+                        {{$title}}
+                    @else
+                        Manage Orders
+                    @endif    
+                </h4>
                 <br>
+                <form action="{{route('admin.orders.index')}}">
+                    <div class="row">
+                        <div class="input-field col s12 m8">
+                            <input type="text" name="search" id="re-search" value="{{request()->search}}">
+                            <label for="re-search">Search By Customer Name</label>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn col s12 m2">Search</button>
+                    </div>
+                </form>
                 <table class="responsive-table centered">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>ID</th>
                             <th>Customer Name</th>
                             <th>Address ID</th>
                             <th>Status</th>
@@ -52,15 +68,24 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8">
-                                    <h4 class="center grey-text text-darken-2">No Orders to Display!</h4>
-                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="center">No Orders to Display!</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
                 <br>
                 <div class="center-align">
+                        @if($title)
+                            <a href="{{route('admin.orders.index')}}" class="btn waves-effect">View All</a>
+                            <br>
+                        @endif
                     {{$orders->links('vendor.pagination.default',[ 'items' => $orders ])}}
                 </div>
                 <br><br>

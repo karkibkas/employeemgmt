@@ -23,7 +23,11 @@
                 <td>{{$order->address->address_1}}</td>
                 <td>{{$order->address->postal_code}}</td>
                 <td>{{$order->address->city}}</td>
-                <td>{{$order->payment->transaction_id}}</td>
+                @if($order->payment)
+                    <td>{{$order->payment->transaction_id}}</td>
+                @else
+                    <td></td>
+                @endif
                 <td>{{($order->paid) ? 'Paid' : 'Failed'}}</td>
                 <td>{{$order->user_id}}</td>
                 <td>{{$order->created_at->diffForHumans()}}</td>
@@ -31,9 +35,13 @@
             </tr>
         @empty
             <tr>
-                <td colspan="7">
-                    <h6 class="center">No Orders Found!</h6>
-                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="center">No Orders Found!</td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
         @endforelse
     </tbody>

@@ -40,6 +40,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('admin.customers.index')}}" class="waves-effect waves-light grey-text text-darken-1">
+                        <i class="material-icons">supervisor_account</i>
+                        Manage Customers
+                    </a>
+                </li>
+                <li>
                     <a href="{{route('admin.reviews.index')}}" class="grey-text text-darken-1">
                         <i class="material-icons">rate_review</i>
                         Product Reviews
@@ -72,12 +78,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('admin.customers.index')}}" class="waves-effect waves-light grey-text text-darken-1">
-                        <i class="material-icons">supervisor_account</i>
-                        Manage Customers
-                    </a>
-                </li>
-                <li>
                     <a href="{{route('admin.addresses.index')}}" class="waves-effect waves-light grey-text text-darken-1">
                         <i class="material-icons">business</i>
                         Manage Addresses
@@ -92,12 +92,6 @@
         <a href="{{route('admin.reports.index')}}" class="waves-effect grey-text text-darken-1">
             <i class="material-icons grey-text text-darken-1">chrome_reader_mode</i>
             Reports
-        </a>
-    </li>
-    <li>
-        <a href="#" class="waves-effect grey-text text-darken-1">
-            <i class="material-icons grey-text text-darken-1">settings</i>
-            Settings
         </a>
     </li>
     <li class="show-on-med-and-small hide-on-large-only divider"></li>

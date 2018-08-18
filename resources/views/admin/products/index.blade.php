@@ -3,15 +3,37 @@
 <div class="container-fluid">
     <div class="row">
         <div class="card-panel">
+            <h4 class="center">
+                @if($title)
+                    {{$title}}
+                @else
+                    Products List
+                @endif
+            </h4>
             <br>
-            <h4 class="center grey-text text-darken-1">Products List</h4>
-            <br>
+            <form action="{{route('admin.products.index')}}">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <input type="text" name="search" class="autocomplete" value="{{request()->search}}">
+                        <label for="search">Search</label>
+                    </div>
+                    <div class="input-field col s12 m4">
+                        <select name="option" id="option">
+                            <option value="title" {{(request()->option == "title") ? 'selected' : ''}}>Name</option>
+                            <option value="quantity" {{(request()->option == "quantity") ? 'selected' : ''}}>quantity</option>
+                            <option value="price" {{(request()->option == "price") ? 'selected' : ''}}>Price</option>
+                        </select>
+                        <label for="option">Option</label>
+                    </div>
+                    <br>
+                    <button type="submit" class="col s12 m2 btn waves-effect">Search</button>
+                </div>
+            </form>
             <table class="responsive-table centered">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Image</th>
                         <th>ID</th>
+                        <th>Image</th>
                         <th>Name</th>
                         <th>Rating</th>
                         <th>Category</th>
@@ -24,11 +46,10 @@
                 <tbody>
                     @forelse($products as $product)
                         <tr>
-                            <td>{{$loop->index + 1}}</td>
+                            <td>{{$product->id}}</td>
                             <td>
                                 <img width="50px" height="50px" src="{{asset('storage/products/'.$product->image)}}" alt="">
                             </td>
-                            <td>{{$product->id}}</td>
                             <td>{{$product->title}}</td>
                             <td>{{($product->reviews->avg('rating')) ? : 'None'}}</td>
                             <td>{{$product->hasCategory->title}}</td>
@@ -49,15 +70,25 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="9">
-                                <h4 class="center grey-text text-darken-2">No Products to Display!</h4>
-                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="center">No Products to Display!</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
             <br><br>
             <div class="center-align">
+                @if($title)
+                    <a href="{{route('admin.products.index')}}" class="btn waves-effect">View All</a>
+                    <br>
+                @endif
                 {{$products->links('vendor.pagination.default',[ 'items' => $products ])}}
             </div>
         </div>

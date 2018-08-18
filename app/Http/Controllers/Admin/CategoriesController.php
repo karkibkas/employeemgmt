@@ -33,11 +33,19 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::orderBy('created_at')->paginate(10);
+        $title = null;
+        if($request->search){
+            $search = $request->search;
+            $categories = Category::where('title','LIKE','%'.$search.'%')->paginate(10);
+            $title = "Search results for \"{$search}\"";
+        }else{
+            $categories = Category::orderBy('created_at')->paginate(10);
+        }
         return view('admin.categories.index',[
-            'categories' => $categories
+            'categories' => $categories,
+            'title' => $title
         ]);
     }
 

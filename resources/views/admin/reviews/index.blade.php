@@ -4,14 +4,37 @@
         <div class="row">
             <div class="col s12">
                 <div class="card-panel">
-                    <h4 class="center">Product Reviews</h4>
+                    <h4 class="center">
+                        @if($title)
+                            {{$title}}
+                        @else
+                            Product Reviews
+                        @endif    
+                    </h4>
                     <br>
+                    <form action="{{route('admin.reviews.index')}}">
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                <input type="text" name="search" id="re-search" value="{{request()->search}}">
+                                <label for="re-search">Search</label>
+                            </div>
+                            <div class="input-field col s12 m4">
+                                <select name="option" id="option">
+                                    <option value="customer_name" {{(request()->option == "customer_name") ? 'selected' : ''}}>Customer Name</option>
+                                    <option value="product_name" {{(request()->option == "product_name") ? 'selected' : ''}}>Product Name</option>
+                                    <option value="rating" {{(request()->option == "rating") ? 'selected' : ''}}>Rating</option>
+                                </select>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn col s12 m2">Search</button>
+                        </div>
+                    </form>
                     <table class="responsive-table centered">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>User ID</th>
-                                <th>Product ID</th>
+                                <th>Customer Name</th>
+                                <th>Product Name</th>
                                 <th>Rating</th>
                                 <th>Status</th>
                                 <th>Created at</th>
@@ -23,8 +46,8 @@
                             @forelse($reviews as $review)
                                 <tr>
                                     <td class="val">{{$loop->index + 1}}</td>
-                                    <td class="val">{{$review->user_id}}</td>
-                                    <td class="val">{{$review->product_id}}</td>
+                                    <td class="val">{{$review->user->name}}</td>
+                                    <td class="val">{{$review->product->title}}</td>
                                     <td class="val">{{$review->rating}}</td>
                                     <td>{{($review->status) ? 'Enabled' : 'Disabled' }}</td>
                                     <td>{{$review->created_at->diffForHumans()}}</td>
@@ -51,14 +74,25 @@
                                     </td>
                                 </tr>
                             @empty
-                                <tr>
-                                    <td colspan="7">No Reviews yet!</td>
-                                </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="center">No Reviews Found!</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                             @endforelse
                         </tbody>
                     </table>
                     <br>
                     <div class="center-align">
+                        @if($title)
+                            <a href="{{route('admin.reviews.index')}}" class="btn waves-effect">View All</a>
+                            <br>
+                        @endif
                         {{$reviews->links('vendor.pagination.default',[
                             'items' => $reviews
                         ])}}

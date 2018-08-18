@@ -35,11 +35,44 @@ class ReviewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $reviews = Review::orderBy('created_at','desc')->paginate(10);
+        $title = null;
+        
+        if($request->search){
+        
+            $search = $request->search;
+            $option = ($request->option) ? : 'customer_name' ;
+        
+            switch ($option) {
+                case 'product_name':
+                    $reviews = Review::whereHas('product',function($query) use ($search){
+                        $query->where('title','LIKE',"%{$search}%");
+                    })->paginate(10);
+                break;
+        
+                case 'rating':
+                    $rating = ($search <= 5 && $search >= 1) ? $search : 1;
+                    $reviews = Review::where('rating',$rating)->paginate(10);
+                break;
+        
+                case 'customer_name':
+                default:
+                    $reviews = Review::whereHas('user',function($query) use ($search){
+                        $query->where('name','like',"%{$search}%");
+                    })->paginate(10);
+                break;
+            }
+        
+            $title = "Search results by{$option} for \"{$search}\"";
+        
+        }else{
+            $reviews = Review::orderBy('created_at','desc')->paginate(10);
+        }
+        
         return view('admin.reviews.index',[
             'reviews' => $reviews,
+            'title'   => $title
         ]);
     }
 

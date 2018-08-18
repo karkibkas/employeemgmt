@@ -33,11 +33,21 @@ class CustomersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = User::orderBy('created_at')->paginate(10);
+        $title = null;
+        if($request->search){
+            $search = $request->search;
+            $option = ($request->option) ? : 'name' ;
+            $customers = User::where($option,'LIKE','%'.$search.'%')->paginate(10);
+            $title = "Search results by {$option} for \"{$search}\"";
+        }else{
+            $customers = User::orderBy('created_at')->paginate(10);
+        }
+        
         return view('admin.customers.index',[
-            'customers' => $customers
+            'customers' => $customers,
+            'title'     => $title
         ]);
     }
 

@@ -23,9 +23,13 @@
             </tr>
         @empty
             <tr>
-                <td colspan="7">
-                    <h6 class="center">No Products Found!</h6>
-                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="center">No Products Found!</td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
         @endforelse
     </tbody>

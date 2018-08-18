@@ -33,12 +33,11 @@
                         <span>{{$product->quantity}}</span>
                     </p>
                     <p>
-                        <strong class="left">Rating: </strong>
-                        <span>
-                            @for($i = 0; $i<$product->reviews->avg('rating'); $i++)
-                                <i class="material-icons yellow-text text-darken-1">star</i>
-                            @endfor
-                        </span>
+                        <strong class="left">Rating: &nbsp;</strong>
+                        @component('components.review-count',[
+                            'product' => $product
+                        ])
+                        @endcomponent
                     </p>
                 </li>
                 <li class="collection-item">

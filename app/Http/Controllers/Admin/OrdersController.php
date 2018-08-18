@@ -34,11 +34,21 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::orderBy('created_at')->paginate(10);
+        $title = null;
+        if($request->search){
+            $search = $request->search;
+            $orders = Order::whereHas('user',function($query) use ($search){
+                $query->where('name','LIKE',"%{$search}%");
+            })->paginate(10);
+            $title = "Search results for \"{$search}\"";
+        }else{
+            $orders = Order::orderBy('created_at')->paginate(10);
+        }
         return view('admin.orders.index',[
-            'orders' => $orders
+            'orders' => $orders,
+            'title'  => $title
         ]);
     }
 

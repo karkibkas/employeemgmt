@@ -51,11 +51,17 @@
                                     </td>
                                 </tr>
                             @empty
-                                <tr>
-                                    <td colspan="7">
-                                        <h5 class="center">Add <a href="{{route('products')}}">Products</a> in Wishlist!</h5>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="center">
+                                    <h5 class="center">Add <a href="{{route('products')}}">Products</a> to Wishlist!</h5>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                             @endforelse
                         </tbody>
                     </table>

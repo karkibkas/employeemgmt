@@ -19,9 +19,11 @@
             </tr>
         @empty
             <tr>
-                <td colspan="5">
-                    <h6 class="center">No Customers Found!</h6>
-                </td>
+                <td></td>
+                <td></td>
+                <td class="center">No Customers Found!</td>
+                <td></td>
+                <td></td>
             </tr>
         @endforelse
     </tbody>

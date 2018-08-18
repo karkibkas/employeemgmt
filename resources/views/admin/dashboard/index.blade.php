@@ -95,7 +95,13 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7">No Latest Orders!</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="center">No Latest Orders!</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         @endforelse
                     </tbody>
