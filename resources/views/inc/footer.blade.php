@@ -6,13 +6,10 @@
                 <p class="grey-text text-lighten-4">Laracart is an online store build on Laravel and Materialize css.</p>
               </div>
               <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Follow us on</h5>
+                <h5 class="white-text">Find me on</h5>
                 <ul class="d-flex">
-                  <li><a class="grey-text text-lighten-3 media-link" href="#!"><img src="{{asset('images/media-icons/facebook.png')}}" alt="Facebook"></a></li>
-                  <li><a class="grey-text text-lighten-3 media-link" href="#!"><img src="{{asset('images/media-icons/google_plus.png')}}" alt="Google Plus"></a></li>
-                  <li><a class="grey-text text-lighten-3 media-link" href="#!"><img src="{{asset('images/media-icons/instagram.png')}}" alt="Instagram"></a></li>
-                  <li><a class="grey-text text-lighten-3 media-link" href="#!"><img src="{{asset('images/media-icons/twitter.png')}}" alt="Twitter"></a></li>
-                  <li><a class="grey-text text-lighten-3 media-link" href="#!"><img src="{{asset('images/media-icons/youtube.png')}}" alt="Youtube"></a></li>
+                  <li><a class="grey-text text-lighten-3 media-link" href="https://www.linkedin.com/in/sagar-maheshwary-b95248142" target="_blank"><img src="{{asset('images/media-icons/linkedin.png')}}" alt="Linkedin"></a></li>
+                  <li><a class="grey-text text-lighten-3 media-link" href="https://github.com/SagarMaheshwary" target="_blank"><img src="{{asset('images/media-icons/github.png')}}" alt="Github"></a></li>
                 </ul>
               </div>
             </div>
