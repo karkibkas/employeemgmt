@@ -12,7 +12,8 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $category = new Category();
-        $category->title = "Electronics";
+        $category->title = "mobile";
+        $category->slug = "mobile";
         $category->save();
     }
 }
