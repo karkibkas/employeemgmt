@@ -126,7 +126,13 @@ class AddressesController extends Controller
      */
     public function destroy($id)
     {
-        Address::destroy($id);
+        $address = Address::findOrFail($id);
+        
+        if($address->orders->count()){
+            return redirect()
+                ->back()
+                ->with('status','Cannot delete an address that belongs to an order!');
+        }
         return redirect()
             ->route('admin.addresses.index')
             ->with('status','Selected address has been deleted!');
@@ -139,11 +145,20 @@ class AddressesController extends Controller
      * @return void
      */
     private function validateRequest(Request $request){
+        //allow numbers, letters underscores, spaces, and dashes.
+        $address = "/^[a-zA-Z0-9_ -]+$/";
+
+        //allow numbers, letters and spaces
+        $city = "/^[a-zA-Z0-9 ]+$/";
+        
+        //allow numbers, letters.
+        $postalcode = "/^[a-zA-Z0-9]+$/";
+
         $this->validate($request,[
-            'address_1'   => 'required|string|min:5',
-            'address_2'   => 'required|string|min:5',
-            'city'        => 'required|string|min:3',
-            'postal_code' => 'required|string|min:3'
+            'address_1'   => "required|regex:{$address}|min:5|max:500",
+            'address_2'   => "required|regex:{$address}|min:5|max:500",
+            'city'        => "required|regex:{$city}|min:3|max:50",
+            'postal_code' => "required|regex:{$postalcode}|min:3|max:50"
         ]);
     }
 

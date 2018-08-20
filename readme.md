@@ -29,6 +29,11 @@ Laravel online store using laravel 5.6, Materialize-css 1.0.0rc-2, JQuery, Mater
     php artisan storage:link
 ```
 
+- Publish resources for Ckeditor
+```bash
+php artisan vendor:publish --tag=ckeditor
+```
+
 - Clear the application cache
 ```bash
     php artisan config:clear
@@ -39,10 +44,6 @@ Laravel online store using laravel 5.6, Materialize-css 1.0.0rc-2, JQuery, Mater
     php artisan serve
 ```
 
-### Publish resources for Ckeditor
-```bash
-php artisan vendor:publish --tag=ckeditor
-```
 
 ### Note
 - This application uses [LaravelShoppingCart](https://github.com/Crinsane/LaravelShoppingcart) which is a laravel package that gives you all the cart features.

@@ -114,7 +114,7 @@ class CustomersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Delete the customer (User)
     }
 
     /**
@@ -125,8 +125,9 @@ class CustomersController extends Controller
      * @return void
      */
     private function validateRequest(Request $request,$id){
+        $regex = "/^[a-zA-Z ]+$/";
         $this->validate($request,[
-            'name' => 'required|string|min:3|max:50',
+            'name' => "required|regex:{$regex}|min:3|max:50",
             'email' => 'required|email|min:7|max:150',
             'password' => ((!$id) ? 'required' : 'nullable' ).'|string'
         ]);

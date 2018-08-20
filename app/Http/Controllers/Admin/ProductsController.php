@@ -194,8 +194,8 @@ class ProductsController extends Controller
             'description'  => 'required|min:30|string',
             'image'        => (($id) ? 'nullable|image|max:1999' : 'required|image|max:1999'),
             'category'     => 'required|integer',
-            'price'        => 'required|integer',
-            'quantity'     => 'required|integer'
+            'price'        => 'required|numeric|min:1',
+            'quantity'     => 'required|integer|min:1'
         ]);
     }
 

@@ -64,18 +64,21 @@ function carousalSlider() {
  * and show on scroll down.
  */
 function stickyNavbar() {
-    let prevScrollpos = window.pageYOffset;
-    window.onscroll = function () {
-        const navbar = $('#navbar').get(0);
-        let currentScrollPos = window.pageYOffset;
-        if (prevScrollpos > currentScrollPos) {
-            navbar.style.top = "0";
-        }
-        else {
-            navbar.style.top = "-65px";
-        }
-        prevScrollpos = currentScrollPos;
-    };
+    //only if we have a navbar with id of navbar
+    if($('#navbar').get(0)){
+        let prevScrollpos = window.pageYOffset;
+        window.onscroll = function () {
+            const navbar = $('#navbar').get(0);
+            let currentScrollPos = window.pageYOffset;
+            if (prevScrollpos > currentScrollPos) {
+                navbar.style.top = "0";
+            }
+            else {
+                navbar.style.top = "-65px";
+            }
+            prevScrollpos = currentScrollPos;
+        };
+    }
 }
 
 /**

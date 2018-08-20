@@ -17,4 +17,11 @@ class Address extends Model
         'city',
         'postal_code',
     ];
+
+    /**
+     * One to Many relationship
+     */
+    public function orders(){
+        return $this->hasMany('App\Order');
+    }
 }

@@ -115,6 +115,20 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
+
+        //check if category has products.
+        if($category->products->count()){
+            /**
+             * Note: foreign key constraint fails.
+             * we cannot delete a category that
+             * is related to a product.
+             */
+
+            return redirect()
+                ->route('admin.categories.index')
+                ->with('status','Cannot delete a category that has products!');
+        }
+
         $category->delete();
 
         return redirect()
@@ -129,8 +143,10 @@ class CategoriesController extends Controller
      *  @return void
      */
     private function validateCategory(Request $request){
+        //allow numbers letters underscores, spaces, and dashes.
+        $regex = "/^[a-zA-Z0-9_ -]+$/";
         $this->validate($request,[
-            'title' => 'required|min:5|max:50'
+            'title' => 'required|regex:'.$regex.'|string|min:5|max:50'
         ]);
     }
 

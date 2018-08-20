@@ -50,7 +50,7 @@
                                 @endif
                             </div>
                             <div class="input-field col s12 m5 l6 xl6">
-                                <input type="number" name="price" id="price" value="{{old('price')}}">
+                                <input type="number" name="price" id="price" value="{{old('price')}}" min=0 step="0.01">
                                 <label for="price">Price</label>
                                 @if($errors->has('price'))
                                     <span class="helper-text red-text">

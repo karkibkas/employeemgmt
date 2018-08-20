@@ -41,7 +41,7 @@
                                 @endif
                             </div>
                             <div class="input-field col s12 m5 offset-m1 l6 xl6">
-                                <input type="number" name="quantity" id="quantity"  value="{{old('quantity') ? : $product->quantity }}">
+                                <input type="number" name="quantity" min=1 id="quantity"  value="{{old('quantity') ? : $product->quantity }}">
                                 <label for="quantity">Quantity</label>
                                 @if($errors->has('quantity'))
                                     <span class="helper-text red-text">
@@ -50,7 +50,7 @@
                                 @endif
                             </div>
                             <div class="input-field col s12 m5 l6 xl6">
-                                <input type="number" name="price" id="price" value="{{old('price') ? : $product->price }}">
+                                <input type="number" name="price" id="price" value="{{old('price') ? : $product->price }}" min=1 step="0.01">
                                 <label for="price">Price</label>
                                 @if($errors->has('price'))
                                     <span class="helper-text red-text">
@@ -64,7 +64,7 @@
                                     <input type="file" name="image">
                                 </div>
                                 <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text" value="{{old('image') ? : $product->image}}">
+                                    <input class="file-path" type="text" value="{{old('image') ? : $product->image}}">
                                     @if($errors->has('image'))
                                         <span class="helper-text red-text">
                                             {{$errors->has('image') ? $errors->first('image') : ''}}

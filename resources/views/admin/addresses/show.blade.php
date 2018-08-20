@@ -36,7 +36,7 @@
                     ])
                     @endcomponent
                     <div class="col s12 m6 l6 xl6 row">
-                        <a href="#deleteModal" class="btn red waves-effect waves-light col s12 modal-trigger">
+                        <a href="#deleteModal" class="{{($address->orders->count()) ? 'disabled' : '' }} btn red waves-effect waves-light col s12 modal-trigger">
                             <i class="material-icons left">delete</i>
                             Delete
                         </a>
@@ -46,6 +46,7 @@
                         </form>
                     </div>
                 </div>
+                <a href="{{route('admin.addresses.index')}}">Go Back</a>
             </div>
         </div>
     </div>

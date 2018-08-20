@@ -263,6 +263,7 @@ main {
 
 .star{
     font-size: 17px !important;
+    margin-top: 3px;
 }
 
 .tabs .indicator {
@@ -410,11 +411,26 @@ main {
     text-align: center;
 }
 
+.show-prod-img{
+    width: 50% !important;
+    height: auto !important;
+}
+
+.mt-10{
+    margin-top:10% !important;
+}
 
 /* Media Queries */
 @media only screen and (min-width : 1202px) {
     .login-container{
         padding:0 29.1% 0 29.1% !important;
+    }
+}
+
+@media only screen and (max-width: 1202px){
+    .show-prod-img{
+        width: 70% !important;
+        height: auto !important;
     }
 }
 
@@ -430,5 +446,10 @@ main {
 
     .featured-product{
         margin:0 10px 0 10px;
+    }
+
+    .show-prod-img{
+        width: 100% !important;
+        height: auto !important;
     }
 }

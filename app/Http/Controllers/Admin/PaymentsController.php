@@ -50,7 +50,8 @@ class PaymentsController extends Controller
      */
     public function destroy($id)
     {
-        Payment::destroy($id);
+        $payment = Payment::findOrfail($id);
+        $payment->delete();
         return redirect()
             ->back()
             ->with('status','Selected payment has been deleted!');

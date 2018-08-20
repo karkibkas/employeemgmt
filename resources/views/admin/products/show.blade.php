@@ -11,8 +11,8 @@
                     <h5 class="center">{{$product->title}}</h5>
                 </li>
                 <li class="collection-item">
-                    <div>
-                        <img src="{{asset('storage/products/'.$product->image)}}" width="100%" height="320px" alt="">
+                    <div class="center-align">
+                        <img src="{{asset('storage/products/'.$product->image)}}" alt="{{$product->title}}" class="show-prod-img">
                     </div>
                 </li>
                 <li class="collection-item">

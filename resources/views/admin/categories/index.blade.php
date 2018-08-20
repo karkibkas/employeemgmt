@@ -45,23 +45,29 @@
                                     <td>Not updated</td>
                                 @endif
                                 <td>
-                                    <a href="{{route('admin.categories.edit',$category->id)}}" class="btn-floating btn-small waves-effect orange waves-light">
+                                    <a href="{{route('admin.categories.edit',$category->id)}}" class="btn-floating btn-small waves-effect orange waves-light tooltipped" data-position="right" data-tooltip="Update Category!">
                                         <i class="material-icons">mode_edit</i>
                                     </a>
-                                    <a href="#delete-modal-{{$category->id}}" class="btn-floating btn-small waves-effect red modal-trigger waves-light">
-                                        <i class="material-icons">delete</i>
-                                    </a>
+                                    @if($category->products->count())
+                                        <a href="#delete-modal-{{$category->id}}" class="disabled btn-floating btn-small waves-effect red modal-trigger waves-light">
+                                            <i class="material-icons">delete</i>
+                                        </a>
+                                    @else
+                                        <a href="#delete-modal-{{$category->id}}" class="btn-floating btn-small waves-effect red modal-trigger waves-light tooltipped" data-position="left" data-tooltip="Delete Category!">
+                                            <i class="material-icons">delete</i>
+                                        </a>
+                                        @component('components.confirm',[
+                                            'id' => 'delete-form-'.$category->id,
+                                            'modal' => 'delete-modal-'.$category->id,
+                                            'title' => 'Category'
+                                        ])
+                                        @endcomponent
+                                        <form action="{{route('admin.categories.destroy',$category->id)}}" method="post" class="hide" id="delete-form-{{$category->id}}">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    @endif
                                 </td>
-                                @component('components.confirm',[
-                                    'id' => 'delete-form-'.$category->id,
-                                    'modal' => 'delete-modal-'.$category->id,
-                                    'title' => 'Category'
-                                ])
-                                @endcomponent
-                                <form action="{{route('admin.categories.destroy',$category->id)}}" method="post" class="hide" id="delete-form-{{$category->id}}">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
                             </tr>
                         @empty
                             <tr>

@@ -108,8 +108,21 @@ class ReviewsController extends Controller
         $this->updateReview($request, $id);
 
         return redirect()
-            ->route('admin.reviews.index')
+            ->back()
             ->with('status','Selected review has been updated!');
+    }
+
+    /**
+     * Show a specified resource from storage
+     * @param int id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id){
+        $review = Review::findOrFail($id);
+        
+        return view('admin.reviews.show',[
+            'review' => $review,
+        ]);
     }
 
     /**
@@ -120,9 +133,10 @@ class ReviewsController extends Controller
      */
     public function destroy($id)
     {
-        $review = Review::destroy($id);
+        $review = Review::findOrFail($id);
+        $review->delete();
         return redirect()
-        ->back()
+        ->route('admin.reviews.index')
         ->with('status','Selected review has been deleted!');
     }
 
@@ -133,10 +147,11 @@ class ReviewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     private function validateRequest(Request $request){
+        $regex = "/^[a-zA-Z0-9_. -]+$/";
         $this->validate($request,[
             'user'        => 'required|integer|min:1',
             'product'     => 'required|integer|min:1',
-            'description' => 'required|string|min:20',
+            'description' => "required|regex:{$regex}|min:20|max:500",
             'rating'      => 'required|between:1,5',
             'status'      => 'required|boolean'
         ]);

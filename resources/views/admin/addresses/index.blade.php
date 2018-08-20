@@ -59,19 +59,25 @@
                                     <a href="{{route('admin.addresses.show',$address->id)}}" class="btn-floating btn-small tooltipped" data-position="left" data-tooltip="Address Details!">
                                         <i class="material-icons">visibility</i>
                                     </a>
-                                    <a href="#delete-modal-{{$address->id}}" class="btn-floating btn-small red modal-trigger tooltipped" data-position="right" data-tooltip="Delete Address!">
-                                        <i class="material-icons">delete</i>
-                                    </a>
-                                    @component('components.confirm',[
-                                        'id'    => 'delete-address-'.$address->id,
-                                        'modal' => 'delete-modal-'.$address->id,
-                                        'title' => 'Address'
-                                    ])
-                                    @endcomponent
-                                    <form action="{{route('admin.addresses.destroy',$address->id)}}" method="post" class="hide" id="delete-address-{{$address->id}}">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
+                                    @if($address->orders->count())
+                                        <a href="#delete-modal-{{$address->id}}" class="disabled btn-floating btn-small red modal-trigger tooltipped" data-position="right" data-tooltip="Delete Address!">
+                                            <i class="material-icons">delete</i>
+                                        </a>
+                                    @else
+                                        <a href="#delete-modal-{{$address->id}}" class="btn-floating btn-small red modal-trigger tooltipped" data-position="right" data-tooltip="Delete Address!">
+                                            <i class="material-icons">delete</i>
+                                        </a>
+                                        @component('components.confirm',[
+                                            'id'    => 'delete-address-'.$address->id,
+                                            'modal' => 'delete-modal-'.$address->id,
+                                            'title' => 'Address'
+                                        ])
+                                        @endcomponent
+                                        <form action="{{route('admin.addresses.destroy',$address->id)}}" method="post" class="hide" id="delete-address-{{$address->id}}">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @empty

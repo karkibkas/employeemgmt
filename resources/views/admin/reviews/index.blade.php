@@ -32,7 +32,7 @@
                     <table class="responsive-table centered">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>ID</th>
                                 <th>Customer Name</th>
                                 <th>Product Name</th>
                                 <th>Rating</th>
@@ -45,7 +45,7 @@
                         <tbody>
                             @forelse($reviews as $review)
                                 <tr>
-                                    <td class="val">{{$loop->index + 1}}</td>
+                                    <td class="val">{{$review->id}}</td>
                                     <td class="val">{{$review->user->name}}</td>
                                     <td class="val">{{$review->product->title}}</td>
                                     <td class="val">{{$review->rating}}</td>
@@ -54,7 +54,7 @@
                                     <td>{{$review->updated_at->diffForHumans()}}</td>
                                     <td>
                                         <div class="center">
-                                            <a href="{{route('admin.reviews.edit',$review->id)}}" class="btn-floating btn-small tooltipped waves-effect waves-light" data-position="left" data-tooltip="Review Details">
+                                            <a href="{{route('admin.reviews.show',$review->id)}}" class="btn-floating btn-small tooltipped waves-effect waves-light" data-position="left" data-tooltip="Review Details">
                                                 <i class="material-icons">visibility</i>
                                             </a>
                                             <a href="#delete-modal-{{$review->id}}" class="modal-trigger btn-floating btn-small red tooltipped red waves-effect waves-light" data-position="left" data-tooltip="Delete Review">
