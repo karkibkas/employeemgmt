@@ -80,7 +80,9 @@
                         <a href="{{route('admin.customers.index')}}" class="btn waves-effect">View All</a>
                         <br>
                     @endif
-                    {{$customers->links('vendor.pagination.default',[ 'customers' => $customers ])}}
+                    {{$customers->appends(request()->query())->links('vendor.pagination.default',[
+                        'items' => $customers
+                    ])}}
                 </div>
                 <br><br>
             </div>

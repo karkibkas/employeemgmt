@@ -100,7 +100,9 @@
                         <a href="{{route('admin.addresses.index')}}" class="btn waves-effect">View All</a>
                         <br>
                     @endif
-                    {{$addresses->links('vendor.pagination.default',[ 'items' => $addresses])}}
+                    {{$addresses->appends(request()->query())->links('vendor.pagination.default',[
+                        'items' => $addresses
+                    ])}}
                 </div>
                 <br><br>
             </div>

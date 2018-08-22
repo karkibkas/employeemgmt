@@ -31,10 +31,7 @@ Route::prefix('/search')->group(function(){
 /**
  * Contact Route(s)
  */
-Route::prefix('/contact')->group(function(){
-    Route::get('/', 'HomeController@contact')->name('contact');
-    Route::post('/','ContactController@store');
-});
+Route::post('/contact','ContactController@store')->name('contact');
 
 /**
  *  Checkout Route(s)
@@ -170,4 +167,10 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
         Route::get('/excel','ExcelController@makeExcelReport')->name('excel');
         Route::get('/csv','CSVController@makeCSVReport')->name('csv');
     });
+
+    /**
+     * Contact messages Route(s)
+     */
+    Route::resource('/contacts','ContactController');
+
 });

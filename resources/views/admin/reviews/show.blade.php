@@ -4,35 +4,50 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col s12">
-            <div class="card-panel">
-                
+            <div class="card-panel">                
                 <ul class="collection with-header">
                     <li class="collection-header">
                         <h4 class="center">Review Details</h4>        
                     </li>
                     <li class="collection-item">
-                        Customer Name : {{$review->user->name}}
+                        <div class="section">
+                            <h6 class="grey-text text-darken-3">Customer Name :</h6>
+                            <span>{{$review->user->name}}</span>
+                        </div>
                     </li>
                     <li class="collection-item">
-                        Product Name : <a href="{{route('admin.products.show',$review->product->id)}}">{{$review->product->title}}</a>
+                        <div class="section">
+                            <h6 class="grey-text text-darken-3">Product Name :</h6>
+                            <span>
+                                <a href="{{route('admin.products.show',$review->product->id)}}">{{$review->product->title}}</a>
+                            </span>
+                        </div>
                     </li>
                     <li class="collection-item">
-                        <span>Rating : </span>
-                        <span class="star">
-                            @component('components.review-count',[
-                                'product' => $review->product
-                            ])
-                            @endcomponent
-                        </span>
+                        <div class="section">
+                            <h6 class="grey-text text-darken-3">Rating :</h6>
+                            <span class="star">
+                                @component('components.review-count',[
+                                    'product' => $review->product
+                                ])
+                                @endcomponent
+                            </span>
+                        </div>
                     </li>
                     <li class="collection-item">
-                        Status : {{($review->status ? 'Enabled' : 'Disabled')}}
+                        <div class="section">
+                            <h6 class="grey-text text-darken-3">Review Status :</h6>
+                            <span>{{($review->status ? 'Enabled' : 'Disabled')}}</span>
+                        </div>
                     </li>
                     <li class="collection-item">
-                        Reviewed at : {{$review->created_at->diffForHumans()}}
+                        <div class="section">
+                            <h6 class="grey-text text-darken-3">Reviewed at :</h6>
+                            <span>{{$review->created_at->diffForHumans()}}</span>
+                        </div>
                     </li>
                     <li class="collection-item">
-                    <li class="collection-item">
+                        <br>
                         <div class="row">
                             <div class="col s12 m6 l6 xl6 row">
                                 <a href="{{route('admin.reviews.edit',$review->id)}}" class="btn orange waves-effect waves-light col s12">

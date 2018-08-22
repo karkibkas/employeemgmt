@@ -82,11 +82,13 @@
                 </table>
                 <br>
                 <div class="center-align">
-                        @if($title)
-                            <a href="{{route('admin.orders.index')}}" class="btn waves-effect">View All</a>
-                            <br>
-                        @endif
-                    {{$orders->links('vendor.pagination.default',[ 'items' => $orders ])}}
+                    @if($title)
+                        <a href="{{route('admin.orders.index')}}" class="btn waves-effect">View All</a>
+                        <br>
+                    @endif
+                    {{$orders->appends(request()->query())->links('vendor.pagination.default',[
+                        'items' => $orders
+                    ])}}
                 </div>
                 <br><br>
             </div>

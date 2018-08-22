@@ -51,6 +51,12 @@
                         Product Reviews
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.contacts.index')}}" class="grey-text text-darken-1">
+                        <i class="material-icons">message</i>
+                        Contact Messages
+                    </a>
+                </li>
               </ul>
             </div>
           </li>
