@@ -38,7 +38,10 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
+                <td></td>
                 <td class="center">No Orders Found!</td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>

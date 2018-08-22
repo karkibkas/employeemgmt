@@ -62,10 +62,17 @@ class ProfileController extends Controller
      * @return void
      */
     private function validateRequest(Request $request){
+        $name = "/^[a-zA-Z0-9 ]+$/";
+
+        $password = "/^[a-zA-Z0-9_ -]+$/";
+        
         $this->validate($request,[
             'name' => 'required|string|min:3|max:50',
             'email' => 'required|email|min:7|max:150',
             'password' => 'nullable|string|min:7|max:100'
+        ],[
+            'name.regex' => 'Only letters and spaces are allowed!',
+            'password.regex' => 'Only numbers, letters, underscores, and dashes are allowed!'
         ]);
     }
 

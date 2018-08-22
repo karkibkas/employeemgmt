@@ -145,8 +145,8 @@ class AddressesController extends Controller
      * @return void
      */
     private function validateRequest(Request $request){
-        //allow numbers, letters underscores, spaces, and dashes.
-        $address = "/^[a-zA-Z0-9_ -]+$/";
+        //allow numbers, letters, spaces, and dashes.
+        $address = "/^[a-zA-Z0-9 -]+$/";
 
         //allow numbers, letters and spaces
         $city = "/^[a-zA-Z0-9 ]+$/";
@@ -159,6 +159,10 @@ class AddressesController extends Controller
             'address_2'   => "required|regex:{$address}|min:5|max:500",
             'city'        => "required|regex:{$city}|min:3|max:50",
             'postal_code' => "required|regex:{$postalcode}|min:3|max:50"
+        ],[
+            'address_1.regex' => 'Only numbers, letters, dashes, and spaces are allowed',
+            'address_2.regex' => 'Only numbers, letters, dashes, and spaces are allowed',
+            'postal_code.regex' => 'Only numbers and letters are allowed'
         ]);
     }
 

@@ -28,7 +28,7 @@
                 {{$products->appends(request()->query())->links('vendor.pagination.default',['items' => $products])}}
             </div>
         </div>
-        <div class="col s12 m6 offset-m3 xl3">
+        <div class="col s12 m6 offset-m3 l3">
             <ul class="collection with-header">
                 <li class="collection-header">
                     <h5 class="center">Categories</h5>

@@ -41,11 +41,14 @@ class ContactController extends Controller
      * @return void
      */
     private function validateRequest(Request $request){
+        $name = "/^[a-zA-Z0-9 ]+$/";
+        $message = "/^[a-zA-Z0-9 -]+$/";
+
         $this->validate($request,[
-            'first_name' => 'nullable|string|min:3|max:50',
-            'last_name'  => 'nullable|string|min:3|max:50',
+            'first_name' => 'nullable|regex:'.$name.'|min:3|max:50',
+            'last_name'  => 'nullable|regex:'.$name.'|min:3|max:50',
             'email'      => 'required|email|min:7|max:150',
-            'message'    => 'required|string|min:20',
+            'message'    => 'required|'.$message.'|min:20',
         ]);
     }
 

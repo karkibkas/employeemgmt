@@ -52,10 +52,15 @@ class ReviewsController extends Controller
      * @return void
      */
     private function validateRequest(Request $request){
+        
+        $description = "/^[a-zA-Z0-9 -]+$/";
+
         $this->validate($request,[
             'product_id'    => 'required|integer',
-            'description'   => 'required|string|min:5|max:500',
+            'description'   => 'required|regex:'.$description.'|min:5|max:500',
             'rating'        => 'required|integer|digits_between:1,5',
+        ],[
+            'description.regex' => 'Only numbers, letters, and dashes are allowed!'
         ]);
     }
 

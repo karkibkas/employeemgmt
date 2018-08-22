@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="div col s12 m6 l5 offset-l2 xl4 offset-xl4">
+    <div class="div col s12 m6 l4 offset-l4 xl4 offset-xl4">
         <form action="{{route('products')}}" id="sort-form">
             <input type="hidden" name="items_per_page" value="{{request()->items_per_page}}">
             <input type="hidden" name="category" value="{{request()->category}}">
@@ -15,7 +15,7 @@
             </div>
         </form>
     </div>
-    <div class="div col s12 m6 l5 xl4">
+    <div class="div col s12 m6 l4 xl4">
         <form action="{{route('products')}}" id="items-form">
             <input type="hidden" name="sort_by" value="{{request()->sort_by}}">
             <input type="hidden" name="category" value="{{request()->category}}">

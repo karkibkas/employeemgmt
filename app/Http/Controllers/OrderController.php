@@ -144,12 +144,21 @@ class OrderController extends Controller
      * @return void
      */
     private function validateOrder(Request $request){
+        
+        $address = "/^[a-zA-Z0-9 -]+$/";
+
+        $postal_code = "/^[a-zA-Z0-9]+$/";
+
         $this->validate($request,[
-            'address_1'    =>  'required|string|min:7|max:255',
-            'address_2'    =>  'nullable|string|min:7|max:255',
+            'address_1'    =>  'required|'.$address.'|min:7|max:255',
+            'address_2'    =>  'nullable|'.$address.'|min:7|max:255',
             'city'         =>  'required|min:3|max:50',
-            'postal_code'  =>  'required|min:3|max:50',
-            'nonce'        =>  'required'
+            'postal_code'  =>  'required|regex:'.$postal_code.'|min:5|max:50',
+            'nonce'        =>  'required|string'
+        ],[
+            'address_1.regex' => 'Only numbers, letters, and dashes are allowed!',
+            'address_2.regex' => 'Only numbers, letters, and dashes are allowed!',
+            'postal_code.regex' => 'Only numbers and letters are allowed!'
         ]);
     }
 

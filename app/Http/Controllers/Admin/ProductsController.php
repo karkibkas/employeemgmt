@@ -189,13 +189,18 @@ class ProductsController extends Controller
      *  @return void
      */
     private function validateProduct(Request $request,$id){
+        //allow numbers, letters, spaces, and dashes.
+        $title = "/^[a-zA-Z0-9 -]+$/";
+        
         $this->validate($request,[
-            'title'        => 'required|min:10|max:50',
-            'description'  => 'required|min:30|string',
+            'title'        => 'required|regex:'.$title.'|min:10|max:50',
+            'description'  => 'required|regex:'.$title.'|min:30|max:500',
             'image'        => (($id) ? 'nullable|image|max:1999' : 'required|image|max:1999'),
             'category'     => 'required|integer',
             'price'        => 'required|numeric|min:1',
             'quantity'     => 'required|integer|min:1'
+        ],[
+            'regex' => 'Only numbers, letters, spaces, and dashes are allowed!'
         ]);
     }
 
