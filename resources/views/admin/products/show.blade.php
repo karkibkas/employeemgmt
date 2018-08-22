@@ -12,7 +12,7 @@
                 </li>
                 <li class="collection-item">
                     <div class="center-align">
-                        <img src="{{asset('storage/products/'.$product->image)}}" alt="{{$product->title}}" class="show-prod-img">
+                        <img src="{{asset('storage/products/'.$product->image)}}" alt="{{$product->title}}" class="show-prod-img materialboxed">
                     </div>
                 </li>
                 <li class="collection-item">
@@ -33,11 +33,13 @@
                         <span>{{$product->quantity}}</span>
                     </p>
                     <p>
-                        <strong class="left">Rating: &nbsp;</strong>
+                        <strong class="left">Rating: </strong>
+                        <span>
                         @component('components.review-count',[
                             'product' => $product
                         ])
                         @endcomponent
+                        </span>
                     </p>
                 </li>
                 <li class="collection-item">

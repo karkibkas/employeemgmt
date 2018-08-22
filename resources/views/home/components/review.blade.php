@@ -5,7 +5,7 @@
             <h5 class="col">Leave a review.</h5>
             <form action="{{route('reviews.store')}}" method="post">
                 @csrf
-                <input type="hidden" name="product_id" value="{{$product->id}}">
+                <input type="hidden" name="product_id" value="{{$p_id}}">
                 <div class="input-field col s12 login-field">
                     <textarea name="description" id="description" class="materialize-textarea">{{old('description')}}</textarea>
                     <label for="description">My Review</label>
@@ -35,7 +35,7 @@
         @endif
     @else
         <br>
-        <h6 class="center">Please login or register to write a review!</h6>
+        <h6 class="center">Please <a href="{{route('login')}}">login</a> or <a href="{{route('register')}}">register</a> to write a review!</h6>
         <br>
     @endauth
     @forelse($reviews as $review)
@@ -57,7 +57,7 @@
         </ul>
         <br>
     @empty
-        <h5>No Reviews yet!</h5>
+        <h5 class="center">No Reviews yet!</h5>
     @endforelse
     <div class="center-align">
         {{$reviews->links('vendor.pagination.default',[

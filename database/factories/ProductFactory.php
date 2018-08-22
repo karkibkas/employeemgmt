@@ -8,7 +8,7 @@ $factory->define(App\Product::class, function (Faker $faker) {
         'description'  =>  $faker->text('1000'),
         'image'        =>  'product.jpeg',
         'slug'         =>  $faker->slug(),
-        'price'        =>  $faker->randomFloat(NULL, 0,1000),
+        'price'        =>  $faker->randomFloat(2, 0,1000),
         'quantity'     =>  $faker->numberBetween(10,100),
         'category'     =>  \App\Category::all()->first()->id,
     ];

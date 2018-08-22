@@ -7,7 +7,9 @@
         <div class="col s12 m12 l6 xl6">
             <ul class="collection">
                 <li class="collection-item">
-                    <img src="{{asset('storage/products/'.$product->image)}}" class="materialboxed" alt="{{$product->title}}" height="250px" width="100%">
+                    <div class="center-align">
+                        <img src="{{asset('storage/products/'.$product->image)}}" class="materialboxed show-prod-img" alt="{{$product->title}}">
+                    </div>
                 </li>
                 <li class="collection-item">
                     <div class="row">
@@ -75,11 +77,9 @@
                         <br>
                         <div class="section center">
                             <a href="#" data-id="{{$product->id}}" class="add-cart btn bg2 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Add to Cart"><i class="material-icons">add_shopping_cart</i></a>
-                            <a href="#" id="wishlist-btn" class="btn bg2 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Add to Wishlist"><i class="material-icons">favorite_border</i></a>
-                            <form id="wishlist-form" action="{{route('wishlist.add')}}" method="post" class="hide">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{$product->id}}">
-                            </form>
+                            <a href="#" data-id="{{$product->id}}" class="add-wishlist tooltipped btn bg2 waves-effect waves-light" data-position="bottom" data-tooltip="Add to wishlist">
+                                <i class="material-icons">favorite_border</i>
+                            </a>
                         </div>
                     @else
                         <span class="chip white-text red lighten-1">
@@ -117,6 +117,7 @@
                 </div>
                 @component('home.components.review',[
                     'reviews' => $reviews,
+                    'product' => $product
                 ])
                 @endcomponent
             </div>

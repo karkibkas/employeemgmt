@@ -149,8 +149,7 @@
                         '{{$order_ct_1}}',
                     ],
                 }]
-            },
-            options: []
+            }
         });
     </script>
 @endsection
