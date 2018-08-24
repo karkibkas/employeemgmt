@@ -47,9 +47,15 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7">
-                                    <h4 class="center grey-text text-darken-2">No Payments to Display!</h4>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h6 class="center grey-text text-darken-2">No Payments to Display!</h6>
                                 </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         @endforelse
                     </tbody>

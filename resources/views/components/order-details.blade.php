@@ -2,71 +2,75 @@
 <br>
 <ul class="collection with-header">
     <li class="collection-header">
-        <h5 class="grey-text text-darken-2">Customer Order Details:</h5>
+        <div class="section">
+            <h5 class="grey-text text-darken-2">Customer Order Details:</h5>
+        </div>
     </li>
     <li class="collection-item">
-        <p>
-            <span class="grey-text text-darken-4">Order Date: </span>
+        <div class="section">
+            <h6 class="grey-text text-darken-4">Order Date: </h6>
             <span class="grey-text text-darken-2">{{$order->created_at->diffForHumans()}}</span>
-        </p>
-        <div class="divider"></div>
-        <p>
-            <span class="grey-text text-darken-4">Payment Status: </span>
+        </div>
+    </li>
+    <li class="collection-item">
+        <div class="section">
+            <h6 class="grey-text text-darken-4">Payment Status: </h6>
             <span class="grey-text text-darken-2">{{($order->paid) ? 'Paid' : 'failed'}}</span>
-        </p>
-        <div class="divider"></div>
-        <p>
-            <span class="grey-text text-darken-4">Sub Total (without tax) :</span>
+        </div>
+    </li>
+    <li class="collection-item">
+        <div class="section">
+            <h6 class="grey-text text-darken-4">Sub Total (without tax) :</h6>
             <span class="val grey-text text-darken-2"> ${{number_format($order->total,2)}}</span>
-        </p>
-        <div class="divider"></div>
-        <p>
-            <span class="grey-text text-darken-4">Tax :</span>
+        </div>
+    </li>
+    <li class="collection-item">
+        <div class="section">
+            <h6 class="grey-text text-darken-4">Tax :</h6>
             <span class="val grey-text text-darken-2">${{($order->total * 5 / 100)}}</span>
-        </p>
-        <div class="divider"></div>
-        <p>
-            <span class="grey-text text-darken-4">Total :</span>
+        </div>
+    </li>
+    <li class="collection-item">
+        <div class="section">
+            <h6 class="grey-text text-darken-4">Total :</h6>
             <span class="val grey-text text-darken-2">${{number_format((($order->total) + ($order->total * 5 /100)),2)}}</span>
-        </p>
+        </div>
     </li>
 </ul>
 <br>
 <ul class="collection with-header">
     <li class="collection-header">
-        <h5 class="grey-text text-darken-2">Address Details:</h5>
+        <div class="section">
+            <h5 class="grey-text text-darken-2">Address Details:</h5>
+        </div>
     </li>
     <li class="collection-item">
-    <table>
-        <tr>
-            <td>
-                <h6 class="grey-text text-darken-4">Address Line 1: </h6>
-                <p class="grey-text text-darken-2">{{$order->address->address_1}}</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h6 class="grey-text text-darken-4">Address Line 2: </h6>
-                @if($order->address->address_2)
-                    <p class="grey-text text-darken-2">{{$order->address->address_2}}</p>
-                @else
-                    <p class="grey-text text-darken-2">No Second Address</p>
-                @endif
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h6 class="grey-text text-darken-4">City:</h6>
-                <p>{{$order->address->city}}</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h6 class="grey-text text-darken-4">Postal Code:</h6>
-                <p>{{$order->address->postal_code}}</p>
-            </td>
-        </tr>
-    </table>
+        <div class="section">
+            <h6 class="grey-text text-darken-4">Address Line 1: </h6>
+            <span class="grey-text text-darken-2">{{$order->address->address_1}}</span>
+        </div>
+    </li>
+    <li class="collection-item">
+        <div class="section">
+            <h6 class="grey-text text-darken-4">Address Line 2: </h6>
+            @if($order->address->address_2)
+                <span class="grey-text text-darken-2">{{$order->address->address_2}}</span>
+            @else
+                <span class="grey-text text-darken-2">No Second Address</span>
+            @endif
+        </div>
+    </li>
+    <li class="collection-item">
+        <div class="section">
+            <h6 class="grey-text text-darken-4">City:</h6>
+            <span>{{$order->address->city->name}}</span>
+        </div>
+    </li>
+    <li class="collection-item">
+        <div class="section">
+            <h6 class="grey-text text-darken-4">Postal Code:</h6>
+            <span>{{$order->address->postal_code}}</span>
+        </div>
     </li>
 </ul>
 <br><br>

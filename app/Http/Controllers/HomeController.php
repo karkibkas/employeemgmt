@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Review;
 use App\Category;
+use App\City;
 use Auth;
 
 class HomeController extends Controller
@@ -143,8 +144,12 @@ class HomeController extends Controller
         if(!\Cart::count()){
             return redirect()->route('cart.index');
         }
+        
+        $cities = City::all();
 
-        return view('home.checkout');
+        return view('home.checkout',[
+            'cities' => $cities
+        ]);
     }
 
     /**
@@ -177,10 +182,21 @@ class HomeController extends Controller
      * @return void
      */
     private function validateRequest(Request $request){
-        $this->validate($request,[
+        $rules = $this->rules();
+
+        $this->validate($request,$rules);
+    }
+
+    /**
+     * Validation rules.
+     * 
+     * @return array
+     */
+    private function rules(){
+        return [
             'sort_by' => 'nullable|alpha_dash',
             'items_per_page' => 'nullable|integer|min:1|max:25',
             'category' => 'nullable|alpha_dash',
-        ]);
+        ];
     }
 }

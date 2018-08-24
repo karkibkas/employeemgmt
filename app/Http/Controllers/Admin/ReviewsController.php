@@ -108,7 +108,7 @@ class ReviewsController extends Controller
         $this->updateReview($request, $id);
 
         return redirect()
-            ->back()
+            ->route('admin.reviews.index')
             ->with('status','Selected review has been updated!');
     }
 
@@ -136,8 +136,8 @@ class ReviewsController extends Controller
         $review = Review::findOrFail($id);
         $review->delete();
         return redirect()
-        ->route('admin.reviews.index')
-        ->with('status','Selected review has been deleted!');
+            ->route('admin.reviews.index')
+            ->with('status','Selected review has been deleted!');
     }
 
     /**
@@ -147,14 +147,41 @@ class ReviewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     private function validateRequest(Request $request){
-        $regex = "/^[a-zA-Z0-9_. -]+$/";
-        $this->validate($request,[
+        
+        $rules = $this->rules();
+
+        $messages = $this->messages();
+
+        $this->validate($request,$rules,$messages);
+
+    }
+
+    /**
+     * Validation rules.
+     * 
+     * @return array
+     */
+    private function rules(){
+        $regex = "/^[a-zA-Z0-9. -]+$/";
+        
+        return [
             'user'        => 'required|integer|min:1',
             'product'     => 'required|integer|min:1',
             'description' => "required|regex:{$regex}|min:20|max:500",
             'rating'      => 'required|between:1,5',
             'status'      => 'required|boolean'
-        ]);
+        ];
+    }
+
+    /**
+     * Validation messages.
+     * 
+     * @return array
+     */
+    private function messages(){
+        return [
+            'regex' => 'Only numbers, letters, dashes, and spaces are allowed!'
+        ];
     }
 
     /**

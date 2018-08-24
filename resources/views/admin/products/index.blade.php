@@ -13,11 +13,11 @@
             <br>
             <form action="{{route('admin.products.index')}}">
                 <div class="row">
-                    <div class="input-field col s12 m6">
-                        <input type="text" name="search" class="autocomplete" value="{{request()->search}}">
-                        <label for="search">Search</label>
+                    <div class="input-field col s12 m6 login-field">
+                        <input type="text" name="search" id="re-search" value="{{request()->search}}">
+                        <label for="re-search">Search</label>
                     </div>
-                    <div class="input-field col s12 m4">
+                    <div class="input-field col s12 m4 login-field">
                         <select name="option" id="option">
                             <option value="title" {{(request()->option == "title") ? 'selected' : ''}}>Name</option>
                             <option value="quantity" {{(request()->option == "quantity") ? 'selected' : ''}}>quantity</option>
@@ -26,9 +26,10 @@
                         <label for="option">Option</label>
                     </div>
                     <br>
-                    <button type="submit" class="col s12 m2 btn waves-effect">Search</button>
+                    <button type="submit" class="col bg s8 offset-s2 m2 btn waves-effect">Search</button>
                 </div>
             </form>
+            <br>
             <table class="responsive-table centered">
                 <thead>
                     <tr>
@@ -63,7 +64,7 @@
                             <td>
                                 <div class="center">
                                     <a href="{{route('admin.products.show',$product->id)}}" class="btn-floating btn-small waves-effect waves-light tooltipped" data-position="left" data-tooltip="Show Product Details">
-                                        <i class="material-icons">description</i>
+                                        <i class="material-icons">visibility</i>
                                     </a>
                                 </div>
                             </td>

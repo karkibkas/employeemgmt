@@ -8,10 +8,12 @@ use App\Http\Controllers\Admin\Reports\Traits\Report;
 use App\Http\Controllers\Admin\Reports\Traits\CustomersReport;
 use App\Http\Controllers\Admin\Reports\Traits\OrdersReport;
 use App\Http\Controllers\Admin\Reports\Traits\ProductsReport;
+use App\Http\Controllers\Admin\Reports\Traits\AddressesReport;
 use Carbon\Carbon;
 use App\Order;
 use App\Product;
 use App\User;
+use App\Address;
 use ExcelReport;
 
 class ExcelController extends Controller
@@ -35,7 +37,8 @@ class ExcelController extends Controller
     use Report,
         OrdersReport,
         ProductsReport,
-        CustomersReport;
+        CustomersReport,
+        AddressesReport;
 
     /**
      * Create a new controller instance.
@@ -71,7 +74,7 @@ class ExcelController extends Controller
                 $queryBuilder = Product::whereBetween('created_at',$dates);
         
                 $columns = $this->productColumns();
-                break;
+            break;
             
             case "customers":
                 $title = $this->customerReportTitle();
@@ -79,7 +82,15 @@ class ExcelController extends Controller
                 $queryBuilder = User::whereBetween('created_at',$dates);
         
                 $columns = $this->customerColumns();
-                break;
+            break;
+            
+            case "addresses":
+                $title = $this->addressReportTitle();
+        
+                $queryBuilder = Address::whereBetween('created_at',$dates);
+        
+                $columns = $this->addressColumns();
+            break;
             
             case "orders":
             default:
@@ -88,7 +99,7 @@ class ExcelController extends Controller
                 $queryBuilder = Order::whereBetween('created_at',$dates);
         
                 $columns = $this->orderColumns();
-                break;
+            break;
         }
 
         $meta = $this->reportMeta(

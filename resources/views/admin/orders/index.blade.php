@@ -14,12 +14,12 @@
                 <br>
                 <form action="{{route('admin.orders.index')}}">
                     <div class="row">
-                        <div class="input-field col s12 m8">
+                        <div class="input-field col s12 m6 offset-m2 login-field">
                             <input type="text" name="search" id="re-search" value="{{request()->search}}">
                             <label for="re-search">Search By Customer Name</label>
                         </div>
                         <br>
-                        <button type="submit" class="btn col s12 m2">Search</button>
+                        <button type="submit" class="btn col s12 m2 bg2">Search</button>
                     </div>
                 </form>
                 <table class="responsive-table centered">

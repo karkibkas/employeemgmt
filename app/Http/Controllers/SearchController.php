@@ -25,16 +25,23 @@ class SearchController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function search(Request $request){
+        
         $str = $request->search;
-        $products = Product::where('title','LIKE','%'.$str.'%')->orderBy('created_at','desc')->paginate(12);
+        
+        $products = Product::where('title','LIKE',"%{$str}%")
+            ->orderBy('created_at','desc')
+            ->paginate(12);
+
         $categories = Category::all();
-        $title = "Search Results for \"".$str."\"";
+        
+        $title = "Search Results for \"{$str}\"";
         
         return view('home.products',[
             'products'   => $products,
             'categories' => $categories,
             'title'      => $title,
         ]);
+
     }
 
     /**
@@ -44,9 +51,15 @@ class SearchController extends Controller
      * @return \Illuminate\Http\JsonReponse
      */
     public function ajaxSearch($str){
-        $products = Product::select(['title','slug'])->where('title','LIKE','%'.$str.'%')->take(5)->get();
+        
+        $products = Product::select(['title','slug'])
+            ->where('title','LIKE',"%{$str}%")
+            ->take(5)
+            ->get();
+
         return response()->json([
             'products' => $products,
         ]);
+
     }
 }

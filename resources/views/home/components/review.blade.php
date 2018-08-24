@@ -5,7 +5,7 @@
             <h5 class="col">Leave a review.</h5>
             <form action="{{route('reviews.store')}}" method="post">
                 @csrf
-                <input type="hidden" name="product_id" value="{{$p_id}}">
+                <input type="hidden" name="product_id" value="{{$product->id}}">
                 <div class="input-field col s12 login-field">
                     <textarea name="description" id="description" class="materialize-textarea">{{old('description')}}</textarea>
                     <label for="description">My Review</label>
@@ -16,17 +16,17 @@
                     @endif
                 </div>
                 <div class="input-field col s12 m4 offset-m4 l2 login-field">
-                <select name="rating" id="rating">
-                    @for($i = 1; $i < 5; $i++)
-                        <option value="{{$i}}" {{ ($i === 5) ? 'selected' : '' }}>{{$i}}</option>
-                    @endfor
-                </select>
-                <label>Rating</label>
-                @if($errors->has('rating'))
-                    <span class="helper-text red-text">
-                        {{$errors->first('rating')}}
-                    </span>
-                @endif
+                    <select name="rating" id="rating">
+                        @for($i = 1; $i <= 5; $i++)
+                            <option value="{{$i}}" {{ ($i == old('rating')) ? 'selected' : '' }}>{{$i}}</option>
+                        @endfor
+                    </select>
+                    <label>Rating</label>
+                    @if($errors->has('rating'))
+                        <span class="helper-text red-text">
+                            {{$errors->first('rating')}}
+                        </span>
+                    @endif
                 </div>
                 <div class="row"></div>
                 <button type="submit" class="btn bg waves-effect waves-light col s10 offset-s1 m4 offset-m4 l2 offset-l5">Submit</button>

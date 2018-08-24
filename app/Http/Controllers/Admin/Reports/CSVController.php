@@ -8,9 +8,11 @@ use App\Http\Controllers\Admin\Reports\Traits\Report;
 use App\Http\Controllers\Admin\Reports\Traits\ProductsReport;
 use App\Http\Controllers\Admin\Reports\Traits\CustomersReport;
 use App\Http\Controllers\Admin\Reports\Traits\OrdersReport;
+use App\Http\Controllers\Admin\Reports\Traits\AddressesReport;
 use App\Order;
 use App\Product;
 use App\User;
+use App\Address;
 use Carbon\Carbon;
 use CSVReport;
 
@@ -35,7 +37,8 @@ class CSVController extends Controller
     use Report,
         OrdersReport,
         CustomersReport,
-        ProductsReport;
+        ProductsReport,
+        AddressesReport;
 
     /**
      * Create a new controller instance.
@@ -70,7 +73,7 @@ class CSVController extends Controller
                 $queryBuilder = Product::whereBetween('created_at',$dates);
         
                 $columns = $this->productColumns();
-                break;
+            break;
             
             case "customers":
                 $title = $this->customerReportTitle();
@@ -78,7 +81,16 @@ class CSVController extends Controller
                 $queryBuilder = User::whereBetween('created_at',$dates);
         
                 $columns = $this->customerColumns();
-                break;
+            break;
+        
+            case "addresses":
+                $title = $this->addressReportTitle();
+        
+                $queryBuilder = Address::whereBetween('created_at',$dates);
+        
+                $columns = $this->addressColumns();
+            break;
+                
             case "orders":
             default:
                 $title = $this->reportTitle();
@@ -86,7 +98,7 @@ class CSVController extends Controller
                 $queryBuilder = Order::whereBetween('created_at',$dates);
         
                 $columns = $this->orderColumns();
-                break;
+            break;
         }
 
         $meta = $this->reportMeta(

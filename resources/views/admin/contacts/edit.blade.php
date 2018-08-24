@@ -45,9 +45,11 @@
                                 </span>
                             @endif
                         </div>
-                        <button type="submit" class="btn col s10 offset-s1 m6 offset-m3 bg2">Update</button>
+                        <button type="submit" class="btn col s10 offset-s1 m4 offset-m4 bg2 waves-effect waves-light">Update</button>
                     </div>
                 </form>
+                <br>
+                <a href="{{route('admin.contacts.show',$contact->id)}}" class="btn-flat waves-effect blue-text">Go Back</a>
             </div>
         </div>
     </div>

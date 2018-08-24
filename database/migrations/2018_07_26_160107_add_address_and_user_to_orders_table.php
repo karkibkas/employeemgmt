@@ -27,7 +27,8 @@ class AddAddressAndUserToOrdersTable extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            //
+            $table->dropForeign(['address_id']);
+            $table->dropForeign(['user_id']);
         });
     }
 }

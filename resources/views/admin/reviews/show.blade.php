@@ -50,8 +50,7 @@
                         <br>
                         <div class="row">
                             <div class="col s12 m6 l6 xl6 row">
-                                <a href="{{route('admin.reviews.edit',$review->id)}}" class="btn orange waves-effect waves-light col s12">
-                                    <i class="material-icons left">update</i>
+                                <a href="{{route('admin.reviews.edit',$review->id)}}" class="btn pink lighten-1 waves-effect waves-light col s8 offset-s2">
                                     Update
                                 </a>
                             </div>
@@ -62,8 +61,7 @@
                             ])
                             @endcomponent
                             <div class="col s12 m6 l6 xl6 row">
-                                <a href="#deleteModal" class="btn red waves-effect waves-light col s12 modal-trigger">
-                                    <i class="material-icons left">delete</i>
+                                <a href="#deleteModal" class="btn red waves-effect waves-light col  s8 offset-s2 modal-trigger">
                                     Delete
                                 </a>
                             </div>
@@ -74,6 +72,8 @@
                         </div>
                     </li>
                 </ul>
+                <br>
+                <a href="{{route('admin.reviews.index')}}" class="btn-flat waves-effect blue-text">Go Back</a>
             </div>
         </div>
     </div>

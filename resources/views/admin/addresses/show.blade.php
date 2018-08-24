@@ -15,7 +15,7 @@
                 <div class="divider"></div>
                 <br>
                 <h6>City :</h6>
-                <p>{{$address->city}}</p>
+                <p>{{$address->city->name}}</p>
                 <div class="divider"></div>
                 <br>
                 <h6>Postal Code:</h6>
@@ -24,8 +24,7 @@
                 <br><br>
                 <div class="row">
                     <div class="col s12 m6 l6 xl6 row">
-                        <a href="{{route('admin.addresses.edit',$address->id)}}" class="btn orange waves-effect waves-light col s12">
-                            <i class="material-icons left">update</i>
+                        <a href="{{route('admin.addresses.edit',$address->id)}}" class="btn pink waves-effect waves-light col s8 offset-s2">
                             Update
                         </a>
                     </div>
@@ -36,8 +35,7 @@
                     ])
                     @endcomponent
                     <div class="col s12 m6 l6 xl6 row">
-                        <a href="#deleteModal" class="{{($address->orders->count()) ? 'disabled' : '' }} btn red waves-effect waves-light col s12 modal-trigger">
-                            <i class="material-icons left">delete</i>
+                        <a href="#deleteModal" class="{{($address->orders->count()) ? 'disabled' : '' }} btn red waves-effect waves-light col s8 offset-s2 modal-trigger">
                             Delete
                         </a>
                         <form action="{{route('admin.addresses.destroy',$address->id)}}" method="post" class="hide" id="delete-address">
@@ -46,7 +44,8 @@
                         </form>
                     </div>
                 </div>
-                <a href="{{route('admin.addresses.index')}}">Go Back</a>
+                <br>
+                <a href="{{route('admin.addresses.index')}}" class="btn-flat waves-effect blue-text">Go Back</a>
             </div>
         </div>
     </div>

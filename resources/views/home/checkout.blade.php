@@ -10,7 +10,7 @@
                 <form action="{{route('checkout')}}" method="post" id="checkout-form">
                     <div class="row">
                         @csrf
-                        <div class="input-field col s12">
+                        <div class="input-field col s12 login-field">
                             <textarea name="address_1" id="address_1" class="materialize-textarea"></textarea>
                             <label for="address_1">Address line 1</label>
                             @if($errors->has('address_1'))
@@ -19,7 +19,7 @@
                                 </span>
                             @endif
                         </div>
-                        <div class="input-field col s12">
+                        <div class="input-field col s12 login-field">
                             <textarea name="address_2" id="address_2" class="materialize-textarea"></textarea>
                             <label for="address_2">Address Line 2</label>
                             @if($errors->has('address_2'))
@@ -28,8 +28,13 @@
                                 </span>
                             @endif
                         </div>
-                        <div class="input-field col s12 m6">
-                            <input type="text" name="city" id="city">
+                        <div class="input-field col s12 m6 login-field">
+                            <select name="city" id="city">
+                                <option value="">Select a city</option>
+                                @foreach($cities as $city)
+                                    <option value="{{$city->id}}" {{(old('city') == $city->id) ? 'selected' : '' }}>{{$city->name}}</option>
+                                @endforeach
+                            </select>
                             <label for="city">City</label>
                             @if($errors->has('city'))
                                 <span class="helper-text red-text">
@@ -37,7 +42,7 @@
                                 </span>
                             @endif
                         </div>
-                        <div class="input-field col s12 m6">
+                        <div class="input-field col s12 m6 login-field">
                             <input type="text" name="postal_code" id="postal_code">
                             <label for="postal_code">Postal code</label>
                             @if($errors->has('postal_code'))
@@ -50,7 +55,7 @@
                             <div id="dropin-container"></div>
                             <br>
                             <div class="row">
-                                <button id="check-out-btn" class="btn center col s8 offset-s2">Checkout</button>
+                                <button id="check-out-btn" class="btn center col s8 offset-s2 m4 offset-m4 bg2">Checkout</button>
                             </div>
                         </div>
                         <input type="hidden" name="nonce" id="nonce">

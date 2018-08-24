@@ -5,70 +5,80 @@
         <div class="card-panel grey-text text-darken-1">
             <ul class="collection with-header">
                 <li class="collection-header">
-                    <h4 class="center">Product Details</h4>
+                    <div class="section">
+                        <h4 class="center">Product Details</h4>
+                    </div>
                 </li>
                 <li class="collection-item">
-                    <h5 class="center">{{$product->title}}</h5>
-                </li>
-                <li class="collection-item">
+                    <div class="section">
+                        <h5 class="center">{{$product->title}}</h5>
+                    </div>
                     <div class="center-align">
                         <img src="{{asset('storage/products/'.$product->image)}}" alt="{{$product->title}}" class="show-prod-img materialboxed">
                     </div>
                 </li>
                 <li class="collection-item">
-                    <h5 class="center">Product Description</h5>
-                    <p>{!! $product->description !!}</p>
+                    <div class="section">
+                        <h4 class="center">Product Description</h4>
+                        <p>{!! $product->description !!}</p>
+                    </div>
                 </li>
                 <li class="collection-item">
-                    <p>
-                        <strong>Category: </strong>
+                    <div class="section">
+                        <h6 class="grey-text text-darken-3">Category: </h6>
                         <span>{{$product->hasCategory->title}}</span>
-                    </p>
-                    <p>
-                        <strong>Price: </strong>
-                        <span>${{$product->price}}</span>
-                    </p>
-                    <p>
-                        <strong>Quantity: </strong>
-                        <span>{{$product->quantity}}</span>
-                    </p>
-                    <p>
-                        <strong class="left">Rating: </strong>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="section">
+                        <h6 class="grey-text text-darken-3">Price: </h6>
+                        <span class="val">{{'$'.number_format($product->price,2)}}</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="section">
+                        <h6 class="grey-text text-darken-3">Quantity: </h6>
+                        <span class="val">{{$product->quantity}}</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="section">
+                        <h6 class="grey-text text-darken-3">Rating: </h6>
                         <span>
                         @component('components.review-count',[
                             'product' => $product
                         ])
                         @endcomponent
                         </span>
-                    </p>
+                    </div>
                 </li>
                 <li class="collection-item">
-                    <div class="row">
-                        <div class="col s12 m6 l6 xl6 row">
-                            <a href="{{route('admin.products.edit',$product->id)}}" class="btn orange waves-effect waves-light col s12">
-                                <i class="material-icons left">update</i>
-                                Update
-                            </a>
+                    <div class="section">
+                        <div class="row mb-0">
+                        <br>
+                            <div class="col s12 m6 l6 xl6 row">
+                                <a href="{{route('admin.products.edit',$product->id)}}" class="btn pink lighten-1 waves-effect waves-light col s10 offset-s1 m8 offset-m2">
+                                    Update
+                                </a>
+                            </div>
+                            @component('components.confirm',[
+                                'id'    => 'delete-form',
+                                'modal' => 'deleteModal',
+                                'title' => 'Product'
+                            ])
+                            @endcomponent
+                            <div class="col s12 m6 l6 xl6 row mb-0">
+                                <a href="#deleteModal" class="btn red waves-effect waves-light col s10 offset-s1 m8 offset-m2 modal-trigger">
+                                    Delete
+                                </a>
+                            </div>
+                            <form action="{{route('admin.products.destroy',$product->id)}}" method="post" class="hide" id="delete-form">
+                                @csrf
+                                @method('DELETE')
+                            </form>
                         </div>
-                        @component('components.confirm',[
-                            'id'    => 'delete-form',
-                            'modal' => 'deleteModal',
-                            'title' => 'Product'
-                        ])
-                        @endcomponent
-                        <div class="col s12 m6 l6 xl6 row">
-                            <a href="#deleteModal" class="btn red waves-effect waves-light col s12 modal-trigger">
-                                <i class="material-icons left">delete</i>
-                                Delete
-                            </a>
-                        </div>
-                        <form action="{{route('admin.products.destroy',$product->id)}}" method="post" class="hide" id="delete-form">
-                            @csrf
-                            @method('DELETE')
-                        </form>
                     </div>
                 </li>
             </ul>
+            <br>
+            <a href="{{route('admin.products.index')}}" class="btn-flat waves-effect blue-text">Go Back</a>
         </div>
     </div>
 </div>

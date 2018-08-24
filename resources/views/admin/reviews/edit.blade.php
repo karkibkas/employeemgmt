@@ -66,9 +66,11 @@
                                 @endif
                             </div>
                             <div class="row"></div>
-                            <button type="submit" class="btn bg col s10 offset-s1 m4 offset-m4">Update Review</button>
+                            <button type="submit" class="btn bg col s10 offset-s1 m4 offset-m4 waves-effect waves-light">Update Review</button>
                         </div>
                     </form>
+                    <br>
+                    <a href="{{route('admin.reviews.show',$review->id)}}" class="btn-flat waves-effect blue-text">Go Back</a>
                 </div>
             </div>
         </div>

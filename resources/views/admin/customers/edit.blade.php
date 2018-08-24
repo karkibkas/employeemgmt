@@ -14,7 +14,7 @@
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        <div class="input-field col s12">
+                        <div class="input-field col s12 m10 offset-m1 login-field">
                             <input type="text" name="name" id="name" class="grey-text text-darken-4" value="{{old('name') ? : $customer->name}}">
                             <label for="name" class="active">Name</label>
                             @if($errors->has('name'))
@@ -23,7 +23,7 @@
                                 </span>
                             @endif
                         </div>
-                        <div class="input-field col s12">
+                        <div class="input-field col s12 m10 offset-m1 login-field">
                             <input type="email" name="email" id="email" class="grey-text text-darken-4" value="{{old('email') ? : $customer->email}}">
                             <label for="email" class="active">Email</label>
                             @if($errors->has('email'))
@@ -32,7 +32,7 @@
                                 </span>
                             @endif
                         </div>
-                        <div class="input-field col s12">
+                        <div class="input-field col s12 m10 offset-m1 login-field">
                             <input type="password" name="password" id="password" class="grey-text text-darken-4">
                             <label for="password">Password</label>
                             @if($errors->has('password'))
@@ -42,10 +42,11 @@
                             @endif
                         </div>
                         <div class="row"></div>
-                        <button type="submit" class="btn waves-effect waves-light bg2 col s12 m6 offset-m3 l6 offset-l3 xl6 offset-xl3">Update Customer</button>
+                        <button type="submit" class="btn waves-effect waves-light bg2 col s12 m4 offset-m4">Update Customer</button>
                     </div>
                 </form>
                 <br>
+                <a href="{{route('admin.customers.index')}}" class="btn-flat waves-effect blue-text">Go Back</a>
             </div>
         </div>
     </div>

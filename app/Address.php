@@ -14,7 +14,7 @@ class Address extends Model
     protected $fillable = [
         'address_1',
         'address_2',
-        'city',
+        'city_id',
         'postal_code',
     ];
 
@@ -23,5 +23,12 @@ class Address extends Model
      */
     public function orders(){
         return $this->hasMany('App\Order');
+    }
+
+    /**
+     * one to many inverse
+     */
+    public function city(){
+        return $this->belongsTo('App\City','city_id');
     }
 }

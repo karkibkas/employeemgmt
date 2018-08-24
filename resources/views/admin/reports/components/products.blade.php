@@ -1,4 +1,4 @@
-<table class="responsive-table">
+<table class="responsive-table centered">
     <thead>
         <tr>
             <th>ID</th>

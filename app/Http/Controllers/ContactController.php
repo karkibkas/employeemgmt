@@ -41,15 +41,42 @@ class ContactController extends Controller
      * @return void
      */
     private function validateRequest(Request $request){
+
+        $rules = $this->rules();
+
+        $messages = $this->messages();
+
+        $this->validate($request,$rules,$messages);
+
+    }
+
+    /**
+     * Validation rules.
+     * 
+     * @return array
+     */
+    private function rules(){
         $name = "/^[a-zA-Z0-9 ]+$/";
         $message = "/^[a-zA-Z0-9 -]+$/";
-
-        $this->validate($request,[
-            'first_name' => 'nullable|regex:'.$name.'|min:3|max:50',
-            'last_name'  => 'nullable|regex:'.$name.'|min:3|max:50',
+        
+        return [
+            'first_name' => "nullable|regex:{$name}|min:3|max:50",
+            'last_name'  => "nullable|regex:{$name}|min:3|max:50",
             'email'      => 'required|email|min:7|max:150',
-            'message'    => 'required|'.$message.'|min:20',
-        ]);
+            'message'    => "required|regex:{$message}|min:20|max:500",
+        ];
+    }
+    /**
+     * Validation messages.
+     * 
+     * @return array
+     */
+    private function messages(){
+        return [
+            'first_name' => 'Only numbers, letters, and spaces are allowed!',
+            'first_name' => 'Only numbers, letters, and spaces are allowed!',
+            'message'    => 'Only numbers, letters, dashes, and spaces are allowed!',
+        ];
     }
 
     /**

@@ -64,18 +64,40 @@ class ProfileController extends Controller
      */
     private function validateRequest(Request $request){
         
-        $name = "/^[a-zA-Z0-9 ]+$/";
+        $rules = $this->rules;
 
+        $messages = $this->messages();
+
+        $this->validate($request,$rules,$messages);
+
+    }
+
+    /**
+     * Validation rules.
+     * 
+     * @return array
+     */
+    private function rules(){
+        $name = "/^[a-zA-Z0-9 ]+$/";
         $password = "/^[a-zA-Z0-9_ -]+$/";
-        
-        $this->validate($request,[
-            'name' => 'required|string|min:3|max:50',
+
+        return [
+            'name' => "required|regex:{$name}|min:3|max:50",
             'email' => 'required|email|min:7|max:150',
-            'password' => 'nullable|string|min:7|max:100'
-        ],[
+            'password' => "nullable|regex:{$password}|min:7|max:100"
+        ];
+    }
+
+    /**
+     * Validation messages.
+     * 
+     * @return array
+     */
+    private function messages(){
+        return [
             'name.regex' => 'Only letters and spaces are allowed!',
             'password.regex' => 'Only numbers, letters, underscores, and dashes are allowed!'
-        ]);
+        ];
     }
 
     /**

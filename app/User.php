@@ -51,7 +51,7 @@ class User extends Authenticatable
         $hash = md5(strtolower(trim($this->email)));
 
         //Getting the user avatar with gravatar
-        return "http://www.gravatar.com/avatar/$hash"."?d=mp";
+        return "http://www.gravatar.com/avatar/{$hash}"."?d=mp";
     }
 
     /**

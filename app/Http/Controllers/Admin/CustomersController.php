@@ -39,7 +39,7 @@ class CustomersController extends Controller
         if($request->search){
             $search = $request->search;
             $option = ($request->option) ? : 'name' ;
-            $customers = User::where($option,'LIKE','%'.$search.'%')->paginate(10);
+            $customers = User::where($option,'LIKE',"%{$search}%")->paginate(10);
             $title = "Search results by {$option} for \"{$search}\"";
         }else{
             $customers = User::orderBy('created_at')->paginate(10);
@@ -125,12 +125,40 @@ class CustomersController extends Controller
      * @return void
      */
     private function validateRequest(Request $request,$id){
-        $regex = "/^[a-zA-Z ]+$/";
-        $this->validate($request,[
-            'name' => "required|regex:{$regex}|min:3|max:50",
+        
+        $rules = $this->rules($id);
+
+        $messages = $this->messages();
+
+        $this->validate($request,$rules,$messages);
+    }
+
+    /**
+     * Validation rules
+     * 
+     * @return array
+     */
+    private function rules($id){
+        $name = "/^[a-zA-Z ]+$/";
+        $password = "/^[a-zA-Z0-9_ -]+$/";
+        
+        return [
+            'name' => "required|regex:{$name}|min:3|max:50",
             'email' => 'required|email|min:7|max:150',
-            'password' => ((!$id) ? 'required' : 'nullable' ).'|string'
-        ]);
+            'password' => ((!$id) ? "required" : "nullable" )."|regex:{$password}"
+        ];
+    }
+
+    /**
+     * Validation messages
+     * 
+     * @return array
+     */
+    private function messages(){
+        return [
+            'name.regex' => 'Only letters and spaces are allowed!',
+            'password.regex' => 'Only numbers, underscores, dashes, and letters are allowed!',
+        ];
     }
 
     /**

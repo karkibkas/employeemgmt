@@ -10,7 +10,7 @@
             </td>
         </tr>
         <tr>
-            <td>Shipping:</td>
+            <td>Tax:</td>
             <td>
                 <span class="val cart-tax"> ${{Cart::tax()}} /- </span>
             </td>

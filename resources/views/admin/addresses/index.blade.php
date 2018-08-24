@@ -14,11 +14,11 @@
                 <br>
                 <form action="{{route('admin.addresses.index')}}">
                     <div class="row">
-                        <div class="input-field col s12 m6">
+                        <div class="input-field col s12 m6 login-field">
                             <input type="text" name="search" id="re-search" value="{{request()->search}}">
                             <label for="re-search">Search</label>
                         </div>
-                        <div class="input-field col s12 m4">
+                        <div class="input-field col s12 m4 login-field">
                             <select name="option" id="option">
                                 <option value="address_1" {{(request()->option == "address_1") ? 'selected' : ''}}>Address line 1</option>
                                 <option value="address_2" {{(request()->option == "address_2") ? 'selected' : ''}}>Address line 2</option>
@@ -28,7 +28,7 @@
                             <label for="option">Option</label>
                         </div>
                         <br>
-                        <button type="submit" class="col s12 m2 btn waves-effect">Search</button>
+                        <button type="submit" class="col s12 m2 btn bg2 waves-effect">Search</button>
                     </div>
                 </form>
                 <br>
@@ -51,12 +51,12 @@
                                 <td>{{$address->id}}</td>
                                 <td>{{str_limit($address->address_1,15)}}</td>
                                 <td>{{str_limit($address->address_2,15)}}</td>
-                                <td>{{$address->city}}</td>
+                                <td>{{$address->city->name}}</td>
                                 <td>{{$address->postal_code}}</td>
                                 <td>{{$address->created_at->diffForHumans()}}</td>
                                 <td>{{$address->updated_at->diffForHumans()}}</td>
                                 <td>
-                                    <a href="{{route('admin.addresses.show',$address->id)}}" class="btn-floating btn-small tooltipped" data-position="left" data-tooltip="Address Details!">
+                                    <a href="{{route('admin.addresses.show',$address->id)}}" class="btn-floating btn-small tooltipped" data-position="right" data-tooltip="Address Details!">
                                         <i class="material-icons">visibility</i>
                                     </a>
                                     @if($address->orders->count())
@@ -64,7 +64,7 @@
                                             <i class="material-icons">delete</i>
                                         </a>
                                     @else
-                                        <a href="#delete-modal-{{$address->id}}" class="btn-floating btn-small red modal-trigger tooltipped" data-position="right" data-tooltip="Delete Address!">
+                                        <a href="#delete-modal-{{$address->id}}" class="btn-floating btn-small red modal-trigger tooltipped" data-position="left" data-tooltip="Delete Address!">
                                             <i class="material-icons">delete</i>
                                         </a>
                                         @component('components.confirm',[

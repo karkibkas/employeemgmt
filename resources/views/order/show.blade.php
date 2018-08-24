@@ -9,6 +9,8 @@
                 'products' => $products
             ])
             @endcomponent
+            <br>
+            <a href="{{route('order.index')}}" class="btn-flat waves-effect blue-text">Go Back</a>
             </div>
         </div>
     </div>

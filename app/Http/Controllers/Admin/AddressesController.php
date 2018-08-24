@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Address;
+use App\City;
 
 class AddressesController extends Controller
 {
@@ -37,14 +38,19 @@ class AddressesController extends Controller
     public function index(Request $request)
     {
         $title = null;
+        
         if($request->search){
             $search = $request->search;
             $option = ($request->option) ? : 'address_1' ;
-            $addresses = Address::where($option,'LIKE',"%{$search}%")->paginate(10);
+            
+            $addresses = $this->getAddresses($option,$search);
+
+            $option = $this->optionName($option);
             $title = "Search results by {$option} for \"{$search}\"";
         }else{
             $addresses = Address::orderBy('created_at')->paginate(10);
         }
+
         return view('admin.addresses.index',[
             'addresses' => $addresses,
             'title'     => $title
@@ -58,7 +64,11 @@ class AddressesController extends Controller
      */
     public function create()
     {
-        return view('admin.addresses.create');
+        $cities = City::all();
+
+        return view('admin.addresses.create',[
+            'cities' => $cities
+        ]);
     }
 
     /**
@@ -97,7 +107,13 @@ class AddressesController extends Controller
      */
     public function edit($id)
     {
-        return $this->showAddress($id,'edit');
+        $address = Address::findOrFail($id);
+        $cities = City::all();
+
+        return view('admin.addresses.edit',[
+            'address' => $address,
+            'cities'  => $cities
+        ]);
     }
 
     /**
@@ -133,6 +149,9 @@ class AddressesController extends Controller
                 ->back()
                 ->with('status','Cannot delete an address that belongs to an order!');
         }
+        
+        $address->delete();
+        
         return redirect()
             ->route('admin.addresses.index')
             ->with('status','Selected address has been deleted!');
@@ -145,25 +164,42 @@ class AddressesController extends Controller
      * @return void
      */
     private function validateRequest(Request $request){
-        //allow numbers, letters, spaces, and dashes.
-        $address = "/^[a-zA-Z0-9 -]+$/";
 
-        //allow numbers, letters and spaces
-        $city = "/^[a-zA-Z0-9 ]+$/";
-        
-        //allow numbers, letters.
+        $rules = $this->rules();
+
+        $messages = $this->messages();
+
+        $this->validate($request,$rules,$messages);
+    }
+
+    /**
+     * Validation rules.
+     * 
+     * @return array
+     */
+    private function rules(){
+        $address = "/^[a-zA-Z0-9 -]+$/";
         $postalcode = "/^[a-zA-Z0-9]+$/";
 
-        $this->validate($request,[
+        return [
             'address_1'   => "required|regex:{$address}|min:5|max:500",
             'address_2'   => "required|regex:{$address}|min:5|max:500",
-            'city'        => "required|regex:{$city}|min:3|max:50",
+            'city'        => "required|integer",
             'postal_code' => "required|regex:{$postalcode}|min:3|max:50"
-        ],[
+        ];
+    }
+
+    /**
+     * custom validation message
+     * 
+     * @return array
+     */
+    private function messages(){
+        return [
             'address_1.regex' => 'Only numbers, letters, dashes, and spaces are allowed',
             'address_2.regex' => 'Only numbers, letters, dashes, and spaces are allowed',
             'postal_code.regex' => 'Only numbers and letters are allowed'
-        ]);
+        ];
     }
 
     /**
@@ -177,7 +213,7 @@ class AddressesController extends Controller
     private function createOrUpdateAddress(Request $request,Address $address){
         $address->address_1 = $request->address_1;
         $address->address_2 = $request->address_2;
-        $address->city = $request->city;
+        $address->city_id = $request->city;
         $address->postal_code = $request->postal_code;
         $address->save();
     }
@@ -191,8 +227,53 @@ class AddressesController extends Controller
      */
     private function showAddress($id,$view){
         $address = Address::findOrFail($id);
-        return view('admin.addresses.'.$view,[
+        return view("admin.addresses.{$view}",[
             'address' => $address
         ]);
+    }
+
+    /**
+     * modify the option name
+     * 
+     * @param string $option
+     * @return string
+     */
+    private function optionName($option){
+        switch ($option) {
+            
+            case 'address_2':
+                return 'Address line 2';
+            break;
+            
+            case 'city':
+                return 'City';
+            break;
+            
+            case 'postal_code':
+                return 'Postal Code';
+            break;
+            
+            case 'address_1':
+            default:
+                return 'Address line 1';
+            break;
+        }
+    }
+
+    /**
+     * search for addresses.
+     * 
+     * @param string $option
+     * @param string $search
+     * @return \App\Address
+     */
+    private function getAddresses($option,$search){
+        if($option == "city"){
+            return Address::whereHas('city',function($query) use ($search){
+                $query->where('name','LIKE',"%{$search}%");
+            })->paginate(10);
+        }else{
+            return Address::where($option,'LIKE',"%{$search}%")->paginate(10);
+        }
     }
 }

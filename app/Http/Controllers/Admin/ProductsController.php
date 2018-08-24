@@ -189,19 +189,44 @@ class ProductsController extends Controller
      *  @return void
      */
     private function validateProduct(Request $request,$id){
-        //allow numbers, letters, spaces, and dashes.
-        $title = "/^[a-zA-Z0-9 -]+$/";
         
-        $this->validate($request,[
-            'title'        => 'required|regex:'.$title.'|min:10|max:50',
-            'description'  => 'required|regex:'.$title.'|min:30|max:500',
+        $rules = $this->rules($id);
+
+        $messages = $this->messages();
+
+        $this->validate($request,$rules,$messages);
+        
+    }
+
+    /**
+     * Validation rules.
+     * 
+     * @param int $id
+     * @return array
+     */
+    private function rules($id){
+        $title = "/^[a-zA-Z0-9 -]+$/";
+
+        return [
+            'title'        => "required|regex:{$title}|unique:products|min:10|max:50",
+            'description'  => "required|string|min:30|max:500",
             'image'        => (($id) ? 'nullable|image|max:1999' : 'required|image|max:1999'),
             'category'     => 'required|integer',
             'price'        => 'required|numeric|min:1',
             'quantity'     => 'required|integer|min:1'
-        ],[
+        ];
+    }
+
+    /**
+     * Validation messages
+     * 
+     * @return array
+     */
+    private function messages(){
+        return [
+            'title.unique' => 'This product name already exists!',
             'regex' => 'Only numbers, letters, spaces, and dashes are allowed!'
-        ]);
+        ];
     }
 
     /**

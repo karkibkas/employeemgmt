@@ -101,9 +101,6 @@ class OrderController extends Controller
         $address = $this->firstOrCreateAddress($request);
         
         $payment = $this->processPayment($request->nonce,$total);
-        
-        //create a unique hash for order.
-        //$hash = bin2hex(random_bytes(32));
 
         //create the order.
         $order = $this->createOrder($address->id,$total);
@@ -133,7 +130,7 @@ class OrderController extends Controller
 
         return redirect()
             ->route('cart.index')
-            ->with('status','Your order has been submitted!');        
+            ->with('status','Checkout Successful!');
 
     }
 
@@ -144,22 +141,44 @@ class OrderController extends Controller
      * @return void
      */
     private function validateOrder(Request $request){
-        
-        $address = "/^[a-zA-Z0-9 -]+$/";
 
+        $rules = $this->rules();
+
+        $messages = $this->messages();
+
+        $this->validate($request,$rules,$messages);
+
+    }
+
+    /**
+     * Validation rules.
+     * 
+     * @return array
+     */
+    private function rules(){
+        $address = "/^[a-zA-Z0-9 -]+$/";
         $postal_code = "/^[a-zA-Z0-9]+$/";
 
-        $this->validate($request,[
-            'address_1'    =>  'required|'.$address.'|min:7|max:255',
-            'address_2'    =>  'nullable|'.$address.'|min:7|max:255',
-            'city'         =>  'required|min:3|max:50',
-            'postal_code'  =>  'required|regex:'.$postal_code.'|min:5|max:50',
+        return [
+            'address_1'    =>  "required|regex:{$address}|min:7|max:500",
+            'address_2'    =>  "nullable|regex:{$address}|min:7|max:500",
+            'city'         =>  'required|integer',
+            'postal_code'  =>  "required|regex:{$postal_code}|min:5|max:50",
             'nonce'        =>  'required|string'
-        ],[
+        ];
+    }
+
+    /**
+     * Validation messages.
+     * 
+     * @return array
+     */
+    private function messages(){
+        return [
             'address_1.regex' => 'Only numbers, letters, and dashes are allowed!',
             'address_2.regex' => 'Only numbers, letters, and dashes are allowed!',
             'postal_code.regex' => 'Only numbers and letters are allowed!'
-        ]);
+        ];
     }
 
     /**
@@ -173,7 +192,7 @@ class OrderController extends Controller
         return Address::firstOrCreate([
                 'address_1' => $request->address_1,
                 'address_2' => $request->address_2,
-                'city' => $request->city,
+                'city_id' => $request->city,
                 'postal_code' => $request->postal_code
             ]);
     }

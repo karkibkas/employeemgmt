@@ -104,7 +104,6 @@
                         </a>
                     </li>
                 </ul>
-                </div>
                 <div id="description" class="col s12">
                     <div class="row">
                         <div class="col xl12">

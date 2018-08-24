@@ -8,16 +8,38 @@ use App\Contact;
 
 class ContactController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | ContactController
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for displaying a list of contact messages,
+    | updating and deleting those messages.
+    |
+    */
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $contacts = Contact::orderBy('created_at','desc')->paginate(10);
+        $title = null;
+        if($request->search){
+       
+            $search = $request->search;
+            $option = ($request->option) ? : 'first_name';
+            $contacts = Contact::where($option,'LIKE','%'.$search.'%')->paginate(10);    
+            $title = "Showing results by {$option} for \"{$search}\"";
+        
+        }else{
+            $contacts = Contact::orderBy('created_at','desc')->paginate(10);
+        }
+
         return view('admin.contacts.index',[
-            'contacts' => $contacts
+            'contacts' => $contacts,
+            'title'    => $title
         ]);
     }
 
@@ -112,21 +134,41 @@ class ContactController extends Controller
      * @return void
      */
     private function validateContact(Request $request){
-        //allow numbers, letters and spaces
-        $message = "/^[a-zA-Z0-9 ]+$/";
 
-        //allow letters and spaces
+        $rules = $this->rules();
+
+        $messages = $this->messages();
+
+        $this->validate($request,$rules,$messages);
+    }
+
+    /**
+     * Validation rules.
+     * 
+     * @return array
+     */
+    private function rules(){
+        $message = "/^[a-zA-Z0-9 ]+$/";
         $name = "/^[a-zA-Z ]+$/";
 
-        $this->validate($request,[
-            'first_name' => 'nullable|regex:'.$name.'|min:3|max:50',
-            'last_name'  => 'nullable|regex:'.$name.'|min:3|max:50',
+        return [
+            'first_name' => "nullable|regex:{$name}|min:3|max:50",
+            'last_name'  => "nullable|regex:{$name}|min:3|max:50",
             'email'      => 'required|email|min:5|max:150',
-            'message'    => 'required|regex:'.$message.'|min:20|max:500',
-        ],[
+            'message'    => "required|regex:{$message}|min:20|max:500",
+        ];
+    }
+    
+    /**
+     * Validation messages.
+     * 
+     * @return array
+     */
+    private function messages(){
+        return [
             'first_name.regex' => 'Only letters and spaces are allowed',
             'last_name.regex' => 'Only letters and spaces are allowed',
             'message.regex' => 'Only letters, spaces, and numbers are allowed'
-        ]);
+        ];
     }
 }

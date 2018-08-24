@@ -420,6 +420,10 @@ main {
     margin-top:10% !important;
 }
 
+.mb-0{
+    margin-bottom:0 !important;
+}
+
 /* Media Queries */
 @media only screen and (min-width : 1202px) {
     .login-container{

@@ -14,11 +14,11 @@
                 <br>
                 <form action="{{route('admin.customers.index')}}">
                     <div class="row">
-                        <div class="input-field col s12 m6">
+                        <div class="input-field col s12 m6 login-field">
                             <input type="text" name="search" id="re-search" value="{{request()->search}}">
                             <label for="re-search">Search</label>
                         </div>
-                        <div class="input-field col s12 m4">
+                        <div class="input-field col s12 m4 login-field">
                             <select name="option" id="option">
                                 <option value="name" {{(request()->option == "name") ? 'selected' : ''}}>Name</option>
                                 <option value="email" {{(request()->option == "email") ? 'selected' : ''}}>Email</option>
@@ -26,10 +26,10 @@
                             <label for="option">Option</label>
                         </div>
                         <br>
-                        <button type="submit" class="col s12 m2 btn waves-effect">Search</button>
+                        <button type="submit" class="col s12 m2 bg2 btn waves-effect">Search</button>
                     </div>
                 </form>
-            <br>
+                <br>
                 <table class="responsive-table centered">
                     <thead>
                         <tr>
@@ -56,7 +56,7 @@
                             <td>
                                 <div class="center">
                                     <a href="{{route('admin.customers.edit',$customer->id)}}" class="btn-floating btn-small tooltipped" data-position="left" data-tooltip="Update Customer!">
-                                        <i class="material-icons">mode_edit</i>
+                                        <i class="material-icons">refresh</i>
                                     </a>
                                 </div>
                             </td>

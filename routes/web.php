@@ -136,7 +136,9 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
      *  Orders Route(s)
      */
     Route::resource('/orders','OrdersController');
-
+    Route::get('orders/{id}/products','OrdersController@editProduct')->name('orders.products');
+    Route::post('orders/{id}/products','OrdersController@updateOrderedProduct');
+    Route::post('orders/{id}/products/add','OrdersController@addProduct')->name('orders.products.add');
     /**
      *  Payments Route(s)
      */
@@ -173,4 +175,8 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
      */
     Route::resource('/contacts','ContactController');
 
+    /**
+     * Cities Route(s)
+     */
+    Route::resource('/cities','CitiesController');
 });

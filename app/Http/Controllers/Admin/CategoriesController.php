@@ -38,7 +38,7 @@ class CategoriesController extends Controller
         $title = null;
         if($request->search){
             $search = $request->search;
-            $categories = Category::where('title','LIKE','%'.$search.'%')->paginate(10);
+            $categories = Category::where('title','LIKE',"%{$search}%")->paginate(10);
             $title = "Search results for \"{$search}\"";
         }else{
             $categories = Category::orderBy('created_at')->paginate(10);
@@ -143,17 +143,42 @@ class CategoriesController extends Controller
      *  @return void
      */
     private function validateCategory(Request $request){
-        //allow numbers letters underscores, spaces, and dashes.
+
+        $rules = $this->rules();
+
+        $messages = $this->messages();
+
+        $this->validate($request,$rules,$messages);
+    }
+
+    /**
+     * Validation rules.
+     * 
+     * @return array
+     */
+    private function rules(){
         $regex = "/^[a-zA-Z0-9_ -]+$/";
-        $this->validate($request,[
-            'title' => 'required|regex:'.$regex.'|string|min:5|max:50'
-        ]);
+
+        return [
+            'title' => "required|regex:{$regex}|string|min:5|max:50"
+        ];
+    }
+
+    /**
+     * Validation messages.
+     * 
+     * @return array
+     */
+    private function messages(){
+        return [
+            'regex' => 'Only numbers, letters, underscores, spaces, and dashes are allowed!'
+        ];
     }
 
     /**
      *  Create or update Category
      *  
-     *  @param App\Category $category
+     *  @param \App\Category $category
      *  @param \Illuminate\Http\Request $request
      *  @return void
      */

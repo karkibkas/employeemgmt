@@ -27,7 +27,8 @@ class AddOrderAndProductToOrdersProducts extends Migration
     public function down()
     {
         Schema::table('orders_products', function (Blueprint $table) {
-            //
+            $table->dropForeign(['product_id']);
+            $table->dropForeign(['order_id']);
         });
     }
 }

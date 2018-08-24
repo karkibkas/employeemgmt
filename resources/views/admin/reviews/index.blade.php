@@ -14,11 +14,11 @@
                     <br>
                     <form action="{{route('admin.reviews.index')}}">
                         <div class="row">
-                            <div class="input-field col s12 m6">
+                            <div class="input-field col s12 m6 login-field">
                                 <input type="text" name="search" id="re-search" value="{{request()->search}}">
                                 <label for="re-search">Search</label>
                             </div>
-                            <div class="input-field col s12 m4">
+                            <div class="input-field col s12 m4 login-field">
                                 <select name="option" id="option">
                                     <option value="customer_name" {{(request()->option == "customer_name") ? 'selected' : ''}}>Customer Name</option>
                                     <option value="product_name" {{(request()->option == "product_name") ? 'selected' : ''}}>Product Name</option>
@@ -26,7 +26,7 @@
                                 </select>
                             </div>
                             <br>
-                            <button type="submit" class="btn col s12 m2">Search</button>
+                            <button type="submit" class="btn col s12 m2 bg2">Search</button>
                         </div>
                     </form>
                     <table class="responsive-table centered">

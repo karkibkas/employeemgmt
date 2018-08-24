@@ -41,27 +41,24 @@
                                     </td>
                                     <td class="val">${{$product->price}}</td>
                                     <td>
-                                        <form action="{{route('cart.index')}}" method="post">
-                                            @csrf
-                                            <div class="row"  style="margin-bottom:0 !important">
-                                                <input type="hidden" id="rowId-{{$product->model->slug}}" value="{{$product->rowId}}">
-                                                <div class="input-field col s9 xl5">
-                                                    <select name="qty" id="qty-{{$product->model->slug}}">
-                                                        <option value="0">None</option>
-                                                        @for($i = 0; $i < $product->model->quantity; $i++)
-                                                            <option value="{{$i+1}}" {{$product->qty == ($i+1) ? 'selected' : '' }}>{{$i + 1}}</option>
-                                                        @endfor
-                                                    </select>
-                                                    <label>Quantity</label>
-                                                </div>
-                                                <div class="col">
-                                                <br>
-                                                <button type="submit" data-id="{{$product->model->slug}}" class="btn-floating waves-effect bg2 tooltipped update-cart" data-position="bottom" data-tooltip="Update quantity">
-                                                    <i class="material-icons">sync</i>
-                                                </button>
-                                                </div>
+                                        <div class="row"  style="margin-bottom:0 !important">
+                                            <input type="hidden" id="rowId-{{$product->model->slug}}" value="{{$product->rowId}}">
+                                            <div class="input-field col s9 xl5">
+                                                <select name="qty" id="qty-{{$product->model->slug}}">
+                                                    <option value="0">None</option>
+                                                    @for($i = 0; $i < $product->model->quantity; $i++)
+                                                        <option value="{{$i+1}}" {{$product->qty == ($i+1) ? 'selected' : '' }}>{{$i + 1}}</option>
+                                                    @endfor
+                                                </select>
+                                                <label>Quantity</label>
                                             </div>
-                                        </form>
+                                            <br>
+                                            <div class="col">
+                                            <button type="submit" data-id="{{$product->model->slug}}" class="btn-floating btn-small waves-effect bg2 tooltipped update-cart" data-position="bottom" data-tooltip="Update quantity">
+                                                <i class="material-icons">sync</i>
+                                            </button>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

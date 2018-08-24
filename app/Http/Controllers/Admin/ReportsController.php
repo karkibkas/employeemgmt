@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Order;
 use App\Product;
 use App\User;
+use App\Address;
 use Carbon\Carbon;
 
 class ReportsController extends Controller
@@ -43,27 +44,33 @@ class ReportsController extends Controller
                 new Carbon($dateTo)
             ];
         
-        $items ;
+        $items = null;
 
         switch ($request->type) {
             case 'customers':
                 ($dateFrom && $dateTo) ? 
                 $items = User::whereBetween('created_at',$dates)->paginate(10) :
                 $items = User::orderBy('created_at','desc')->paginate(10);
-                break;
+            break;
 
             case 'products':
                 ($dateFrom && $dateTo) ? 
                 $items = Product::whereBetween('created_at',$dates)->paginate(10) :
                 $items = Product::orderBy('created_at','desc')->paginate(10);
-                break;
+            break;
+
+            case 'addresses':
+                ($dateFrom && $dateTo) ? 
+                $items = Address::whereBetween('created_at',$dates)->paginate(10) :
+                $items = Address::orderBy('created_at','desc')->paginate(10);
+            break;
             
             case 'orders':
             default:
                 ($dateFrom && $dateTo) ? 
                 $items = Order::whereBetween('created_at',$dates)->paginate(10) :
                 $items = Order::orderBy('created_at','desc')->paginate(10);
-                break;
+            break;
         }
 
         return view('admin.reports.index',[

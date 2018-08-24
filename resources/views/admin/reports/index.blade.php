@@ -13,6 +13,7 @@
                             <option value="orders" {{(request()->type == "orders") ? 'selected' : '' }}>Orders Report</option>
                             <option value="customers" {{(request()->type == "customers") ? 'selected' : ''}}>Customers Report</option>
                             <option value="products" {{(request()->type == "products") ? 'selected' : ''}}>Products Report</option>
+                            <option value="addresses" {{(request()->type == "addresses") ? 'selected' : ''}}>Addresses Report</option>
                         </select>
                     </div>
                 </form>
@@ -54,6 +55,11 @@
                         'products' => $items
                     ])
                     @endcomponent
+                @elseif(request()->type == "addresses")
+                    @component('admin.reports.components.addresses',[
+                        'addresses' => $items
+                    ])
+                    @endcomponent
                 @else
                     @component('admin.reports.components.orders',[
                         'orders' => $items
@@ -84,21 +90,21 @@
                             </a>
                         </div>
                     </div>
-                    <form action="{{route('admin.reports.pdf')}}" class="hide" id="pdf-form">
-                        <input type="hidden" name="type" value="{{request()->type}}">
-                        <input type="hidden" name="date_to" value="{{request()->date_to}}">
-                        <input type="hidden" name="date_from" value="{{request()->date_from}}">
-                    </form>
-                    <form action="{{route('admin.reports.excel')}}" class="hide" id="excel-form">
-                        <input type="hidden" name="type" value="{{request()->type}}">
-                        <input type="hidden" name="date_to" value="{{request()->date_to}}">
-                        <input type="hidden" name="date_from" value="{{request()->date_from}}">
-                    </form>
-                    <form action="{{route('admin.reports.csv')}}" class="hide" id="csv-form">
-                        <input type="hidden" name="type" value="{{request()->type}}">
-                        <input type="hidden" name="date_to" value="{{request()->date_to}}">
-                        <input type="hidden" name="date_from" value="{{request()->date_from}}">
-                    </form>
+                    @component('admin.reports.components.report-form',[
+                        'route' => 'pdf',
+                        'form'  => 'pdf-form'
+                    ])
+                    @endcomponent
+                    @component('admin.reports.components.report-form',[
+                        'route' => 'excel',
+                        'form'  => 'excel-form'
+                    ])
+                    @endcomponent
+                    @component('admin.reports.components.report-form',[
+                        'route' => 'csv',
+                        'form'  => 'csv-form'
+                    ])
+                    @endcomponent
                 </div>
             </div>
         </div>

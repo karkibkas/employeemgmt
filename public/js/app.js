@@ -16,6 +16,7 @@ $(document).ready(function () {
      * for details.
      */
     stickyNavbar();
+
     carousalSlider();
     mobileSearch();
     navSearch();
@@ -255,9 +256,11 @@ function addToCart(){
 
         // get the text (value) of selected quantity
         let qty = $('#qty :selected').text();
+        
         if (!qty) {
             qty = 1;
         }
+
         const data = {
             _token: _token,
             _id: id,
@@ -291,11 +294,13 @@ function addToCart(){
 function updateCart(){
     $('body').delegate('.update-cart', 'click', function (e) {
         e.preventDefault();
+        
         // "this" means the current object, in our case
         // it's #update-cart.
         const id = $(this).attr('data-id');
         const qty = $('#qty-' + id + ' :selected').text();
         const rowId = $('#rowId-' + id).val();
+        
         const data = {
             _token: _token,
             _rowId: rowId,

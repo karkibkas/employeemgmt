@@ -27,7 +27,7 @@ class AddOrderToPaymentsTable extends Migration
     public function down()
     {
         Schema::table('payments', function (Blueprint $table) {
-            //
+            $table->dropForeign(['order_id']);
         });
     }
 }

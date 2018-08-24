@@ -30,19 +30,25 @@
                 <li>
                     <a href="{{route('admin.products.index')}}" class="grey-text text-darken-1">
                         <i class="material-icons">shopping_basket</i>
-                        Products List
+                        Manage Products
                     </a>
                 </li>
                 <li>
                     <a href="{{route('admin.categories.index')}}" class="grey-text text-darken-1">
                         <i class="material-icons">apps</i>
-                        Categories List
+                        Manage Categories
                     </a>
                 </li>
                 <li>
                     <a href="{{route('admin.customers.index')}}" class="waves-effect waves-light grey-text text-darken-1">
                         <i class="material-icons">supervisor_account</i>
                         Manage Customers
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.cities.index')}}" class="grey-text text-darken-1">
+                        <i class="material-icons">location_city</i>
+                        Manage Cities
                     </a>
                 </li>
                 <li>

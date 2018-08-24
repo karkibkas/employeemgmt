@@ -13,15 +13,16 @@
                 <br>
                 <form action="{{route('admin.categories.index')}}">
                     <div class="row">
-                        <div class="input-field col s12 m8">
-                            <input type="text" name="search" id="cat-search">
-                            <label for="cat-search">Category Name</label>
+                        <div class="input-field col s12 m6 offset-m2 login-field">
+                            <input type="text" name="search" id="re-search">
+                            <label for="re-search">Category Name</label>
                         </div>
                         <br>
-                        <button type="submit" class="btn col s12 m2">Search</button>
+                        <button type="submit" class="btn col s12 m2 bg2">Search</button>
                     </div>
                 </form>
-                <table class="responsive-table">
+                <br>
+                <table class="responsive-table centered">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -45,8 +46,8 @@
                                     <td>Not updated</td>
                                 @endif
                                 <td>
-                                    <a href="{{route('admin.categories.edit',$category->id)}}" class="btn-floating btn-small waves-effect orange waves-light tooltipped" data-position="right" data-tooltip="Update Category!">
-                                        <i class="material-icons">mode_edit</i>
+                                    <a href="{{route('admin.categories.edit',$category->id)}}" class="btn-floating btn-small waves-effect waves-light tooltipped" data-position="right" data-tooltip="Update Category!">
+                                        <i class="material-icons">refresh</i>
                                     </a>
                                     @if($category->products->count())
                                         <a href="#delete-modal-{{$category->id}}" class="disabled btn-floating btn-small waves-effect red modal-trigger waves-light">
