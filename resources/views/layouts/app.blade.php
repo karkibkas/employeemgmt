@@ -16,8 +16,6 @@
     <title>Laracart | The Best Online Store Like Ever...</title>
 </head>
 <body>
-    {{-- Show loader before the page loads --}}
-        {{--@include('inc.preloader')--}}
 
     {{-- Include the Navbar --}}
     <header>

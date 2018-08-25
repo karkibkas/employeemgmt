@@ -23,31 +23,38 @@
                         <i class="material-icons right mt-3">arrow_drop_down</i>
                     </a>
                 </li>
-                <ul id='user-dropdown' class='dropdown-content'>
+                <ul id='user-dropdown' class='dropdown-content no-constrain'>
                     <li>
-                        <a href="{{route('profile')}}">Profile</a>
+                        <a href="{{route('profile')}}" class="purple-text text-lighten-2">Profile</a>
                     </li>
                     <li>
-                        <a href="{{route('order.index')}}">Order History</a>
+                        <a href="{{route('order.index')}}" class="purple-text text-lighten-2">Order History</a>
                     </li>
                     <li>
-                        <a href="{{route('wishlist.index')}}">My Wishlist</a>
+                        <a href="{{route('wishlist.index')}}" class="purple-text text-lighten-2">My Wishlist</a>
                     </li>
                     <li class="divider"></li>
                     <li>
                         {{-- this link submits a hidden form to log users out --}}
-                        <a href="#" onclick="this.preventDefault;document.querySelector('#user-logout').submit()">Logout</a>
+                        <a href="#" onclick="this.preventDefault;document.querySelector('#user-logout').submit()" class="purple-text text-lighten-2">Logout</a>
                         <form action="{{route('logout')}}" method="post" class="hide" id="user-logout">
                             @csrf
                         </form>
                     </li>
                 </ul>
             @else
-                <li class="waves-effect">
-                    <a href="{{route('login')}}">Login</a>
-                </li>
-                <li class="waves-effect">
-                    <a href="{{route('register')}}">Register</a>
+                <li>
+                    <a href="#" class="dropdown-trigger no-constrain" data-target="auth-dropdown">
+                        <i class="material-icons right mt-3">person</i>
+                    </a>
+                    <ul id='auth-dropdown' class='dropdown-content'>
+                        <li class="waves-effect">
+                            <a href="{{route('login')}}" class="purple-text text-lighten-2">Login</a>
+                        </li>
+                        <li class="waves-effect">
+                            <a href="{{route('register')}}" class="purple-text text-lighten-2">Register</a>
+                        </li>
+                    </ul>
                 </li>
             @endauth
             <li class="waves-effect">

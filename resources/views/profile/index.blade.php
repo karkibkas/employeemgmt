@@ -13,7 +13,7 @@
                 <form action="{{route('profile')}}" method="post">
                     @csrf
                     <div class="row">
-                        <div class="input-field col s12">
+                        <div class="input-field col s12 login-field">
                             <input type="text" name="name" id="name" class="grey-text text-darken-4" value="{{old('name') ? : Auth::user()->name}}">
                             <label for="name" class="active">Name</label>
                             @if($errors->has('name'))
@@ -22,7 +22,7 @@
                                 </span>
                             @endif
                         </div>
-                        <div class="input-field col s12">
+                        <div class="input-field col s12 login-field">
                             <input type="email" name="email" id="email" class="grey-text text-darken-4" value="{{old('email') ? : Auth::user()->email}}">
                             <label for="email" class="active">Email</label>
                             @if($errors->has('email'))
@@ -31,7 +31,7 @@
                                 </span>
                             @endif
                         </div>
-                        <div class="input-field col s12">
+                        <div class="input-field col s12 login-field">
                             <input type="password" name="password" id="password" class="grey-text text-darken-4">
                             <label for="password" class="active">Password</label>
                         </div>

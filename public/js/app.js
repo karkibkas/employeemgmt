@@ -31,7 +31,7 @@ $(document).ready(function () {
  * false.
  */
 function autoWidthDropDown() {
-    var dropdowns = document.querySelectorAll('.user-dropdown');
+    var dropdowns = document.querySelectorAll('.no-constrain');
     M.Dropdown.init(dropdowns, {
         constrainWidth: false
     });

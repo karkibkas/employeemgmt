@@ -12,12 +12,14 @@
                 @if(!Cart::count())
                     <h5 class="grey-text text-darken-2 center">Your cart is empty! <a href="{{route('products')}}"> Start Shopping</a></h5>
                 @else
+                    <h4 class="center">My Cart</h4>
+                    <br>
                     <table class="responsive-table cart-items">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Image</th>
-                                <th>Products</th>
+                                <th>Product Name</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
                             </tr>
@@ -41,9 +43,9 @@
                                     </td>
                                     <td class="val">${{$product->price}}</td>
                                     <td>
-                                        <div class="row"  style="margin-bottom:0 !important">
+                                        <div class="row mb-0">
                                             <input type="hidden" id="rowId-{{$product->model->slug}}" value="{{$product->rowId}}">
-                                            <div class="input-field col s9 xl5">
+                                            <div class="input-field col s6 xl5">
                                                 <select name="qty" id="qty-{{$product->model->slug}}">
                                                     <option value="0">None</option>
                                                     @for($i = 0; $i < $product->model->quantity; $i++)
@@ -63,7 +65,8 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                    </table>        
+                    </table>
+                    <br>
                 @endif
             </div>
             <br><br>

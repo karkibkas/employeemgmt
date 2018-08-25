@@ -55,7 +55,7 @@
                             <div id="dropin-container"></div>
                             <br>
                             <div class="row">
-                                <button id="check-out-btn" class="btn center col s8 offset-s2 m4 offset-m4 bg2">Checkout</button>
+                                <button id="check-out-btn" class="btn center col s8 offset-s2 m4 offset-m4 bg2 waves-effect waves-light">Checkout</button>
                             </div>
                         </div>
                         <input type="hidden" name="nonce" id="nonce">

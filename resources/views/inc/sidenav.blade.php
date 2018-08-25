@@ -2,19 +2,7 @@
 @guest
 <ul class="sidenav bg" id="sidenav">
     <li>
-        <form action="{{route('search')}}" id="search-form-mb">
-            <div class="search-box">
-                <a href="#" id="search-icon-mb" class="left">
-                    <i class="material-icons grey-text">search</i>
-                </a>
-                <input type="search" name="search" id="mobile-search" placeholder="Search Products" class="browser-default">
-                <a href="#" id="search-close-mb" class="right">
-                    <i class="material-icons transparent-text close-icon-mb">close</i>
-                </a>
-                <ul id="search-results-mb" class="z-depth-1 grey lighten-3 collection with-header">
-                </ul>
-            </div>
-        </form>
+        @include('inc.search-sidenav')
     </li>
     <li>
         <a href="{{route('index')}}" class="waves-effect grey-text text-lighten-3">
@@ -69,6 +57,9 @@
             <a href="{{route('profile')}}"><span class="white-text email">{{ Auth::user()->email }}</span></a>
         </div>
     </li>
+    <li class="mb-1 user-search">
+        @include('inc.search-sidenav')
+    </li>
     <li>
         <a href="{{route('index')}}" class="waves-effect grey-text text-darken-1">
             <i class="material-icons grey-text text-darken-1 left">home</i>
@@ -85,12 +76,6 @@
         <a href="{{route('about')}}" class="waves-effect grey-text text-darken-1">
             <i class="material-icons grey-text text-darken-1 left">info_outline</i>
             About
-        </a>
-    </li>
-    <li>
-        <a href="{{route('contact')}}" class="waves-effect grey-text text-darken-1">
-            <i class="material-icons grey-text text-darken-1 left">contact_phone</i>
-            Contact
         </a>
     </li>
     <li class="no-padding">
@@ -132,9 +117,9 @@
         </ul>
     </li>
     <li>
-        <a href="{{route('cart.index')}}" class="waves-effect grey-text text-darken-1 val">
+        <a href="{{route('cart.index')}}" class="waves-effect grey-text text-darken-1">
             <i class="material-icons left cart-icon grey-text text-darken-1">shopping_cart</i>
-            <span class="grey-text text-darken-1">My Cart </span><span class="cart-count">({{Cart::count()}})</span>
+            <span class="grey-text text-darken-1">My Cart </span><span class="cart-count val">({{Cart::count()}})</span>
         </a>
     </li>
 </ul>

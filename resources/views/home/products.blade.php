@@ -15,7 +15,7 @@
         <div class="col s12 m12 l9">
             <div class="row">
                 @forelse($products as $product)
-                <div class="col s12 m6 l4 xl3">
+                <div class="col s10 offset-s1 m4 l4 xl3">
                     @component('components.product',['product' => $product])
                     @endcomponent
                 </div>

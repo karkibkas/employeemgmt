@@ -424,6 +424,15 @@ main {
     margin-bottom:0 !important;
 }
 
+.mb-1{
+    margin-bottom:1rem !important;
+}
+
+.user-search input{
+    border-color: #e0e0e0 !important;
+    box-shadow: #e0e0e0 1px 1px 1px;
+}
+
 /* Media Queries */
 @media only screen and (min-width : 1202px) {
     .login-container{
@@ -431,10 +440,14 @@ main {
     }
 }
 
-@media only screen and (max-width: 1202px){
+@media only screen and (max-width: 992px){
     .show-prod-img{
         width: 70% !important;
         height: auto !important;
+    }
+
+    .featured-product{
+        margin:0 1rem;
     }
 
     .hoverable:hover{
@@ -454,7 +467,7 @@ main {
     }
 
     .featured-product{
-        margin:0 10px 0 10px;
+        margin:0 2.5rem;
     }
 
     .show-prod-img{
@@ -465,5 +478,9 @@ main {
     .hoverable:hover{
         -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2) !important;
           box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    .prod-card-img > img{
+        height: 200px;
     }
 }

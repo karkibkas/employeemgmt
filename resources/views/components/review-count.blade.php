@@ -3,5 +3,5 @@
         <i class="material-icons {{($product->reviews->avg('rating') >= $i) ? 'yellow-text text-darken-1' : 'grey-text text-lighten-2'}} star">star</i>
     @endfor
 @else
-<span>no reviews!</span>
+<span class="sm-txt">no reviews!</span>
 @endif

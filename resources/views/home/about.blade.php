@@ -26,7 +26,7 @@
             <img src="{{asset('images/about/about3.jpeg')}}" alt="" width="100%">
         </div>
         <div class="col s12 m12 l6 xl6">
-        <h4 class="grey-text text-darken-2 tex-uppercase">Our Respossible Team</h4>
+        <h4 class="grey-text text-darken-2 tex-uppercase">Our Responsible Team</h4>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nulla explicabo quidem optio dolorum ea, quae, hic eos delectus eveniet, quis error recusandae rem facere. Quas a sapiente, minus ad culpa esse blanditiis quidem qui voluptates doloremque fugiat magni odit explicabo! Quia soluta quae aliquid voluptate error maxime consectetur harum, optio doloremque dolore dicta similique non saepe eos accusamus porro distinctio? Blanditiis unde eius esse cumque fugiat</p>
         </div>
     </div>

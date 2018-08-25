@@ -1,12 +1,12 @@
 <div id="reviews" class="col s12">
     <br>
     @auth
-        @if(!App\Review::where('user_id',Auth::id())->first())
+        @if(!$product->reviews->where('user_id',Auth::id())->first())
             <h5 class="col">Leave a review.</h5>
             <form action="{{route('reviews.store')}}" method="post">
                 @csrf
                 <input type="hidden" name="product_id" value="{{$product->id}}">
-                <div class="input-field col s12 login-field">
+                <div class="input-field col s12 l10 login-field">
                     <textarea name="description" id="description" class="materialize-textarea">{{old('description')}}</textarea>
                     <label for="description">My Review</label>
                     @if($errors->has('description'))
@@ -28,7 +28,7 @@
                         </span>
                     @endif
                 </div>
-                <div class="row"></div>
+                <div class="row mb-0"></div>
                 <button type="submit" class="btn bg waves-effect waves-light col s10 offset-s1 m4 offset-m4 l2 offset-l5">Submit</button>
             </form>
             <br><br>
@@ -57,6 +57,7 @@
         </ul>
         <br>
     @empty
+        <br>
         <h5 class="center">No Reviews yet!</h5>
     @endforelse
     <div class="center-align">
