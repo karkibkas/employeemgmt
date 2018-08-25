@@ -61,6 +61,6 @@ Laravel online store using laravel 5.6, Materialize-css 1.0.0rc-2, JQuery, Mater
 
 #### ScreenShot
 
-![screen shot](https://github.com/SagarMaheshwary/Employee/blob/master/screenshots/laracart.png)
+![screen shot](https://github.com/SagarMaheshwary/laracart/blob/master/screenshots/laracart.png)
 
 Thankyou.
