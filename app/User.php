@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPasswordNotification;
+use App\Notifications\CustomerDeleted;
+
 class User extends Authenticatable
 {
 
@@ -62,7 +64,27 @@ class User extends Authenticatable
         return $this->hasMany('App\Order');
     }
 
+    /**
+     * One to Many
+     */
     public function wishlist(){
         return $this->hasMany('App\Wishlist','user_id');
+    }
+
+    /**
+     * One to Many
+     */
+    public function reviews(){
+        return $this->hasMany('App\Review','user_id');
+    }
+
+    /**
+     * send email nofication to notify that the
+     * user has been deleted!
+     * 
+     * @return void
+     */
+    public function customerHasBeenDeleted(){
+        $this->notify(new CustomerDeleted);
     }
 }

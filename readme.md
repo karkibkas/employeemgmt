@@ -19,7 +19,7 @@ Laravel online store using laravel 5.6, Materialize-css 1.0.0rc-2, JQuery, Mater
     php artisan migrate
 ```
 
-- Generate dummy data for products, category and admin account.
+- Generate dummy data for products, category, cities, and admin account.
 ```bash
     php artisan db:seed
 ```
@@ -49,6 +49,7 @@ Laravel online store using laravel 5.6, Materialize-css 1.0.0rc-2, JQuery, Mater
 #### Admin Credentials
 - Email :- admin@admin.com
 - Password :- password
+- admin can login with /admin/login route.
 
 ### Packages that are used by this application
 - [LaravelShoppingCart](https://github.com/Crinsane/LaravelShoppingcart) which is a laravel package that gives you all the cart features.
@@ -59,7 +60,7 @@ Laravel online store using laravel 5.6, Materialize-css 1.0.0rc-2, JQuery, Mater
 
 - [Laravel-email-confirm](https://github.com/beyondcode/laravel-confirm-email) for customer email confirmation.
 
-#### ScreenShot
+### ScreenShot
 
 ![screen shot](https://github.com/SagarMaheshwary/laracart/blob/master/screenshots/laracart.png)
 

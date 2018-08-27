@@ -56,6 +56,40 @@ class ProfileController extends Controller
     }
 
     /**
+     * Delete customer account including reviews
+     * and wishlist.
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id){
+        
+        //just to make sure that the id matches
+        if(!Auth::id() === $id){
+            return redirect()->back();
+        }
+
+        $user = Auth::user();
+
+        //delete all the wishlist items
+        $user->wishlist()->where('user_id',$id)->delete();
+        
+        //delete all the reviews
+        $user->reviews()->where('user_id',$id)->delete();
+        
+        //logout the customer
+        Auth::logout();
+        
+        //delete the customer
+        $user->delete();
+        
+        //Notify the user with email
+        $user->customerHasBeenDeleted();
+
+        return redirect()->route('index')->with('status','your account has been deleted!');
+    }
+
+    /**
      * Validate Request
      *  
      * @param \Illuminate\Http\Request $request

@@ -376,14 +376,12 @@ main {
 #search-close{
     position: relative;
     margin-left: -45px !important;
-    margin-top:3px;
     transition: ease-in-out .6s;
 }
 
 #search-icon{
     position: relative;
     margin-right: -55px !important;
-    margin-top: 3px;
 }
 
 #search-close:hover , #search-icon:hover{

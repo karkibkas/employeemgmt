@@ -47,6 +47,7 @@ Route::prefix('checkout')->group(function(){
 Route::prefix('/profile')->group(function(){
     Route::get('/','ProfileController@show')->name('profile');
     Route::post('/','ProfileController@update');
+    Route::delete('/{id}','ProfileController@destroy')->name('profile.destroy');
 });
 
 /**

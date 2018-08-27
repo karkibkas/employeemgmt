@@ -39,6 +39,24 @@
                         <button type="submit" class="btn waves-effect waves-light bg2 col s12 m6 offset-m3 l6 offset-l3 xl6 offset-xl3">Update Profile</button>
                     </div>
                 </form>
+                <br>
+                <div class="divider"></div>
+                <br>
+                <div class="center-align">
+                    <a href="#delete-account" class="btn red lighten-1 waves-effect waves-light modal-trigger">Delete Account!</a>
+                    <p class="red-text text-lighten-1 mt-1">Note! <span class="grey-text text-darken-1">Everything will be removed when you delete your account, like your wishlist, etc.</span></p>
+                </div>
+                @component('components.confirm',[
+                    'id'    => 'delete-account-form',
+                    'modal' => 'delete-account',
+                    'title' => 'Account'
+                ])
+                @endcomponent
+                <form action="{{route('profile.destroy',Auth::id())}}" class="hide" id="delete-account-form" method="POST">
+                    @csrf
+                    @method('DELETE')
+                </form>
+                <br>
             </div>
         </div>
     </div>
