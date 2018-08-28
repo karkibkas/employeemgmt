@@ -57,7 +57,7 @@ class ContactController extends Controller
      */
     private function rules(){
         $name = "/^[a-zA-Z0-9 ]+$/";
-        $message = "/^[a-zA-Z0-9 -]+$/";
+        $message = "/^[a-zA-Z0-9. -]+$/";
         
         return [
             'first_name' => "nullable|regex:{$name}|min:3|max:50",
@@ -73,9 +73,9 @@ class ContactController extends Controller
      */
     private function messages(){
         return [
-            'first_name' => 'Only numbers, letters, and spaces are allowed!',
-            'first_name' => 'Only numbers, letters, and spaces are allowed!',
-            'message'    => 'Only numbers, letters, dashes, and spaces are allowed!',
+            'first_name.regex' => 'Only numbers, letters, and spaces are allowed!',
+            'first_name.regex' => 'Only numbers, letters, and spaces are allowed!',
+            'message.regex'    => 'Only numbers, letters, dashes, and spaces are allowed!',
         ];
     }
 

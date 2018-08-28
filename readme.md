@@ -46,6 +46,8 @@ Laravel online store using laravel 5.6, Materialize-css 1.0.0rc-2, JQuery, Mater
 
 - if you don't know how to get the braintree api keys then watch this [video](https://www.youtube.com/watch?v=6NjTrtZ0Uhc&list=PLfdtiltiRHWH9JN1NBpJRFUhN96KBfPmd&index=3) from codecourse youtube channel.
 
+- you can change the tax from config/cart.php file.
+
 #### Admin Credentials
 - Email :- admin@admin.com
 - Password :- password

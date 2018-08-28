@@ -19,6 +19,16 @@ class ContactController extends Controller
     */
 
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -155,7 +165,7 @@ class ContactController extends Controller
             'first_name' => "nullable|regex:{$name}|min:3|max:50",
             'last_name'  => "nullable|regex:{$name}|min:3|max:50",
             'email'      => 'required|email|min:5|max:150',
-            'message'    => "required|regex:{$message}|min:20|max:500",
+            'message'    => "required|regex:{$message}|min:20|max:1500",
         ];
     }
     

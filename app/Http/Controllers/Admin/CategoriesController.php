@@ -160,7 +160,7 @@ class CategoriesController extends Controller
         $regex = "/^[a-zA-Z0-9_ -]+$/";
 
         return [
-            'title' => "required|regex:{$regex}|string|min:5|max:50"
+            'title' => "required|regex:{$regex}|min:5|max:50"
         ];
     }
 

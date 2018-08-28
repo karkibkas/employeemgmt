@@ -28,7 +28,6 @@ class WishlistsController extends Controller
     public function __construct()
     {
         // for guests that are not logged in as admin.
-        // Except for logout method.
         $this->middleware('auth');
     }
 

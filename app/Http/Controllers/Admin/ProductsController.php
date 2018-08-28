@@ -205,11 +205,11 @@ class ProductsController extends Controller
      * @return array
      */
     private function rules($id){
-        $title = "/^[a-zA-Z0-9 -]+$/";
+        $title = "/^[a-zA-Z0-9. -]+$/";
 
         return [
-            'title'        => "required|regex:{$title}|unique:products|min:10|max:50",
-            'description'  => "required|string|min:30|max:500",
+            'title'        => "required|regex:{$title}|unique:products,title".( $id ? ",{$id}" : '' )."|min:10|max:50",
+            'description'  => "required|string|min:30",
             'image'        => (($id) ? 'nullable|image|max:1999' : 'required|image|max:1999'),
             'category'     => 'required|integer',
             'price'        => 'required|numeric|min:1',
