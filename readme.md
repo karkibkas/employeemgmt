@@ -7,6 +7,9 @@ Laravel online store using laravel 5.6, Materialize-css 1.0.0rc-2, JQuery, Mater
 - Clone this repo to your machine or just [download](https://github.com/SagarMaheshwary/laracart/archive/master.zip) the zip.
 
 - Install [Composer](https://getcomposer.org) first, then run this command in your command-line (you should be inside your project directory).
+```bash
+    composer install
+```
 
 - Rename .env.example to .env and add you database, mail, and braintree credentials.
 
