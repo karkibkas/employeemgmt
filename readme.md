@@ -13,33 +13,9 @@ Laravel online store using laravel 5.6, Materialize-css 1.0.0rc-2, JQuery, Mater
 
 - Rename .env.example to .env and add you database, mail, and braintree credentials.
 
-- Generate application key.
+- Below command will run all the necessary commands to get this application up & running. You can explore the command in App/Console/Commands/LaracartInstall.php
 ```bash
-    php artisan key:generate
-```
-- create tables with migration command
-```bash
-    php artisan migrate
-```
-
-- Generate dummy data for products, category, cities, and admin account.
-```bash
-    php artisan db:seed
-```
-
-- Link the storage folder
-```bash
-    php artisan storage:link
-```
-
-- Publish resources for Ckeditor
-```bash
-    php artisan vendor:publish --tag=ckeditor
-```
-
-- Clear the application config
-```bash
-    php artisan config:clear
+    php artisan laracart:install
 ```
 
 - you can create a virtual host or just run this command to run dev server
