@@ -11,7 +11,7 @@
                     <div class="row">
                         @csrf
                         <div class="input-field col s12 login-field">
-                            <textarea name="address_1" id="address_1" class="materialize-textarea"></textarea>
+                            <textarea name="address_1" id="address_1" class="materialize-textarea">{{old('address_1')}}</textarea>
                             <label for="address_1">Address line 1</label>
                             @if($errors->has('address_1'))
                                 <span class="helper-text red-text">
@@ -20,7 +20,7 @@
                             @endif
                         </div>
                         <div class="input-field col s12 login-field">
-                            <textarea name="address_2" id="address_2" class="materialize-textarea"></textarea>
+                            <textarea name="address_2" id="address_2" class="materialize-textarea">{{old('address_2')}}</textarea>
                             <label for="address_2">Address Line 2</label>
                             @if($errors->has('address_2'))
                                 <span class="helper-text red-text">
@@ -43,7 +43,7 @@
                             @endif
                         </div>
                         <div class="input-field col s12 m6 login-field">
-                            <input type="text" name="postal_code" id="postal_code">
+                            <input type="text" name="postal_code" id="postal_code" value="{{old('postal_code')}}">
                             <label for="postal_code">Postal code</label>
                             @if($errors->has('postal_code'))
                                 <span class="helper-text red-text">
