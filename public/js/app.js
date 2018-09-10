@@ -298,9 +298,9 @@ function updateCart(){
         // "this" means the current object, in our case
         // it's #update-cart.
         const id = $(this).attr('data-id');
-        const qty = $('#qty-' + id + ' :selected').text();
+        const qty = $('#qty-'+id).val() || 0 ;
         const rowId = $('#rowId-' + id).val();
-        
+
         const data = {
             _token: _token,
             _rowId: rowId,

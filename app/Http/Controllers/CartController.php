@@ -81,7 +81,11 @@ class CartController extends Controller
             Cart::remove($id);
             return $this->updateCartResponse('delete','Your selected item has been removed from cart!');
         }
-
+        $product = Cart::get($id)->model;
+        if(!$product->hasStock($qty)){
+            return $this->updateCartResponse('update' , 'Invalid quantity!');
+        }
+        
         Cart::update($id,$qty);
         return $this->updateCartResponse('update','Your item quantity has been updated!');
     }
