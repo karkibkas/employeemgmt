@@ -5,7 +5,7 @@
  */
 
 //CSRF-TOKEN for AJAX Requests.
-const _token = $('meta[name=csrf-token]').attr('content');
+var _token = $('meta[name=csrf-token]').attr('content');
 
 $(document).ready(function () {
     //Initialize all the components of materialize css
@@ -67,10 +67,10 @@ function carousalSlider() {
 function stickyNavbar() {
     //only if we have a navbar with id of navbar
     if($('#navbar').get(0)){
-        let prevScrollpos = window.pageYOffset;
+        var prevScrollpos = window.pageYOffset;
         window.onscroll = function () {
-            const navbar = $('#navbar').get(0);
-            let currentScrollPos = window.pageYOffset;
+            var navbar = $('#navbar').get(0);
+            var currentScrollPos = window.pageYOffset;
             if (prevScrollpos > currentScrollPos) {
                 navbar.style.top = "0";
             }
@@ -88,10 +88,10 @@ function stickyNavbar() {
  */
 function mobileSearch() {
     //Search box element
-    const mobileSearch = $('#mobile-search');
+    var mobileSearch = $('#mobile-search');
 
     //Close icon element on search box
-    const closeIcon = $('.close-icon-mb');
+    var closeIcon = $('.close-icon-mb');
     
     //when close icon on search box is click.
     $('#search-close-mb').click(function (e) {
@@ -109,8 +109,8 @@ function mobileSearch() {
         searchResult
     );
 
-    const searchIcon = $('#search-icon-mb');
-    const searchForm = $('#search-form-mb');
+    var searchIcon = $('#search-icon-mb');
+    var searchForm = $('#search-form-mb');
 
     submitSearch( searchIcon, searchForm, mobileSearch);
 }
@@ -121,10 +121,10 @@ function mobileSearch() {
  */
 function navSearch(){
     //Search box element.
-    const Search = $('#search');
+    var Search = $('#search');
     
     //Close icon element on the search box.
-    const closeIcon = $('.close-icon');
+    var closeIcon = $('.close-icon');
 
     //when close icon on search box is click.
     $('#search-close').click(function(e){
@@ -144,8 +144,8 @@ function navSearch(){
         searchResult
     );
 
-    const searchIcon = $('#search-icon');
-    const searchForm = $('#search-form');
+    var searchIcon = $('#search-icon');
+    var searchForm = $('#search-form');
 
     submitSearch( searchIcon, searchForm, Search);
 }
@@ -196,7 +196,7 @@ function searchFocusBlur(Search, closeIcon) {
  */
 function search(elID, resElID, successCallback) {
     elID.on('keyup input propertychange', function () {
-        let str = $(this).val();
+        var str = $(this).val();
         if (str.length <= 1) {
             resElID.style.display = "";
         }
@@ -222,10 +222,10 @@ function search(elID, resElID, successCallback) {
  */
 function searchResult(res, resElID,search) {
     if (res.products.length != 0) {
-        let products = res.products;
+        var products = res.products;
         resElID.innerHTML = "";
         resElID.style.display = 'block';
-        for (const i in products) {
+        for (var i in products) {
             resElID.innerHTML += `
                 <a href="/products/${products[i].slug}" class="truncae grey-text text-darken-1 collection-item">
                     ${products[i].title}
@@ -252,16 +252,16 @@ function searchResult(res, resElID,search) {
 function addToCart(){
     $('body').delegate('.add-cart', 'click', function (e) {
         // get the attribute value of element with #add-cart id.
-        let id = $(this).attr('data-id');
+        var id = $(this).attr('data-id');
 
         // get the text (value) of selected quantity
-        let qty = $('#qty :selected').text();
+        var qty = $('#qty :selected').text();
         
         if (!qty) {
             qty = 1;
         }
 
-        const data = {
+        var data = {
             _token: _token,
             _id: id,
             _qty: qty
@@ -297,11 +297,11 @@ function updateCart(){
         
         // "this" means the current object, in our case
         // it's #update-cart.
-        const id = $(this).attr('data-id');
-        const qty = $('#qty-'+id).val() || 0 ;
-        const rowId = $('#rowId-' + id).val();
+        var id = $(this).attr('data-id');
+        var qty = $('#qty-'+id).val() || 0 ;
+        var rowId = $('#rowId-' + id).val();
 
-        const data = {
+        var data = {
             _token: _token,
             _rowId: rowId,
             _qty: qty
@@ -339,7 +339,7 @@ function updateCartSuccess(res, id) {
     $('.cart-total').text('$' + res.total + ' /-');
 
     //Cart Count
-    const cartTotal = res.cart_count;
+    var cartTotal = res.cart_count;
 
     // if an item was deleted from cart
     if (res.type === 'delete') {
@@ -377,7 +377,7 @@ function updateCartSuccess(res, id) {
  * @param {*} res 
  */
 function addCartSuccess(res) {
-    const msg = `${res.msg}  <a href="/cart" class="btn-flat blue-text"> Cart</a>`;
+    var msg = `${res.msg}  <a href="/cart" class="btn-flat blue-text"> Cart</a>`;
     makeToast(msg);
     updateCartTotal(res.cart_count);
 }
@@ -399,8 +399,8 @@ function addToWishlist(){
     // Handle add product to wishlist request
     $('body').delegate('.add-wishlist', 'click', function (e) {
         e.preventDefault();
-        const id = $(this).attr('data-id');
-        const data = {
+        var id = $(this).attr('data-id');
+        var data = {
             _token: _token,
             _id: id
         };
@@ -410,7 +410,7 @@ function addToWishlist(){
             'POST',
             data,
             function (res) {
-                const msg = `${res.message} <a href="/wishlist" class="btn-flat blue-text">Wishlist</a>`;
+                var msg = `${res.message} <a href="/wishlist" class="btn-flat blue-text">Wishlist</a>`;
                 makeToast(msg);
             },
             function(res){
@@ -480,7 +480,7 @@ function makeToast(msg) {
  *  Dismiss the Toast on click
  */
 function dismissToast() {
-    let toastElement = document.querySelector('.toast');
-    let toastInstance = M.Toast.getInstance(toastElement);
+    var toastElement = document.querySelector('.toast');
+    var toastInstance = M.Toast.getInstance(toastElement);
     toastInstance.dismiss();
 }
